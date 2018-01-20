@@ -13,24 +13,21 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
+            - gcc-7
             - g++-7
+            - cmake
+            - cmake-data
       env:
         - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
 
-addons:
-  apt:
-    sources:
-      - george-edison55-precise-backports
-    packages:
-      - cmake-data
-      - cmake
-
 before_install:
-    - sudo apt-get -qq update
+    #- sudo apt-get -qq update
     - sudo apt-get install -y libsfml-dev
     - eval "${MATRIX_EVAL}"
 
 script:
+    - sudo ln -s /usr/bin/gcc-7 /usr/local/bin/gcc
+    - sudo ln -s /usr/bin/g++-7 /usr/local/bin/g++
     - gcc -v && g++ -v && cmake --version
     - cmake CMakeLists.txt
     - make
