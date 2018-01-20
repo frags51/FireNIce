@@ -36,4 +36,7 @@
 cmake-build-debug
 #exec
 FireNIce
-
+CMakeCache.txt
+CMakeFiles
+Makefile
+cmake_install.cmake
