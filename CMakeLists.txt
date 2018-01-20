@@ -11,4 +11,6 @@ add_executable(FireNIce ${SOURCE_FILES})
 target_link_libraries(FireNIce
         sfml-window
         sfml-system
-        sfml-graphics)
+        sfml-graphics
+        sfml-audio
+        sfml-network)
