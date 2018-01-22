@@ -35,3 +35,6 @@ script:
     # Build it now
     - cmake CMakeLists.txt
     - make
+    
+notifications:
+  email: false
