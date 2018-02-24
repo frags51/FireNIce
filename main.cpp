@@ -2,7 +2,7 @@
 #include "trial/trial.h"
 int main(){
     sf::Window window(sf::VideoMode(800, 600), "My window");
-    print("Hello World");
+    print("Hello World Thanks");
     // run the program as long as the window is open
     while (window.isOpen())
     {
