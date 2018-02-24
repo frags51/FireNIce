@@ -8,7 +8,7 @@ void Splash::show(sf::RenderWindow &renderWindow){
     }
 
     sf::Sprite sprite(texture);
-    sprite.setScale(1600.f/sprite.getGlobalBounds().width, 900.f/sprite.getGlobalBounds().height);
+    sprite.setScale(GameState::_resX/sprite.getGlobalBounds().width, GameState::_resY/sprite.getGlobalBounds().height);
     renderWindow.draw(sprite);
     renderWindow.display();
 
