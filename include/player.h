@@ -11,6 +11,11 @@ private:
 public:
     void make_player(const char* src , unsigned int size_x , unsigned int size_y);
     sf::RectangleShape get_player();
+    void move_right(float index);
+    void move_left(float index);
+    void move_up(float index);
+    void move_down(float index);
+
     //src is the image file location
     //size_x and size_y are image dimensions
 };

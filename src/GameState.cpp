@@ -1,4 +1,5 @@
 #include "GameState.h"
+#include <iostream>
 
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
@@ -23,19 +24,30 @@ bool GameState::isExiting() {
 
 void GameState::gameLoop() {
     sf::Event _event;
-    while(_mainWindow.pollEvent(_event)){
-        switch (_state){
-            case GameState::state::Playing:{
-                _mainWindow.clear(sf::Color::White);
-                _mainWindow.draw(fireboy.get_player());
-                _mainWindow.display();
-                if(_event.type==sf::Event::Closed){
-                    _state = GameState::state ::Exiting;
-                }
-                break;
-            } // Case Playing.
-            default:
-                break;
-        } //switch
-    } //while
+    switch (_state){
+        case GameState::state::Playing:{
+            while(_mainWindow.pollEvent(_event)) {
+                if (_event.type == sf::Event::Closed)
+                    _mainWindow.close();
+            } //while
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
+                fireboy.move_right(0.9f);
+            }
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
+                fireboy.move_left(0.9f);
+            }
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
+                fireboy.move_up(0.9f);
+            }
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
+                fireboy.move_down(0.9f);
+            }
+            _mainWindow.clear(sf::Color::White);
+            _mainWindow.draw(fireboy.get_player());
+            _mainWindow.display();
+            break;
+        } // Case Playing.
+        default:
+            break;
+    } //switch
 } //gameLoop()
