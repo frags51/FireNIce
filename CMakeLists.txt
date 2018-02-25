@@ -4,10 +4,9 @@ project(FireNIce)
 set(CMAKE_CXX_STANDARD 11)
 
 include_directories(include)
-
 set(SOURCE_FILES
         main.cpp
-
+        src/player.cpp
         src/GameState.cpp)
 
 add_executable(FireNIce ${SOURCE_FILES})
