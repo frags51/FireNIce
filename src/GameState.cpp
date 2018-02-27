@@ -51,7 +51,10 @@ void GameState::gameLoop() {
 
 void GameState::showSplashScreen() {
     Splash splashScreen;
-    splashScreen.show(_mainWindow);
+    if(splashScreen.show(_mainWindow)==-1) {
+        _state = GameState::state::Exiting;
+        return;
+    }
     // When this returns, show the menu!
     _state=GameState::state::AtMenu; // Change this to AtMenu when menu is added
 } // showSplashScreen

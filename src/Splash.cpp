@@ -1,10 +1,11 @@
 #include <GameState.h>
 #include "Splash.h"
+#include <iostream>
 
-void Splash::show(sf::RenderWindow &renderWindow){
+int Splash::show(sf::RenderWindow &renderWindow){
     sf::Texture texture;
-    if(!texture.loadFromFile("../res/img/splash.png")){ // Arg: const string: the path to the image file
-        return; // Error handling here
+    if(!texture.loadFromFile("res/img/splash.png")){ // Arg: const string: the path to the image file
+        return -1; // Error handling here
     }
 
     sf::Sprite sprite(texture);
@@ -16,11 +17,12 @@ void Splash::show(sf::RenderWindow &renderWindow){
 
     while(true) { // Event loop
            while(renderWindow.pollEvent(event)){
+               if (event.type == sf::Event::EventType::Closed ) {
+                   return -1;
+               }
                 if(event.type == sf::Event::EventType::KeyPressed
-                   || event.type == sf::Event::EventType::MouseButtonPressed
-                   || event.type == sf::Event::EventType::Closed ) {
-                    return;
-                }
+                   || event.type == sf::Event::EventType::MouseButtonPressed) return 0;
+
            }
     }
 

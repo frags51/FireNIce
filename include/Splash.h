@@ -9,7 +9,7 @@
 
 class Splash{
 public:
-    void show(sf::RenderWindow & renderWindow);
+    int show(sf::RenderWindow & renderWindow);
 };
 
 #endif //FIRENICE_SPLASH_H_H
