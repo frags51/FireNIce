@@ -6,6 +6,8 @@ private:
     sf::RectangleShape player;
     sf::Texture playerTexture;
     sf::Vector2u textureSize;
+public:
+    bool isjumping;
 
 
 public:
@@ -14,7 +16,7 @@ public:
     void move_right(float index);
     void move_left(float index);
     void move_up(float index);
-    void move_down(float index);
+    int getY();
 
     //src is the image file location
     //size_x and size_y are image dimensions

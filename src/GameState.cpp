@@ -26,22 +26,23 @@ void GameState::gameLoop() {
     sf::Event _event;
     switch (_state){
         case GameState::state::Playing:{
+            const int groundheight = 700;
             while(_mainWindow.pollEvent(_event)) {
                 if (_event.type == sf::Event::Closed)
                     _mainWindow.close();
+                if(_event.type == sf::Event::KeyReleased)
+                    fireboy.isjumping = false;
             } //while
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
-                fireboy.move_right(0.9f);
+                fireboy.move_right(1.8f);
             }
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
-                fireboy.move_left(0.9f);
+                fireboy.move_left(1.8f);
             }
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
-                fireboy.move_up(0.9f);
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+                fireboy.move_up(1.8f);
             }
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
-                fireboy.move_down(0.9f);
-            }
+            if(fireboy.isjumping == false && fireboy.getY()<groundheight ) fireboy.move_up(-1.8f);
             _mainWindow.clear(sf::Color::White);
             _mainWindow.draw(fireboy.get_player());
             _mainWindow.display();
