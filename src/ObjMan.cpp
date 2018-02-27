@@ -36,6 +36,7 @@ void ObjMan::drawAll(sf::RenderWindow &renderWindow) {
 void ObjMan::UpdateAll()
 {
     std::map<std::string,VisibleGameObject*>::const_iterator itr = _gameObjects.begin();
+    sf::Clock clock;
     float timeDelta = clock.restart().asSeconds();
 
     while(itr != _gameObjects.end())

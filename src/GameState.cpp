@@ -8,6 +8,7 @@ GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
 Server GameState::server{45000};
 Client GameState::client{};
+ObjMan GameState::_gameObjectManager;
 bool GameState::isClient;
 
 void GameState::play() {
