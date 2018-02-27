@@ -10,6 +10,7 @@ VisibleGameObject::~VisibleGameObject(){
 
 void VisibleGameObject::Load(std::string filename,float x,float y){
     if(playerTexture.loadFromFile(filename) == false){
+        std::cerr<<"Player file not loaded\n";
         _filename = "";
         _isLoaded = false;
     }
