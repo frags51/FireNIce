@@ -7,17 +7,17 @@ MainMenu::MainMenu(float width, float height) {
     }
 
     items[0].setFont(font);
-    items[0].setColor(sf::Color::Black);
+    items[0].setFillColor(sf::Color::Black);
     items[0].setString("Create Server!");
     items[0].setPosition(sf::Vector2f(width/2, height/(N_ITEMS+1)*1));
 
     items[1].setFont(font);
-    items[1].setColor(sf::Color::Blue);
+    items[1].setFillColor(sf::Color::Blue);
     items[1].setString("Join Server!");
     items[1].setPosition(sf::Vector2f(width/2, height/(N_ITEMS+1)*2));
 
     items[2].setFont(font);
-    items[2].setColor(sf::Color::Blue);
+    items[2].setFillColor(sf::Color::Blue);
     items[2].setString("Exit!");
     items[2].setPosition(sf::Vector2f(width/2, height/(N_ITEMS+1)*3));
 
