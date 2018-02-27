@@ -4,16 +4,15 @@ project(FireNIce)
 set(CMAKE_CXX_STANDARD 11)
 
 include_directories(include)
-
 set(SOURCE_FILES
         main.cpp
         include/GameState.h src/GameState.cpp
         include/Splash.h src/Splash.cpp
         include/MainMenu.h src/MainMenu.cpp
         src/Server.cpp include/Server.h
-        src/Client.cpp include/Client.h
         src/Player.cpp include/Player.h 
-        src/VisibleGameObject.cpp include/VisibleGameObject.h) 
+        src/VisibleGameObject.cpp include/VisibleGameObject.h 
+        src/Client.cpp include/Client.h)
 
 add_executable(FireNIce ${SOURCE_FILES})
 

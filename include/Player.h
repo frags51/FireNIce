@@ -9,5 +9,4 @@ public:
     void set_size();
 
 };
-
-#endif
+#endif // PLAYER_H
