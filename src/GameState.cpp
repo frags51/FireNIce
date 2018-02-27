@@ -16,10 +16,10 @@ void GameState::play() {
     if(_state!=Not_init) return;
 
     _mainWindow.create(sf::VideoMode(_resX, _resY, 32), "Fire & Ice");
-    _fireboy.Load("res/img/tux.png", _resX/16,_resY/8);
+    _fireboy.Load("../res/img/tux.png", _resX/16,_resY/8);
     _fireboy.set_size();
     _fireboy.SetPosition(0,_resY-_resY/8);
-    _state=state::Playing;
+    _state=state::AtSplash;
 
     while(!isExiting()) gameLoop();
 
@@ -48,7 +48,7 @@ void GameState::gameLoop() {
                 _mainWindow.clear(sf::Color::Cyan);
                 sf::Text dmsg;
                 sf::Font f1;
-                f1.loadFromFile("res/fonts/Phetsarath_OT.ttf");
+                f1.loadFromFile("../res/fonts/Phetsarath_OT.ttf");
                 dmsg.setFont(f1);
                 dmsg.setFillColor(sf::Color::Black);
                 dmsg.setString("Waiting for connection!\nConnect To:"+sf::IpAddress::getLocalAddress().toString());
@@ -67,7 +67,7 @@ void GameState::gameLoop() {
                 _mainWindow.clear(sf::Color::Cyan);
                 sf::Text dmsg;
                 sf::Font f1;
-                f1.loadFromFile("res/fonts/Phetsarath_OT.ttf");
+                f1.loadFromFile("../res/fonts/Phetsarath_OT.ttf");
                 dmsg.setFont(f1);
                 dmsg.setString("Please enter IP");
                 dmsg.setFillColor(sf::Color::Black);
