@@ -1,3 +1,4 @@
+#include <MainMenu.h>
 #include "GameState.h"
 #include "Splash.h"
 
@@ -29,7 +30,10 @@ void GameState::gameLoop() {
                 showSplashScreen();
             }
             break; // Showing Splash screen
-
+            case GameState::state::AtMenu:{
+                showMainMenu();
+            }
+            break; // Showing Main Menu
             case GameState::state::Playing:{
                 _mainWindow.clear(sf::Color{255,0,0,150});
                 _mainWindow.display();
@@ -49,5 +53,13 @@ void GameState::showSplashScreen() {
     Splash splashScreen;
     splashScreen.show(_mainWindow);
     // When this returns, show the menu!
-    _state=GameState::state::Playing; // Change this to AtMenu when menu is added
+    _state=GameState::state::AtMenu; // Change this to AtMenu when menu is added
 } // showSplashScreen
+
+void GameState::showMainMenu() {
+    MainMenu mm(_mainWindow.getSize().x, _mainWindow.getSize().y);
+    short res = mm.show(_mainWindow);
+    if(res==-1 || res== 2) _state=Exiting;
+    else if(res==0) _state=Playing;
+    else if(res==1) _state=Playing;
+}

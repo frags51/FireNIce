@@ -17,17 +17,19 @@ public:
     //! \brief Start Playing the game!
     static void play();
 
+    enum state {Not_init, AtSplash, AtMenu, Playing, Exiting}; // More maybe added later.
+    static state _state;
+
 private:
 
     //! \brief The set of possible states of the game
-    enum state {Not_init, AtSplash, AtMenu, Playing, Exiting}; // More maybe added later.
     //! \brief Check if the game is in Exiting state.
     static bool isExiting();
     static void gameLoop();
     //! \brief Init and show a splash screen.
     static void showSplashScreen();
+    static void showMainMenu();
     //! \brief The current state of the game
-    static state _state;
     static sf::RenderWindow _mainWindow;
 };
 

@@ -8,7 +8,8 @@ include_directories(include)
 set(SOURCE_FILES
         main.cpp
         include/GameState.h src/GameState.cpp
-        include/Splash.h src/Splash.cpp)
+        include/Splash.h src/Splash.cpp
+        include/MainMenu.h src/MainMenu.cpp)
 
 add_executable(FireNIce ${SOURCE_FILES})
 
