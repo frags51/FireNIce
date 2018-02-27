@@ -7,7 +7,9 @@
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include "Player.h"
 #include "Server.h"
+#include "VisibleGameObject.h"
 #include "Client.h"
 
 class GameState{
@@ -33,6 +35,9 @@ private:
     static void showSplashScreen();
     static void showMainMenu();
     //! \brief The current state of the game
+
+private:
+    static Player _fireboy;
     static sf::RenderWindow _mainWindow;
 };
 

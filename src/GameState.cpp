@@ -1,12 +1,12 @@
 #include "MainMenu.h"
 #include "GameState.h"
 #include "Splash.h"
-#include "Server.h"
 #include <thread>
 #include <iostream>
 
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
+Player GameState::_fireboy;
 Server GameState::server{45000};
 Client GameState::client{};
 
@@ -14,9 +14,11 @@ void GameState::play() {
     static_assert(_resX <= 1920 && _resY <= 1080, "Invalid Screen Resolution!");
     if(_state!=Not_init) return;
 
-
     _mainWindow.create(sf::VideoMode(_resX, _resY, 32), "Fire & Ice");
-    _state=state::AtSplash;
+    _fireboy.Load("res/img/tux.png", _resX/16,_resY/8);
+    _fireboy.set_size();
+    _fireboy.SetPosition(0,_resY-_resY/8);
+    _state=state::Playing;
 
     while(!isExiting()) gameLoop();
 
@@ -45,7 +47,7 @@ void GameState::gameLoop() {
                 _mainWindow.clear(sf::Color::Cyan);
                 sf::Text dmsg;
                 sf::Font f1;
-                f1.loadFromFile("../res/fonts/Phetsarath_OT.ttf");
+                f1.loadFromFile("res/fonts/Phetsarath_OT.ttf");
                 dmsg.setFont(f1);
                 dmsg.setFillColor(sf::Color::Black);
                 dmsg.setString("Waiting for connection!\nConnect To:"+sf::IpAddress::getLocalAddress().toString());
@@ -63,7 +65,7 @@ void GameState::gameLoop() {
                 _mainWindow.clear(sf::Color::Cyan);
                 sf::Text dmsg;
                 sf::Font f1;
-                f1.loadFromFile("../res/fonts/Phetsarath_OT.ttf");
+                f1.loadFromFile("res/fonts/Phetsarath_OT.ttf");
                 dmsg.setFont(f1);
                 dmsg.setString("Please enter IP");
                 dmsg.setFillColor(sf::Color::Black);
@@ -106,6 +108,7 @@ void GameState::gameLoop() {
             break;
             case GameState::state::Playing:{
                 _mainWindow.clear(sf::Color{255,0,0,150});
+                _fireboy.Draw(_mainWindow);
                 _mainWindow.display();
                 if(_event.type==sf::Event::Closed){
                     _state = GameState::state ::Exiting;

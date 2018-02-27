@@ -11,7 +11,9 @@ set(SOURCE_FILES
         include/Splash.h src/Splash.cpp
         include/MainMenu.h src/MainMenu.cpp
         src/Server.cpp include/Server.h
-        src/Client.cpp include/Client.h)
+        src/Client.cpp include/Client.h
+        src/Player.cpp include/Player.h 
+        src/VisibleGameObject.cpp include/VisibleGameObject.h) 
 
 add_executable(FireNIce ${SOURCE_FILES})
 
