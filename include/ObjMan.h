@@ -15,6 +15,7 @@ public:
     int getObjCount() const;
     VisibleGameObject *get(std::string name) const;
     void drawAll(sf::RenderWindow &renderWindow);
+    void UpdateAll();
 
 private:
     std::map<std::string, VisibleGameObject*> _gameObjects;

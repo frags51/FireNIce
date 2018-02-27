@@ -33,6 +33,19 @@ void ObjMan::drawAll(sf::RenderWindow &renderWindow) {
         it++;
     }
 };
+void ObjMan::UpdateAll()
+{
+    std::map<std::string,VisibleGameObject*>::const_iterator itr = _gameObjects.begin();
+    float timeDelta = clock.restart().asSeconds();
+
+    while(itr != _gameObjects.end())
+    {
+        itr->second->Update(timeDelta);
+        itr++;
+    }
+
+
+}
 
 
 

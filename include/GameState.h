@@ -8,6 +8,7 @@
 #include <SFML/Graphics.hpp>
 #include "Player.h"
 #include "Server.h"
+#include "ObjMan.h"
 #include "VisibleGameObject.h"
 #include "Client.h"
 
@@ -17,6 +18,8 @@ public:
     static const unsigned short _resX {1600};
     //! \brief Vertical Resolution
     static const unsigned short _resY {900};
+    const static sf::Event& GetInput();
+
     //! \brief Start Playing the game!
     static void play();
 
@@ -31,13 +34,14 @@ private:
     //! \brief Check if the game is in Exiting state.
     static bool isExiting();
     static void gameLoop();
+
     //! \brief Init and show a splash screen.
     static void showSplashScreen();
     static void showMainMenu();
     //! \brief The current state of the game
 
 private:
-    static Player _fireboy;
+    static ObjMan _gameObjectManager;
     static sf::RenderWindow _mainWindow;
 };
 

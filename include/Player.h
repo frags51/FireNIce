@@ -7,13 +7,13 @@ public:
     Player();
     ~Player();
     void set_size();
-    void updateMovement();
 
-public:
-    float velocityX;
-    float velocityY;
-    float accelerationX;
-    float accelerationY;
-    float gravity;
+    void Update(float elapsedTime);
+
+    float GetVelocity() const;
+
+private:
+    float _velocity;  // -- left ++ right
+    float _maxVelocity;
 };
 #endif // PLAYER_H

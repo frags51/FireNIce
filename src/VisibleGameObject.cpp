@@ -1,7 +1,6 @@
 #include "VisibleGameObject.h"
 
-VisibleGameObject::VisibleGameObject(){
-    _isLoaded = false;
+VisibleGameObject::VisibleGameObject(): _isLoaded(false){
 }
 
 
@@ -33,4 +32,21 @@ void VisibleGameObject::SetPosition(float x, float y){
     if(_isLoaded){
         _player.setPosition(x,y);
     }
+}
+void VisibleGameObject::Update(float elapsedTime)
+{
+}
+
+sf::Vector2f VisibleGameObject::GetPosition() const
+{
+    if(_isLoaded)
+    {
+        return _player.getPosition();
+    }
+    return sf::Vector2f();
+}
+
+bool VisibleGameObject::IsLoaded() const
+{
+    return _isLoaded;
 }

@@ -11,6 +11,9 @@ public:
     virtual void Draw(sf::RenderWindow & window);
 
     virtual void SetPosition(float x, float y);
+    virtual void Update(float elapsedTime);
+    virtual sf::Vector2f GetPosition() const;
+    virtual bool IsLoaded() const;
 protected:
     sf::RectangleShape _player;
     sf::Texture playerTexture;
