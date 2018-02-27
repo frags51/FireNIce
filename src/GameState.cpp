@@ -120,6 +120,7 @@ void GameState::gameLoop() {
                 break;
         } //switch
     } //while
+
 } //gameLoop()
 
 void GameState::showSplashScreen() {
