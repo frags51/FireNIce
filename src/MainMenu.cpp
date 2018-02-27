@@ -2,8 +2,9 @@
 #include <iostream>
 
 MainMenu::MainMenu(float width, float height) {
-    if(!font.loadFromFile("res/fonts/Phetsarath_OT.ttf")){
+    if(!font.loadFromFile("../res/fonts/Phetsarath_OT.ttf")){
         std::cerr<<"Error Loading Font MainMenu!";
+        return;
     }
 
     items[0].setFont(font);
