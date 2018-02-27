@@ -9,7 +9,9 @@ set(SOURCE_FILES
         main.cpp
         include/GameState.h src/GameState.cpp
         include/Splash.h src/Splash.cpp
-        include/MainMenu.h src/MainMenu.cpp)
+        include/MainMenu.h src/MainMenu.cpp
+        src/Server.cpp include/Server.h
+        src/Client.cpp include/Client.h)
 
 add_executable(FireNIce ${SOURCE_FILES})
 
@@ -18,5 +20,6 @@ target_link_libraries(FireNIce
         sfml-system
         sfml-graphics
         sfml-audio
-        sfml-network)
+        sfml-network
+        pthread)
 

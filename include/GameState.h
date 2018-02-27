@@ -7,6 +7,7 @@
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include "Server.h"
 
 class GameState{
 public:
@@ -17,9 +18,9 @@ public:
     //! \brief Start Playing the game!
     static void play();
 
-    enum state {Not_init, AtSplash, AtMenu, Playing, Exiting}; // More maybe added later.
+    enum state {Not_init, AtSplash, AtMenu, WaitForClient, WaitForServer, Playing, Exiting}; // More maybe added later.
     static state _state;
-
+    static Server server;
 private:
 
     //! \brief The set of possible states of the game
