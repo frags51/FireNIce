@@ -40,9 +40,10 @@ void GameState::gameLoop() {
                 fireboy.move_left(1.8f);
             }
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+                fireboy.isjumping = true;
                 fireboy.move_up(1.8f);
             }
-            if(fireboy.isjumping == false && fireboy.getY()<groundheight ) fireboy.move_up(-1.8f);
+            if(fireboy.isjumping == false && groundheight>fireboy.getY()) fireboy.move_down(1.8f);
             _mainWindow.clear(sf::Color::White);
             _mainWindow.draw(fireboy.get_player());
             _mainWindow.display();

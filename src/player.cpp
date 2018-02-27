@@ -22,6 +22,9 @@ void task_player::move_up(float index) {
     this->isjumping = true;
     this->player.move(0,-index);
 }
+void task_player::move_down(float index) {
+    this->player.move(0,index);
+}
 sf::RectangleShape task_player::get_player() {
     return this->player;
 }
