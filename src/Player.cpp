@@ -1,4 +1,4 @@
-#include "player.h"
+#include "Player.h"
 
 void task_player::make_player(const char* src , unsigned int size_x , unsigned size_y){
     this->isjumping=false;

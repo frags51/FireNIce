@@ -13,7 +13,7 @@ set(SOURCE_FILES
         src/Client.cpp include/Client.h 
 	include/ObjMan.h include/Object.h 
 	src/ObjMan.cpp src/Object.cpp.cpp
-        src/player.cpp
+        src/Player.cpp
         src/GameState.cpp)
 
 
