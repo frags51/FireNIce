@@ -11,7 +11,7 @@ void GameState::play() {
 
     _mainWindow.create(sf::VideoMode(_resX, _resY, 32), "Fire & Ice");
     _state=state::Playing;
-    fireboy.make_player("res/img/tux.png",(double)_resX/12,(double)_resY/6);
+    fireboy.make_player("../res/img/tux.png",(double)_resX/12,(double)_resY/6);
 
     while(!isExiting()) gameLoop();
 
@@ -34,17 +34,17 @@ void GameState::gameLoop() {
                     fireboy.isjumping = false;
             } //while
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
-                fireboy.move_right(1.8f);
+                fireboy.move_right(5.8f);
             }
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
-                fireboy.move_left(1.8f);
+                fireboy.move_left(5.8f);
             }
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+                if(!fireboy.isjumping)fireboy.move_up(60.8f);
                 fireboy.isjumping = true;
-                fireboy.move_up(1.8f);
             }
             if(fireboy.isjumping == false && groundheight>fireboy.getY()) fireboy.move_down(1.8f);
-            _mainWindow.clear(sf::Color::White);
+            _mainWindow.clear(sf::Color::Cyan);
             _mainWindow.draw(fireboy.get_player());
             _mainWindow.display();
             break;
