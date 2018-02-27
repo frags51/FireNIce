@@ -4,7 +4,6 @@
 
 #ifndef FIRENICE_GAMESTATE_H
 #define FIRENICE_GAMESTATE_H
-
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include "Server.h"
