@@ -19,13 +19,14 @@ public:
     //! \brief Start Playing the game!
     static void play();
 
+    //! \brief The set of possible states of the game
     enum state {Not_init, AtSplash, AtMenu, WaitForClient, WaitForServer, Playing, Exiting}; // More maybe added later.
     static state _state;
     static Server server;
     static Client client;
+    static bool isClient;
 private:
 
-    //! \brief The set of possible states of the game
     //! \brief Check if the game is in Exiting state.
     static bool isExiting();
     static void gameLoop();
