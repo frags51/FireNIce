@@ -1,7 +1,7 @@
 #include "ObjMan.h"
 
 ObjMan::ObjMan() {};
-ObjMan::~ObjMan() {std::for_each(_gameObjects.begin(), _gameObjects.end(), ObjMan::GameObjDealloc())}
+ObjMan::~ObjMan() {std::for_each(_gameObjects.begin(), _gameObjects.end(), ObjMan::GameObjDealloc());}
 
 void ObjMan::add(std::string name, GameObject *gameObject) {
     _gameObjects.insert(std::pair<std::string, GameObject*>(name, gameObject));
