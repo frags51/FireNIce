@@ -34,7 +34,8 @@ short MainMenu::show(sf::RenderWindow &renderWindow) {
     while(true){ // Event Handling loop
         while(renderWindow.pollEvent(event)){
             switch (event.type){
-                case sf::Event::KeyReleased:{
+                case sf::Event::KeyPressed:{ // Not KeyReleased, since pollEvent (in GameState::gameLoop())
+                    // would need another event to actually display something
                     switch (event.key.code){
                         case sf::Keyboard::Up:{
                             up();
