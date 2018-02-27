@@ -9,6 +9,7 @@ GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
 Server GameState::server{45000};
 Client GameState::client{};
+bool GameState::isClient;
 
 void GameState::play() {
     static_assert(_resX <= 1920 && _resY <= 1080, "Invalid Screen Resolution!");
@@ -54,8 +55,9 @@ void GameState::gameLoop() {
                 _mainWindow.display();
                 std::cout<<"Waiting for clients to join!"<<std::endl;
                 t1.join();
-                while(!res);
+                while(!res); // Wait to get connection
                 std::cout<<"Connected to: "<<server.client.getRemoteAddress()<<std::endl;
+                isClient=false;
                 _state=GameState::state::Playing;
             }
             break;
@@ -86,6 +88,7 @@ void GameState::gameLoop() {
                                 if(client.socket.connect(enter,45000)!=sf::Socket::Done){
                                     std::cerr<<"Error in Client Socket!"<<std::endl;
                                 }
+                                isClient=true;
                                 _state=Playing;
                                 flag=false;
                                 break;
