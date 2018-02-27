@@ -52,9 +52,10 @@ void GameState::gameLoop() {
                 dmsg.setPosition(sf::Vector2f(800, 400));
                 _mainWindow.draw(dmsg);
                 _mainWindow.display();
-                std::cout<<"waiting to join"<<std::endl;
+                std::cout<<"Waiting for clients to join!"<<std::endl;
                 t1.join();
                 while(!res);
+                std::cout<<"Connected to: "<<server.client.getRemoteAddress()<<std::endl;
                 _state=GameState::state::Playing;
             }
             break;
@@ -69,10 +70,13 @@ void GameState::gameLoop() {
                 dmsg.setPosition(sf::Vector2f(800, 400));
                 _mainWindow.draw(dmsg);
                 _mainWindow.display();
+                //! \brief For storing IP address of the server to be connected (as input).
                 std::string enter;
                 bool flag=false;
                 _mainWindow.pollEvent(_event);
-                while((flag=_mainWindow.pollEvent(_event))==true || !flag){
+                while((flag=_mainWindow.pollEvent(_event))==true || !flag){ // flag required for inf loop
+                    // Since pollEvent returns false if no event has been registered
+                    // Causing re init of enter strings.
                     if(flag && _event.type==sf::Event::TextEntered){
                         if(_event.text.unicode<128 ){
                             if(_event.text.unicode!=13 && _event.text.unicode!=10)
