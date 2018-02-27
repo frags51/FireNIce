@@ -11,7 +11,7 @@ void GameState::play() {
 
     _mainWindow.create(sf::VideoMode(_resX, _resY, 32), "Fire & Ice");
     _state=state::Playing;
-    fireboy.make_player("resources/images/tux.png",(double)_resX/12,(double)_resY/6);
+    fireboy.make_player("res/img/tux.png",(double)_resX/12,(double)_resY/6);
 
     while(!isExiting()) gameLoop();
 
