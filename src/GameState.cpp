@@ -89,11 +89,14 @@ void GameState::gameLoop() {
                                 std::cout<<"Got an enter! after "<<enter<<std::endl;
                                 if(client.socket.connect(enter,45000)!=sf::Socket::Done){
                                     std::cerr<<"Error in Client Socket!"<<std::endl;
+                                    enter="";
                                 }
-                                isClient=true;
-                                _state=Playing;
-                                flag=false;
-                                break;
+                                else {
+                                    isClient=true;
+                                    _state=Playing;
+                                    flag=false;
+                                    break;
+                                }
                             }
                         }
                         dmsg.setString("You Entered: "+enter);
