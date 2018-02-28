@@ -50,3 +50,6 @@ bool VisibleGameObject::IsLoaded() const
 {
     return _isLoaded;
 }
+Collision VisibleGameObject::GetCollider() {
+
+}

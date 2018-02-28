@@ -2,7 +2,6 @@
 #include "GameState.h"
 #include "Splash.h"
 #include <thread>
-#include <iostream>
 
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
@@ -11,7 +10,7 @@ Client GameState::client{};
 
 ObjMan GameState::_gameObjectManager;
 
-bool GameState::filePath {false}; // false for linux, true for OSX
+bool GameState::filePath {true}; // false for linux, true for OSX
 
 bool GameState::isClient;
 
@@ -24,6 +23,17 @@ void GameState::play() {
     else fireboy = new Player("res/img/tux.png");
     fireboy->SetPosition(0,_resY-_resY/8);
     _gameObjectManager.add("Fireboy",fireboy);
+    Platform *platform1 = new Platform(nullptr,sf::Vector2f(400.0f,200.0f),sf::Vector2f(500.0f,200.0f));
+    Platform *platform2 = new Platform(nullptr,sf::Vector2f(100.0f,200.0f),sf::Vector2f(200.0f,800.0f));
+    _gameObjectManager.add("Plt1",platform1);
+    _gameObjectManager.add("Plt2",platform2);
+
+
+
+
+
+
+
 
     _state=state::Playing;
 
@@ -129,6 +139,9 @@ void GameState::gameLoop() {
                 if (_event.type == sf::Event::Closed) {
                     _state = GameState::state::Exiting;
                 }
+                _gameObjectManager._gameObjects["Plt1"]->GetCollider().checkCollision(_gameObjectManager._gameObjects["Fireboy"]->GetCollider(),1.0f);
+                _gameObjectManager._gameObjects["Plt2"]->GetCollider().checkCollision(_gameObjectManager._gameObjects["Fireboy"]->GetCollider(),1.0f);
+
                 _mainWindow.clear(sf::Color{255, 0, 0, 150});
                 _gameObjectManager.updateAll(_event);
                 _gameObjectManager.drawAll(_mainWindow);
