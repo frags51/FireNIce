@@ -19,18 +19,10 @@ void GameState::play() {
     static_assert(_resX <= 1920 && _resY <= 1080, "Invalid Screen Resolution!");
     if(_state!=Not_init) return;
     _mainWindow.create(sf::VideoMode(_resX, _resY, 32), "Fire & Ice");
-<<<<<<< HEAD
-    Player* fireboy = new Player("res/img/tux.png");
-=======
-
-<<<<<<< HEAD
-    Player* fireboy = new Player("../res/img/tux.png");
->>>>>>> 86c5995d334e9f3359e8ccc1336213164db62443
-=======
+    bool filePath = true;
     Player *fireboy;
     if(!filePath)fireboy = new Player("../res/img/tux.png");
     else fireboy = new Player("res/img/tux.png");
->>>>>>> 9ba8621a1ba38035a5d6afb89c1547dda3287d93
     fireboy->SetPosition(0,_resY-_resY/8);
     _gameObjectManager.add("Fireboy",fireboy);
 

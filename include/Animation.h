@@ -7,7 +7,7 @@ class Animation{
 public:
     Animation();
     ~Animation();
-    void update(int row,float deltaTime);
+    void update(int row,float deltaTime,bool faceRight);
     void create(sf::Texture* texture,sf::Vector2u imageCount,float switchTime);
 
 public:

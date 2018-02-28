@@ -56,7 +56,7 @@ void Player::Update(float elapsedTime,sf::Event& _event)
     if(_velocity < -_maxVelocity)
         _velocity = -_maxVelocity;
 
-    animation.update(0,elapsedTime);
+    animation.update(0,elapsedTime,false);
     _player.setTextureRect(animation.uvRect);
 
 
