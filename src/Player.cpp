@@ -1,10 +1,10 @@
 #include "Player.h"
 #include "GameState.h"
-Player::Player() :
+Player::Player(std::string fName) :
         _velocity(0),
         _maxVelocity(600.0f)
 {
-    Load("../res/img/tux.png", GameState::_resX/16,GameState::_resY/8);
+    Load(fName, GameState::_resX/16,GameState::_resY/8);
     this->set_size();
 }
 

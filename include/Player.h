@@ -4,7 +4,7 @@
 
 class Player : public VisibleGameObject{
 public:
-    Player();
+    Player(std::string fName);
     ~Player();
     void set_size();
 
