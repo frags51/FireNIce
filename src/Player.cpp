@@ -4,7 +4,7 @@ Player::Player() :
         _velocity(0),
         _maxVelocity(600.0f)
 {
-    Load("res/img/tux.png", GameState::_resX/16,GameState::_resY/8);
+    Load("../res/img/tux.png", GameState::_resX/16,GameState::_resY/8);
     this->set_size();
 }
 

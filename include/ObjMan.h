@@ -18,6 +18,7 @@ public:
     void drawAll(sf::RenderWindow &renderWindow);
 
 private:
+    sf::Clock _clock;
     std::map<std::string, VisibleGameObject*> _gameObjects;
 
     struct GameObjDealloc{
