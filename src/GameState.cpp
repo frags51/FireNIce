@@ -25,7 +25,7 @@ void GameState::play() {
     fireboy->SetPosition(0,_resY-_resY/8);
     _gameObjectManager.add("Fireboy",fireboy);
 
-    _state=state::Playing;
+    _state=state::AtSplash;
 
     while(!isExiting()) {
         gameLoop();
