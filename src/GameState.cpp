@@ -8,14 +8,16 @@ GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
 Server GameState::server{45000};
 Client GameState::client{};
+
 ObjMan GameState::_gameObjectManager;
+
 bool GameState::isClient;
 
 void GameState::play() {
     static_assert(_resX <= 1920 && _resY <= 1080, "Invalid Screen Resolution!");
     if(_state!=Not_init) return;
-
     _mainWindow.create(sf::VideoMode(_resX, _resY, 32), "Fire & Ice");
+
     Player* fireboy = new Player("../res/img/tux.png");
     fireboy->SetPosition(0,_resY-_resY/8);
     _gameObjectManager.add("Fireboy",fireboy);

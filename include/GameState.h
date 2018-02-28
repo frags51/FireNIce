@@ -11,6 +11,7 @@
 #include "ObjMan.h"
 #include "VisibleGameObject.h"
 #include "Client.h"
+#include "ObjMan.h"
 
 class GameState{
 public:
@@ -28,6 +29,7 @@ public:
     static Server server;
     static Client client;
     static bool isClient;
+
 private:
 
     //! \brief Check if the game is in Exiting state.
@@ -40,7 +42,9 @@ private:
     //! \brief The current state of the game
 
 private:
+
     static ObjMan _gameObjectManager;
+
     static sf::RenderWindow _mainWindow;
 
 };
