@@ -44,7 +44,6 @@ void Player::Update(float elapsedTime,sf::Event& _event)
     }
     else if(!isJumping){
         dJump+=2.f;
-        //_player.move(0, _velocity*elapsedTime);
         if(dJump>=150.f) isJumping=true;
     }
     else {_velocity=0;isJumping=false;}
