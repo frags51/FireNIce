@@ -33,7 +33,7 @@ void VisibleGameObject::SetPosition(float x, float y){
         _player.setPosition(x,y);
     }
 }
-void VisibleGameObject::Update(float elapsedTime)
+void VisibleGameObject::Update(float elapsedTime,sf::Event& event)
 {
 }
 

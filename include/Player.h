@@ -8,7 +8,7 @@ public:
     ~Player();
     void set_size();
 
-    void Update(float elapsedTime);
+    void Update(float elapsedTime,sf::Event& _event);
 
     float GetVelocity() const;
 

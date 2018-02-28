@@ -21,7 +21,6 @@ public:
 
     //! \brief Start Playing the game!
     static void play();
-    const static sf::Event& GetInput();
 
     //! \brief The set of possible states of the game
     enum state {Not_init, AtSplash, AtMenu, WaitForClient, WaitForServer, Playing, Exiting}; // More maybe added later.
@@ -43,6 +42,7 @@ private:
 private:
     static ObjMan _gameObjectManager;
     static sf::RenderWindow _mainWindow;
+
 };
 
 #endif //FIRENICE_GAMESTATE_H

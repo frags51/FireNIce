@@ -33,13 +33,6 @@ bool GameState::isExiting() {
     return _state==state::Exiting;
 } // isExiting
 
-const sf::Event& GameState::GetInput()
-{
-    sf::Event currentEvent;
-    _mainWindow.pollEvent(currentEvent);
-    return currentEvent;
-}
-
 void GameState::gameLoop() {
     sf::Event _event;
     _mainWindow.pollEvent(_event);
@@ -121,14 +114,15 @@ void GameState::gameLoop() {
             } // Wait for server
                 break;
             case GameState::state::Playing: {
-                _mainWindow.clear(sf::Color{255, 0, 0, 150});
-                _gameObjectManager.updateAll();
-                _gameObjectManager.drawAll(_mainWindow);
-                _mainWindow.display();
 
+                _mainWindow.pollEvent(_event);
                 if (_event.type == sf::Event::Closed) {
                     _state = GameState::state::Exiting;
                 }
+                _mainWindow.clear(sf::Color{255, 0, 0, 150});
+                _gameObjectManager.updateAll(_event);
+                _gameObjectManager.drawAll(_mainWindow);
+                _mainWindow.display();
 
                 break;
 
@@ -157,4 +151,5 @@ void GameState::showMainMenu() {
     else if(res==0) _state=WaitForClient;
     else if(res==1) _state=WaitForServer;
 }
+
 
