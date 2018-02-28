@@ -11,7 +11,7 @@ Client GameState::client{};
 
 ObjMan GameState::_gameObjectManager;
 
-bool GameState::filePath {false}; // false for linux, true for OSX
+bool GameState::filePath {true}; // false for linux, true for OSX
 
 bool GameState::isClient;
 
@@ -26,7 +26,7 @@ void GameState::play() {
     fireboy->SetPosition(0,_resY-_resY/8);
     _gameObjectManager.add("Fireboy",fireboy);
 
-    _state=state::AtSplash;
+    _state=state::Playing;
 
     while(!isExiting()) {
         gameLoop();
@@ -126,7 +126,6 @@ void GameState::gameLoop() {
             } // Wait for server
                 break;
             case GameState::state::Playing: {
-
                 _mainWindow.pollEvent(_event);
                 if (_event.type == sf::Event::Closed) {
                     _state = GameState::state::Exiting;

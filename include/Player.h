@@ -1,12 +1,12 @@
 #ifndef PLAYER_DEF
 #define PLAYER_DEF
 #include "VisibleGameObject.h"
+#include "Animation.h"
 
 class Player : public VisibleGameObject{
 public:
     Player(std::string fName);
     ~Player();
-    void set_size();
 
     void Update(float elapsedTime,sf::Event& _event);
 
@@ -17,5 +17,6 @@ private:
     float dJump;
     float _velocity;  // -- left ++ right
     float _maxVelocity;
+    Animation animation;
 };
 #endif // PLAYER_H

@@ -11,6 +11,7 @@ set(SOURCE_FILES
         include/MainMenu.h src/MainMenu.cpp
         src/Server.cpp include/Server.h
         src/Player.cpp include/Player.h 
+        src/Animation.cpp include/Animation.h
         src/VisibleGameObject.cpp include/VisibleGameObject.h 
         src/Client.cpp include/Client.h include/ObjMan.h src/ObjMan.cpp)
 
