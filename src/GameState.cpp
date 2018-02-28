@@ -19,7 +19,6 @@ void GameState::play() {
     static_assert(_resX <= 1920 && _resY <= 1080, "Invalid Screen Resolution!");
     if(_state!=Not_init) return;
     _mainWindow.create(sf::VideoMode(_resX, _resY, 32), "Fire & Ice");
-
     Player *fireboy;
     if(!filePath)fireboy = new Player("../res/img/tux.png");
     else fireboy = new Player("res/img/tux.png");
@@ -126,7 +125,6 @@ void GameState::gameLoop() {
             } // Wait for server
                 break;
             case GameState::state::Playing: {
-
                 _mainWindow.pollEvent(_event);
                 if (_event.type == sf::Event::Closed) {
                     _state = GameState::state::Exiting;

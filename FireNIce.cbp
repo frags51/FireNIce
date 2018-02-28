@@ -84,6 +84,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/mayank/Desktop/concurrency-4/include/Animation.h">
+			<Option target="FireNIce"/>
+		</Unit>
 		<Unit filename="/Users/mayank/Desktop/concurrency-4/include/Client.h">
 			<Option target="FireNIce"/>
 		</Unit>
@@ -109,6 +112,9 @@
 			<Option target="FireNIce"/>
 		</Unit>
 		<Unit filename="/Users/mayank/Desktop/concurrency-4/main.cpp">
+			<Option target="FireNIce"/>
+		</Unit>
+		<Unit filename="/Users/mayank/Desktop/concurrency-4/src/Animation.cpp">
 			<Option target="FireNIce"/>
 		</Unit>
 		<Unit filename="/Users/mayank/Desktop/concurrency-4/src/Client.cpp">

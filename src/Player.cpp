@@ -4,10 +4,12 @@ Player::Player(std::string fName) :
         _velocity(0),
         _maxVelocity(600.0f),
         dJump {0.f}
+
 {
     Load(fName, GameState::_resX/16,GameState::_resY/8);
-    this->set_size();
+    animation.create(&playerTexture,sf::Vector2u(3,9),0.3f);
     isJumping=false;
+
 }
 
 
@@ -23,17 +25,22 @@ float Player::GetVelocity() const
 
 void Player::Update(float elapsedTime,sf::Event& _event)
 {
+    int row =0;
+    bool toRight = true;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
         _player.move(-1.5f,0);
+        row =1;
+        toRight = false;
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
         _player.move(1.5f,0);
+        row =1;
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !isJumping)
     {
-        //_player.move(0,-180.5f);
+        row = 2;
         _player.move(0, -2.f);
     }
     // Simulate Gravity -> Add Collision platform detection here
@@ -44,7 +51,6 @@ void Player::Update(float elapsedTime,sf::Event& _event)
     }
     else if(!isJumping){
         dJump+=2.f;
-        //_player.move(0, _velocity*elapsedTime);
         if(dJump>=150.f) isJumping=true;
     }
     else {_velocity=0;isJumping=false;}
@@ -54,15 +60,10 @@ void Player::Update(float elapsedTime,sf::Event& _event)
 
     if(_velocity < -_maxVelocity)
         _velocity = -_maxVelocity;
+    animation.update(row,elapsedTime,toRight);
+    _player.setTextureRect(animation.uvRect);
 
 
-
-}
-void Player::set_size(){
-    sf::Vector2u textureSize = playerTexture.getSize();
-    textureSize.x/=3;
-    textureSize.y/=9;
-    _player.setTextureRect(sf::IntRect (textureSize.x *2, textureSize.y *8 , textureSize.x , textureSize.y));
 }
 
 
