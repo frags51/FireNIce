@@ -93,6 +93,9 @@
 		<Unit filename="/Users/mayank/Desktop/concurrency-4/include/MainMenu.h">
 			<Option target="FireNIce"/>
 		</Unit>
+		<Unit filename="/Users/mayank/Desktop/concurrency-4/include/ObjMan.h">
+			<Option target="FireNIce"/>
+		</Unit>
 		<Unit filename="/Users/mayank/Desktop/concurrency-4/include/Player.h">
 			<Option target="FireNIce"/>
 		</Unit>
@@ -115,6 +118,9 @@
 			<Option target="FireNIce"/>
 		</Unit>
 		<Unit filename="/Users/mayank/Desktop/concurrency-4/src/MainMenu.cpp">
+			<Option target="FireNIce"/>
+		</Unit>
+		<Unit filename="/Users/mayank/Desktop/concurrency-4/src/ObjMan.cpp">
 			<Option target="FireNIce"/>
 		</Unit>
 		<Unit filename="/Users/mayank/Desktop/concurrency-4/src/Player.cpp">

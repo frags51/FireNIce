@@ -12,11 +12,13 @@ public:
     ~ObjMan();
     void add(std::string name, VisibleGameObject *gameObject);
     void remove(std::string name);
+    void updateAll(sf::Event& _event);
     int getObjCount() const;
     VisibleGameObject *get(std::string name) const;
     void drawAll(sf::RenderWindow &renderWindow);
 
 private:
+    sf::Clock _clock;
     std::map<std::string, VisibleGameObject*> _gameObjects;
 
     struct GameObjDealloc{

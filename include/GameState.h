@@ -8,6 +8,7 @@
 #include <SFML/Graphics.hpp>
 #include "Player.h"
 #include "Server.h"
+#include "ObjMan.h"
 #include "VisibleGameObject.h"
 #include "Client.h"
 #include "ObjMan.h"
@@ -18,6 +19,7 @@ public:
     static const unsigned short _resX {1600};
     //! \brief Vertical Resolution
     static const unsigned short _resY {900};
+
     //! \brief Start Playing the game!
     static void play();
 
@@ -27,20 +29,24 @@ public:
     static Server server;
     static Client client;
     static bool isClient;
-    static ObjMan _gameObjectManager;
 
 private:
 
     //! \brief Check if the game is in Exiting state.
     static bool isExiting();
     static void gameLoop();
+
     //! \brief Init and show a splash screen.
     static void showSplashScreen();
     static void showMainMenu();
     //! \brief The current state of the game
 
 private:
+
+    static ObjMan _gameObjectManager;
+
     static sf::RenderWindow _mainWindow;
+
 };
 
 #endif //FIRENICE_GAMESTATE_H

@@ -4,9 +4,18 @@
 
 class Player : public VisibleGameObject{
 public:
-    Player();
+    Player(std::string fName);
     ~Player();
     void set_size();
 
+    void Update(float elapsedTime,sf::Event& _event);
+
+    float GetVelocity() const;
+
+private:
+    bool isJumping;
+    float dJump;
+    float _velocity;  // -- left ++ right
+    float _maxVelocity;
 };
 #endif // PLAYER_H

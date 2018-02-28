@@ -1,6 +1,6 @@
 #include "ObjMan.h"
-
-ObjMan::ObjMan() {};
+#include "GameState.h"
+ObjMan::ObjMan() {sf::Clock _clock{};};
 
 ObjMan::~ObjMan() {std::for_each(_gameObjects.begin(), _gameObjects.end(), ObjMan::GameObjDealloc());};
 
@@ -33,6 +33,20 @@ void ObjMan::drawAll(sf::RenderWindow &renderWindow) {
         it++;
     }
 };
+void ObjMan::updateAll(sf::Event& _event)
+{
+    std::map<std::string,VisibleGameObject*>::const_iterator itr = _gameObjects.begin();
+    sf::Clock clock;
+    float timeDelta = _clock.restart().asSeconds();
+
+    while(itr != _gameObjects.end())
+    {
+        itr->second->Update(timeDelta,_event);
+        itr++;
+    }
+
+
+}
 
 
 
