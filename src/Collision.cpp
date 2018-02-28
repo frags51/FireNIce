@@ -17,6 +17,7 @@ bool Collision::checkCollision(Collision& other, float e) {
     float intersectX = abs(deltaX) - (otherHalfSize.x + thisHalfSize.x);
     float intersectY = abs(deltaY) - (otherHalfSize.y + thisHalfSize.y);
     if(intersectX<0.0f && intersectY<0.0f) {
+        
         e = std::min(std::max(e,0.0f),1.0f);
         if( intersectX > intersectY) {
             if(deltaX >0.0f){
@@ -38,7 +39,6 @@ bool Collision::checkCollision(Collision& other, float e) {
                 other.move(0.0f,intersectY*e);
             }
         }
-        std::cout<<"hui\n";
         return true;
     }
 

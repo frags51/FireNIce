@@ -139,11 +139,13 @@ void GameState::gameLoop() {
                 if (_event.type == sf::Event::Closed) {
                     _state = GameState::state::Exiting;
                 }
-                _gameObjectManager._gameObjects["Plt1"]->GetCollider().checkCollision(_gameObjectManager._gameObjects["Fireboy"]->GetCollider(),1.0f);
-                _gameObjectManager._gameObjects["Plt2"]->GetCollider().checkCollision(_gameObjectManager._gameObjects["Fireboy"]->GetCollider(),1.0f);
-
                 _mainWindow.clear(sf::Color{255, 0, 0, 150});
                 _gameObjectManager.updateAll(_event);
+                Collision boi = _gameObjectManager._gameObjects["Fireboy"]->GetCollider();
+                _gameObjectManager._gameObjects["Plt1"]->GetCollider().checkCollision(boi,0.0f);
+                _gameObjectManager._gameObjects["Plt2"]->GetCollider().checkCollision(boi,0.0f);
+
+
                 _gameObjectManager.drawAll(_mainWindow);
                 _mainWindow.display();
 

@@ -16,8 +16,9 @@ public:
     virtual void Update(float elapsedTime,sf::Event& event);
     virtual sf::Vector2f GetPosition() const;
     virtual bool IsLoaded() const;
-protected:
     sf::RectangleShape _player;
+
+protected:
     sf::Texture playerTexture;
     std::string _filename;
     bool _isLoaded;
