@@ -27,23 +27,6 @@ void Player::Update(float elapsedTime,sf::Event& _event)
 {
     int row =0;
     bool toRight = true;
-    /*if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-    {
-        _player.move(-1.5f,0);
-        row =1;
-        toRight = false;
-    }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-    {
-        _player.move(1.5f,0);
-        row =1;
-    }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !isJumping)
-    {
-        row = 2;
-        _player.move(0, -2.f);
-    }
-     */
     if((_event.type==sf::Event::KeyPressed && _event.key.code==sf::Keyboard::Left) || isLPressed)
     {
         isLPressed=true;
