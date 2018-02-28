@@ -11,6 +11,8 @@ Client GameState::client{};
 
 ObjMan GameState::_gameObjectManager;
 
+bool GameState::filePath {false}; // false for linux, true for OSX
+
 bool GameState::isClient;
 
 void GameState::play() {
@@ -18,7 +20,9 @@ void GameState::play() {
     if(_state!=Not_init) return;
     _mainWindow.create(sf::VideoMode(_resX, _resY, 32), "Fire & Ice");
 
-    Player* fireboy = new Player("../res/img/tux.png");
+    Player *fireboy;
+    if(!filePath)fireboy = new Player("../res/img/tux.png");
+    else fireboy = new Player("res/img/tux.png");
     fireboy->SetPosition(0,_resY-_resY/8);
     _gameObjectManager.add("Fireboy",fireboy);
 
@@ -53,7 +57,10 @@ void GameState::gameLoop() {
                 _mainWindow.clear(sf::Color::Cyan);
                 sf::Text dmsg;
                 sf::Font f1;
-                f1.loadFromFile("res/fonts/Phetsarath_OT.ttf");
+                std::string fontFileM;
+                if(!GameState::filePath) fontFileM="../res/fonts/Phetsarath_OT.ttf";
+                else fontFileM="res/fonts/Phetsarath_OT.ttf";
+                f1.loadFromFile(fontFileM);
                 dmsg.setFont(f1);
                 dmsg.setFillColor(sf::Color::Black);
                 dmsg.setString("Waiting for connection!\nConnect To:" + sf::IpAddress::getLocalAddress().toString());
@@ -72,7 +79,10 @@ void GameState::gameLoop() {
                 _mainWindow.clear(sf::Color::Cyan);
                 sf::Text dmsg;
                 sf::Font f1;
-                f1.loadFromFile("res/fonts/Phetsarath_OT.ttf");
+                std::string fontFileM;
+                if(!GameState::filePath) fontFileM="../res/fonts/Phetsarath_OT.ttf";
+                else fontFileM="res/fonts/Phetsarath_OT.ttf";
+                f1.loadFromFile(fontFileM);
                 dmsg.setFont(f1);
                 dmsg.setString("Please enter IP");
                 dmsg.setFillColor(sf::Color::Black);

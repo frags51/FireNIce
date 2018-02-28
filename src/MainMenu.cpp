@@ -1,8 +1,12 @@
 #include "MainMenu.h"
 #include <iostream>
+#include <GameState.h>
 
 MainMenu::MainMenu(float width, float height) {
-    if(!font.loadFromFile("res/fonts/Phetsarath_OT.ttf")){
+    std::string fontFileM;
+    if(!GameState::filePath) fontFileM="../res/fonts/Phetsarath_OT.ttf";
+    else fontFileM="res/fonts/Phetsarath_OT.ttf";
+    if(!font.loadFromFile(fontFileM)){
         std::cerr<<"Error Loading Font MainMenu!";
         return;
     }
