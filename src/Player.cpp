@@ -25,17 +25,22 @@ float Player::GetVelocity() const
 
 void Player::Update(float elapsedTime,sf::Event& _event)
 {
+    int row =0;
+    bool toRight = true;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
         _player.move(-1.5f,0);
+        row =1;
+        toRight = false;
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
         _player.move(1.5f,0);
+        row =1;
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !isJumping)
     {
-        //_player.move(0,-180.5f);
+        row = 2;
         _player.move(0, -2.f);
     }
     // Simulate Gravity -> Add Collision platform detection here
@@ -55,8 +60,7 @@ void Player::Update(float elapsedTime,sf::Event& _event)
 
     if(_velocity < -_maxVelocity)
         _velocity = -_maxVelocity;
-
-    animation.update(0,elapsedTime,false);
+    animation.update(row,elapsedTime,toRight);
     _player.setTextureRect(animation.uvRect);
 
 

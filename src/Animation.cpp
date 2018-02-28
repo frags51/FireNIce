@@ -28,7 +28,7 @@ void Animation::update(int row,float deltaTime,bool faceRight){
     uvRect.top = currentImage.y*uvRect.height;
     if(faceRight){
         uvRect.left = currentImage.x* uvRect.width;
-        uvRect.width = -abs(uvRect.width);
+        uvRect.width = abs(uvRect.width);
 
     }
     else{
