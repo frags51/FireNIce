@@ -90,6 +90,9 @@
 		<Unit filename="/Users/mayank/Desktop/concurrency-4/include/Client.h">
 			<Option target="FireNIce"/>
 		</Unit>
+		<Unit filename="/Users/mayank/Desktop/concurrency-4/include/Collision.h">
+			<Option target="FireNIce"/>
+		</Unit>
 		<Unit filename="/Users/mayank/Desktop/concurrency-4/include/GameState.h">
 			<Option target="FireNIce"/>
 		</Unit>
@@ -97,6 +100,9 @@
 			<Option target="FireNIce"/>
 		</Unit>
 		<Unit filename="/Users/mayank/Desktop/concurrency-4/include/ObjMan.h">
+			<Option target="FireNIce"/>
+		</Unit>
+		<Unit filename="/Users/mayank/Desktop/concurrency-4/include/Platform.h">
 			<Option target="FireNIce"/>
 		</Unit>
 		<Unit filename="/Users/mayank/Desktop/concurrency-4/include/Player.h">
@@ -120,6 +126,9 @@
 		<Unit filename="/Users/mayank/Desktop/concurrency-4/src/Client.cpp">
 			<Option target="FireNIce"/>
 		</Unit>
+		<Unit filename="/Users/mayank/Desktop/concurrency-4/src/Collision.cpp">
+			<Option target="FireNIce"/>
+		</Unit>
 		<Unit filename="/Users/mayank/Desktop/concurrency-4/src/GameState.cpp">
 			<Option target="FireNIce"/>
 		</Unit>
@@ -127,6 +136,9 @@
 			<Option target="FireNIce"/>
 		</Unit>
 		<Unit filename="/Users/mayank/Desktop/concurrency-4/src/ObjMan.cpp">
+			<Option target="FireNIce"/>
+		</Unit>
+		<Unit filename="/Users/mayank/Desktop/concurrency-4/src/Platform.cpp">
 			<Option target="FireNIce"/>
 		</Unit>
 		<Unit filename="/Users/mayank/Desktop/concurrency-4/src/Player.cpp">

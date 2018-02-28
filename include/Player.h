@@ -2,6 +2,7 @@
 #define PLAYER_DEF
 #include "VisibleGameObject.h"
 #include "Animation.h"
+#include "Collision.h"
 
 class Player : public VisibleGameObject{
 public:
@@ -11,6 +12,7 @@ public:
     void Update(float elapsedTime,sf::Event& _event);
 
     float GetVelocity() const;
+    Collision GetCollider(){return Collision(_player);}
 
 private:
     bool isJumping;

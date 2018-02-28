@@ -17,6 +17,7 @@ public:
     VisibleGameObject *get(std::string name) const;
     void drawAll(sf::RenderWindow &renderWindow);
 
+
 private:
     sf::Clock _clock;
     std::map<std::string, VisibleGameObject*> _gameObjects;
