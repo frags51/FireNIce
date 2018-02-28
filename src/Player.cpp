@@ -60,7 +60,7 @@ void Player::Update(float elapsedTime,sf::Event& _event)
         _player.move(1.5f,0);
         row =1;
     }
-    if(((_event.type==sf::Event::KeyPressed && _event.key.code==sf::Keyboard::Left) || isUpPressed) && !isJumping)
+    if(((_event.type==sf::Event::KeyPressed && _event.key.code==sf::Keyboard::Up) || isUpPressed) && !isJumping)
     {
         isUpPressed=true;
         row = 2;

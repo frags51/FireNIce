@@ -132,6 +132,7 @@ void GameState::gameLoop(VisibleGameObject *fireboy) {
                 if(!isClient){ // Server
 
                     _mainWindow.clear(sf::Color{255, 0, 0, 150});
+                    float telap = _gameObjectManager._clock.getElapsedTime().asSeconds();
                     _gameObjectManager.updateAll(_event);
 
                     if (_event.type == sf::Event::Closed) {
@@ -142,7 +143,7 @@ void GameState::gameLoop(VisibleGameObject *fireboy) {
                         //   server.send(_gameObjectManager.get("Fireboy")->GetPosition());
                     //    std::cout<<"sent: "<<_gameObjectManager.get("Fireboy")->GetPosition().x<<" "<<_gameObjectManager.get("Fireboy")->GetPosition().y<<std::endl;
                         sf::Packet t;
-                        t<<_event.key.code;
+                        t<<_event.key.code<<(_event.type==sf::Event::KeyPressed) <<telap;
                         server.client.send(t);
                     }
                     else if(_event.type==sf::Event::Closed){
@@ -186,8 +187,8 @@ void GameState::gameLoop(VisibleGameObject *fireboy) {
                     } */
                     sf::Packet t;
                     if(client.socket.receive(t)==sf::Socket::Done){
-                        int x;
-                        t>>x;
+                        int x; bool press; float telap;
+                        t>>x>>press>>telap;
 
                         sf::Event::KeyEvent data;
                         data.code = (sf::Keyboard::Key)x;
@@ -197,10 +198,11 @@ void GameState::gameLoop(VisibleGameObject *fireboy) {
                         data.system = false;
 
                         sf::Event __event;
-                        __event.type = sf::Event::KeyPressed;
+                        if(press)__event.type = sf::Event::KeyPressed;
+                        else __event.type=sf::Event::KeyReleased;
                         __event.key = data;
 
-                        fireboy->Update(_gameObjectManager._clock.getElapsedTime().asSeconds(), __event);
+                        fireboy->Update(telap, __event);
                         fireboy->Draw(_mainWindow);
                     }
 
