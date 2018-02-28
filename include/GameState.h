@@ -11,6 +11,7 @@
 #include "ObjMan.h"
 #include "VisibleGameObject.h"
 #include "Client.h"
+#include "Platform.h"
 #include "Collision.h"
 #include "ObjMan.h"
 

@@ -2,8 +2,6 @@
 #include "GameState.h"
 #include "Splash.h"
 #include <thread>
-#include <iostream>
-#include <Platform.h>
 
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
