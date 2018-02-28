@@ -36,7 +36,7 @@ private:
 
     //! \brief Check if the game is in Exiting state.
     static bool isExiting();
-    static void gameLoop();
+    static void gameLoop(VisibleGameObject *fireboy);
 
     //! \brief Init and show a splash screen.
     static void showSplashScreen();

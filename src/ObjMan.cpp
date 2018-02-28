@@ -11,7 +11,7 @@ void ObjMan::add(std::string name, VisibleGameObject *gameObject) {
 void ObjMan::remove(std::string name) {
     auto it = _gameObjects.find(name); // This is an iterator
     if(it!=_gameObjects.end()){
-        delete it->second;
+        //delete it->second;
         _gameObjects.erase(it);
     }
 }
