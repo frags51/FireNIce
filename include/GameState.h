@@ -18,10 +18,10 @@ public:
     static const unsigned short _resX {1600};
     //! \brief Vertical Resolution
     static const unsigned short _resY {900};
-    const static sf::Event& GetInput();
 
     //! \brief Start Playing the game!
     static void play();
+    const static sf::Event& GetInput();
 
     //! \brief The set of possible states of the game
     enum state {Not_init, AtSplash, AtMenu, WaitForClient, WaitForServer, Playing, Exiting}; // More maybe added later.

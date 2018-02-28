@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "GameState.h"
+#include <iostream>
 Player::Player() :
         _velocity(0),
         _maxVelocity(600.0f)
@@ -21,13 +22,14 @@ float Player::GetVelocity() const
 
 void Player::Update(float elapsedTime)
 {
-
+    std::cout<<"Hi\n";
     if(GameState::GetInput().type == sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
         _velocity-= 3.0f;
     }
     if(GameState::GetInput().type == sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
+        std::cout<<"Hi\n";
         _velocity+= 3.0f;
     }
 
@@ -43,13 +45,7 @@ void Player::Update(float elapsedTime)
         _velocity = -_maxVelocity;
 
 
-    //sf::Vector2f pos = this->GetPosition();
 
-    /*if(pos.x  < _player.getSize().
-                || pos.x > (Game::SCREEN_WIDTH - GetSprite().GetSize().x/2))
-    {
-        _velocity = -_velocity; // Bounce by current velocity in opposite direction
-    }*/
 
     _player.move(_velocity * elapsedTime, 0);
 }

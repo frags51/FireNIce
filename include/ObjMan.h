@@ -12,10 +12,10 @@ public:
     ~ObjMan();
     void add(std::string name, VisibleGameObject *gameObject);
     void remove(std::string name);
+    void updateAll();
     int getObjCount() const;
     VisibleGameObject *get(std::string name) const;
     void drawAll(sf::RenderWindow &renderWindow);
-    void UpdateAll();
 
 private:
     std::map<std::string, VisibleGameObject*> _gameObjects;
