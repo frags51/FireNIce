@@ -33,6 +33,8 @@ void GameState::play() {
 
 
 
+
+
     _state=state::Playing;
 
     while(!isExiting()) {

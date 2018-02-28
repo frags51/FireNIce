@@ -15,6 +15,9 @@ public:
     Collision GetCollider(){return Collision(_player);}
 
 private:
+    bool isRPressed;
+    bool isLPressed;
+    bool isUpPressed;
     bool isJumping;
     float dJump;
     float _velocity;  // -- left ++ right
