@@ -13,6 +13,8 @@ public:
     float GetVelocity() const;
 
 private:
+    bool isJumping;
+    float dJump;
     float _velocity;  // -- left ++ right
     float _maxVelocity;
 };
