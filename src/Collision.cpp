@@ -7,7 +7,7 @@ Collision::Collision(sf::RectangleShape& body) :
 {
 
 }
-bool Collision::checkCollision(Collision &other, float e) {
+bool Collision::checkCollision(Collision& other, float e) {
     sf::Vector2f otherPosition = other.GetPosition();
     sf::Vector2f otherHalfSize = other.GetHalfSize();
     sf::Vector2f thisPosition = this->GetPosition();
@@ -38,6 +38,7 @@ bool Collision::checkCollision(Collision &other, float e) {
                 other.move(0.0f,intersectY*e);
             }
         }
+        std::cout<<"hui\n";
         return true;
     }
 
@@ -46,5 +47,7 @@ bool Collision::checkCollision(Collision &other, float e) {
 
     return false;
 
+}
+Collision::~Collision() {
 
 }

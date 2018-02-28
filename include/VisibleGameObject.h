@@ -2,6 +2,7 @@
 #define GAME_OBJECT
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Collision.h"
 class VisibleGameObject{
 public:
     VisibleGameObject();
@@ -9,6 +10,7 @@ public:
 
     virtual void Load(std::string filename,float x,float y);
     virtual void Draw(sf::RenderWindow & window);
+    virtual Collision GetCollider();
 
     virtual void SetPosition(float x, float y);
     virtual void Update(float elapsedTime,sf::Event& event);

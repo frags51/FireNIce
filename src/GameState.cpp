@@ -24,11 +24,10 @@ void GameState::play() {
     fireboy->SetPosition(0,_resY-_resY/8);
     _gameObjectManager.add("Fireboy",fireboy);
     Platform *platform1 = new Platform(nullptr,sf::Vector2f(400.0f,200.0f),sf::Vector2f(500.0f,200.0f));
-    Platform *platform2 = new Platform(nullptr,sf::Vector2f(0.0f,200.0f),sf::Vector2f(500.0f,0.0f));
+    Platform *platform2 = new Platform(nullptr,sf::Vector2f(100.0f,200.0f),sf::Vector2f(200.0f,800.0f));
     _gameObjectManager.add("Plt1",platform1);
     _gameObjectManager.add("Plt2",platform2);
-    platform1->GetCollider().checkCollision(fireboy->GetCollider(),0.0f);
-    platform2->GetCollider().checkCollision(fireboy->GetCollider(),1.0f);
+
 
 
 
@@ -138,6 +137,8 @@ void GameState::gameLoop() {
                 if (_event.type == sf::Event::Closed) {
                     _state = GameState::state::Exiting;
                 }
+                _gameObjectManager._gameObjects["Plt1"]->GetCollider().checkCollision(_gameObjectManager._gameObjects["Fireboy"]->GetCollider(),1.0f);
+                _gameObjectManager._gameObjects["Plt2"]->GetCollider().checkCollision(_gameObjectManager._gameObjects["Fireboy"]->GetCollider(),1.0f);
 
                 _mainWindow.clear(sf::Color{255, 0, 0, 150});
                 _gameObjectManager.updateAll(_event);

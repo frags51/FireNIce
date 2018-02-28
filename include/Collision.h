@@ -2,9 +2,8 @@
 #define FIRENICE_COLLISION_H
 
 #include <SFML/Graphics.hpp>
-#include "VisibleGameObject.h"
 
-class Collision : public VisibleGameObject {
+class Collision{
 public:
     Collision(sf::RectangleShape& body);
     ~Collision();
@@ -12,13 +11,13 @@ public:
     void move(float dx,float dy){
         _player.move(dx,dy);
     }
-    bool checkCollision(Collision &other , float e);
+    bool checkCollision(Collision& other , float e);
     sf::Vector2f GetPosition(){ return _player.getPosition();}
     sf::Vector2f GetHalfSize() { return _player.getSize()/ 2.0f;}
 
 
 private:
-    sf::RectangleShape _player;
+    sf::RectangleShape& _player;
 
 };
 
