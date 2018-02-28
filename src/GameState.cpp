@@ -11,6 +11,8 @@ Client GameState::client{};
 
 ObjMan GameState::_gameObjectManager;
 
+bool GameState::filePath {true}; // false for linux, true for OSX
+
 bool GameState::isClient;
 
 void GameState::play() {
@@ -21,12 +23,18 @@ void GameState::play() {
     Player* fireboy = new Player("res/img/tux.png");
 =======
 
+<<<<<<< HEAD
     Player* fireboy = new Player("../res/img/tux.png");
 >>>>>>> 86c5995d334e9f3359e8ccc1336213164db62443
+=======
+    Player *fireboy;
+    if(!filePath)fireboy = new Player("../res/img/tux.png");
+    else fireboy = new Player("res/img/tux.png");
+>>>>>>> 9ba8621a1ba38035a5d6afb89c1547dda3287d93
     fireboy->SetPosition(0,_resY-_resY/8);
     _gameObjectManager.add("Fireboy",fireboy);
 
-    _state=state::AtSplash;
+    _state=state::Playing;
 
     while(!isExiting()) {
         gameLoop();
@@ -57,7 +65,10 @@ void GameState::gameLoop() {
                 _mainWindow.clear(sf::Color::Cyan);
                 sf::Text dmsg;
                 sf::Font f1;
-                f1.loadFromFile("res/fonts/Phetsarath_OT.ttf");
+                std::string fontFileM;
+                if(!GameState::filePath) fontFileM="../res/fonts/Phetsarath_OT.ttf";
+                else fontFileM="res/fonts/Phetsarath_OT.ttf";
+                f1.loadFromFile(fontFileM);
                 dmsg.setFont(f1);
                 dmsg.setFillColor(sf::Color::Black);
                 dmsg.setString("Waiting for connection!\nConnect To:" + sf::IpAddress::getLocalAddress().toString());
@@ -76,7 +87,10 @@ void GameState::gameLoop() {
                 _mainWindow.clear(sf::Color::Cyan);
                 sf::Text dmsg;
                 sf::Font f1;
-                f1.loadFromFile("res/fonts/Phetsarath_OT.ttf");
+                std::string fontFileM;
+                if(!GameState::filePath) fontFileM="../res/fonts/Phetsarath_OT.ttf";
+                else fontFileM="res/fonts/Phetsarath_OT.ttf";
+                f1.loadFromFile(fontFileM);
                 dmsg.setFont(f1);
                 dmsg.setString("Please enter IP");
                 dmsg.setFillColor(sf::Color::Black);
@@ -120,7 +134,6 @@ void GameState::gameLoop() {
             } // Wait for server
                 break;
             case GameState::state::Playing: {
-
                 _mainWindow.pollEvent(_event);
                 if (_event.type == sf::Event::Closed) {
                     _state = GameState::state::Exiting;

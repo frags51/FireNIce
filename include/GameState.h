@@ -15,6 +15,8 @@
 
 class GameState{
 public:
+    //! \brief The way paths are written: false for linux, true for OSX
+    static bool filePath;
     //! \brief Horizontal Resolution
     static const unsigned short _resX {1600};
     //! \brief Vertical Resolution

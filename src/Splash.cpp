@@ -5,7 +5,10 @@
 
 int Splash::show(sf::RenderWindow &renderWindow){
     sf::Texture texture;
-    if(!texture.loadFromFile("res/img/splash.png")){ // Arg: const string: the path to the image file
+    std::string splashName;
+    if(!GameState::filePath) splashName="../res/img/splash.png";
+    else splashName="res/img/splash.png";
+    if(!texture.loadFromFile(splashName)){ // Arg: const string: the path to the image file
         std::cerr<<"Failed to load splash img!"<<std::endl;
         return -1; // Error handling here
     }

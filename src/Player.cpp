@@ -4,10 +4,12 @@ Player::Player(std::string fName) :
         _velocity(0),
         _maxVelocity(600.0f),
         dJump {0.f}
+
 {
     Load(fName, GameState::_resX/16,GameState::_resY/8);
-    this->set_size();
+    animation.create(&playerTexture,sf::Vector2u(3,9),0.3f);
     isJumping=false;
+
 }
 
 
@@ -54,14 +56,10 @@ void Player::Update(float elapsedTime,sf::Event& _event)
     if(_velocity < -_maxVelocity)
         _velocity = -_maxVelocity;
 
+    animation.update(0,elapsedTime);
+    _player.setTextureRect(animation.uvRect);
 
 
-}
-void Player::set_size(){
-    sf::Vector2u textureSize = playerTexture.getSize();
-    textureSize.x/=3;
-    textureSize.y/=9;
-    _player.setTextureRect(sf::IntRect (textureSize.x *2, textureSize.y *8 , textureSize.x , textureSize.y));
 }
 
 
