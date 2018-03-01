@@ -167,11 +167,10 @@ void GameState::gameLoop(VisibleGameObject *fireboy) {
                         }
                         else need_upd=true;
                         if(need_upd) res = std::async(std::launch::async,
-                                                      [](VisibleGameObject* fireboy, bool* nUpd,
+                                                      [](VisibleGameObject* fireboy,
                                                       int x, bool press, float telap
                                                       ){
 
-                                *nUpd=true;
                                 sf::Event::KeyEvent data;
                                 data.code = (sf::Keyboard::Key)x;
                                 data.alt = false;
@@ -186,7 +185,7 @@ void GameState::gameLoop(VisibleGameObject *fireboy) {
 
                                 fireboy->Update(telap, __event);
 
-                        }, fireboy, &need_upd, x, press, telap);
+                        }, fireboy, x, press, telap);
                     }
 
 
