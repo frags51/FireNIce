@@ -128,7 +128,7 @@ void GameState::gameLoop(VisibleGameObject *fireboy) {
             case GameState::state::Playing: {
 
                 if(!isClient){ // Server
-
+                    server.sendSocket.setBlocking(true);
                     _mainWindow.clear(sf::Color{255, 0, 0, 150});
                     float telap = _gameObjectManager._clock.getElapsedTime().asSeconds();
                     _gameObjectManager.updateAll(_event);
@@ -142,11 +142,14 @@ void GameState::gameLoop(VisibleGameObject *fireboy) {
                     //    std::cout<<"sent: "<<_gameObjectManager.get("Fireboy")->GetPosition().x<<" "<<_gameObjectManager.get("Fireboy")->GetPosition().y<<std::endl;
                         sf::Packet t;
                         t<<_event.key.code<<(_event.type==sf::Event::KeyPressed) <<telap;
-                        server.sendSocket.send(t);
+                        sf::Socket::Status st= server.sendSocket.send(t);
+                        while(st!=sf::Socket::Done) {std::cout<<st<<std::endl; st=server.sendSocket.send(t);}
                     }
-                    else if(_event.type==sf::Event::Closed){
-                        _state=Exiting;
-                        break;
+                    else {
+                        sf::Packet t;
+                        t<<-1<<false<<0.f;
+                        sf::Socket::Status st= server.sendSocket.send(t);
+                        while(st!=sf::Socket::Done) {std::cout<<st<<std::endl; st=server.sendSocket.send(t);}
                     }
                     _gameObjectManager.drawAll(_mainWindow);
                     _mainWindow.display();
@@ -155,9 +158,41 @@ void GameState::gameLoop(VisibleGameObject *fireboy) {
                 }
                 else{ // Client
                     _gameObjectManager.remove("Fireboy");
-                    _mainWindow.clear(sf::Color::Cyan);
+                    bool need_upd {false};
+                    std::future<void> res;
+                    sf::Packet t;
+                    if(client.listenSocket.receive(t)==sf::Socket::Done) {
 
-                    //sendSocket.receive();
+                        int x; bool press; float telap;
+                        t>>x>>press>>telap;
+                        if(x==-1) {
+                            need_upd=false;
+                        }
+                        else need_upd=true;
+                        if(need_upd) res = std::async(std::launch::async,
+                                                      [](VisibleGameObject* fireboy, bool* nUpd,
+                                                      int x, bool press, float telap
+                                                      ){
+
+                                *nUpd=true;
+                                sf::Event::KeyEvent data;
+                                data.code = (sf::Keyboard::Key)x;
+                                data.alt = false;
+                                data.control = false;
+                                data.shift = false;
+                                data.system = false;
+
+                                sf::Event __event;
+                                if(press)__event.type = sf::Event::KeyPressed;
+                                else __event.type=sf::Event::KeyReleased;
+                                __event.key = data;
+
+                                fireboy->Update(telap, __event);
+                                std::cout<<"recd & updated\n";
+
+                        }, fireboy, &need_upd, x, press, telap);
+                    }
+
 
                     if (_event.type == sf::Event::Closed) {
                         _state = GameState::state::Exiting;
@@ -174,35 +209,8 @@ void GameState::gameLoop(VisibleGameObject *fireboy) {
                     _gameObjectManager.updateAll(_event);
                     _gameObjectManager.drawAll(_mainWindow);
 
-                    /*if(sendSocket.recdStatus.wait_for(std::chrono::seconds(0))==std::future_status::ready){
-                        if(sendSocket.recdStatus.get()==sf::Socket::Done){
-                            float x,y;
-                            sendSocket.recd>>x>>y;
-                            std::cout<<"in sendSocket code:: "<<x<<" "<<y<<fireboy->IsLoaded()<<std::endl;
-                            fireboy->SetPosition(x,y);
-                            fireboy->Draw(_mainWindow);
-                        }
-                    } */
-                    sf::Packet t;
-                    if(client.listenSocket.receive(t)==sf::Socket::Done){
-                        int x; bool press; float telap;
-                        t>>x>>press>>telap;
 
-                        sf::Event::KeyEvent data;
-                        data.code = (sf::Keyboard::Key)x;
-                        data.alt = false;
-                        data.control = false;
-                        data.shift = false;
-                        data.system = false;
-
-                        sf::Event __event;
-                        if(press)__event.type = sf::Event::KeyPressed;
-                        else __event.type=sf::Event::KeyReleased;
-                        __event.key = data;
-
-                        fireboy->Update(telap, __event);
-
-                    }
+                    if(need_upd) {std::cout<<"Waiting for get!\n"; res.get();}
                     fireboy->Draw(_mainWindow);
                     _mainWindow.display();
 
