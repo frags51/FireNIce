@@ -13,20 +13,25 @@
 
 class Server {
 public:
-    Server(unsigned short port);
-    void waitForClient(bool *res);
+    Server(unsigned short _port1, unsigned short _port2);
+    void waitForClientSendSocket(bool *res);
+    void waitForClientListenSocket(bool *res);
     //~Server();
     sf::TcpSocket sendSocket;
+    sf::TcpSocket listenSocket;
+    sf::Packet recd;
     std::thread worker;
     void send(sf::Vector2f v);
     sf::Socket::Status sdrive(sf::Vector2f v);
     void checkSent();
-    sf::Packet recd;
 private:
     std::future<sf::Socket::Status> sentStatus;
-    //! \brief The Client's IP address (Only 1 possible)
     sf::TcpListener listener;
-    unsigned short port;
+    sf::TcpListener listener2;
+    //! \brief Port for sendSocket.
+    unsigned short port1;
+    //! \brief Port for listenSocket.
+    unsigned short port2;
 };
 
 

@@ -32,11 +32,14 @@ public:
     static Client client;
     static bool isClient;
 
+    static unsigned short port1;
+    static unsigned short port2;
+
 private:
 
     //! \brief Check if the game is in Exiting state.
     static bool isExiting();
-    static void gameLoop(VisibleGameObject *fireboy);
+    static void gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergirl);
 
     //! \brief Init and show a splash screen.
     static void showSplashScreen();

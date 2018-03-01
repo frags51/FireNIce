@@ -6,7 +6,9 @@
 
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
-Server GameState::server{45004};
+unsigned short GameState::port1 {45004};
+unsigned short GameState::port2 {45005};
+Server GameState::server{GameState::port1, GameState::port2};
 Client GameState::client{};
 
 ObjMan GameState::_gameObjectManager;
@@ -25,13 +27,19 @@ void GameState::play() {
     fireboy->SetPosition(0,_resY-_resY/8);
     _gameObjectManager.add("Fireboy",fireboy);
 
+    Player *watergirl= nullptr;
+    if(!filePath)watergirl = new Player("../res/img/tux.png", sf::Keyboard::W,sf::Keyboard::A, sf::Keyboard::D);
+    else watergirl= new Player("res/img/tux.png", sf::Keyboard::W,sf::Keyboard::A, sf::Keyboard::D);
+    watergirl->SetPosition(_resX-_resX/16,_resY-_resY/8);
+    _gameObjectManager.add("Watergirl",watergirl);
+
     _state=state::AtSplash;
 
     while(!isExiting()) {
-        gameLoop(fireboy);
+        gameLoop(fireboy, watergirl);
     }
     if(isClient) {client.listenSocket.disconnect();delete(fireboy);}
-    else GameState::server.sendSocket.disconnect();
+    else {GameState::server.sendSocket.disconnect(); delete(watergirl);}
     _mainWindow.close();
 } // play()
 
@@ -39,7 +47,7 @@ bool GameState::isExiting() {
     return _state==state::Exiting;
 } // isExiting
 
-void GameState::gameLoop(VisibleGameObject *fireboy) {
+void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergirl) {
     sf::Event _event;
     _mainWindow.pollEvent(_event);
         switch (_state) {
@@ -52,8 +60,10 @@ void GameState::gameLoop(VisibleGameObject *fireboy) {
             }
                 break; // Showing Main Menu
             case GameState::state::WaitForClient: {
-                bool res = false;
-                std::thread t1(&Server::waitForClient, &server, &res);
+                bool res {false};
+                bool res2 {false};
+                std::thread t1(&Server::waitForClientSendSocket, &server, &res);
+                std::thread t2(&Server::waitForClientListenSocket, &server, &res2);
                 _mainWindow.clear(sf::Color::Cyan);
                 sf::Text dmsg;
                 sf::Font f1;
@@ -69,7 +79,8 @@ void GameState::gameLoop(VisibleGameObject *fireboy) {
                 _mainWindow.display();
                 std::cout << "Waiting for clients to join!" << std::endl;
                 t1.join();
-                while (!res); // Wait to get connection
+                t2.join();
+                while (!res || !res2); // Wait to get connection
                 std::cout << "Connected to: " << server.sendSocket.getRemoteAddress() << std::endl;
                 isClient = false;
                 _state = GameState::state::Playing;
@@ -102,10 +113,14 @@ void GameState::gameLoop(VisibleGameObject *fireboy) {
                                 enter += static_cast<char>(_event.text.unicode);
                             else {
                                 std::cout << "Got an enter! after " << enter << std::endl;
-                                if (client.listenSocket.connect(enter, 45004) != sf::Socket::Done) {
-                                    std::cerr << "Error in Client Socket!" << std::endl;
+                                if (client.listenSocket.connect(enter, GameState::port1) != sf::Socket::Done) {
+                                    std::cerr << "Error in Client listen Socket!" << std::endl;
                                     enter = "";
-                                } else {
+                                }
+                                else if(client.sendSocket.connect(enter, GameState::port2) != sf::Socket::Done){
+                                    std::cerr << "Error in Client Send Socket!" << std::endl;
+                                }
+                                else {
                                     isClient = true;
                                     _state = Playing;
                                     flag = false;
@@ -128,6 +143,8 @@ void GameState::gameLoop(VisibleGameObject *fireboy) {
             case GameState::state::Playing: {
 
                 if(!isClient){ // Server
+                    _gameObjectManager.remove("Watergirl");
+                    
                     server.sendSocket.setBlocking(true);
                     _mainWindow.clear(sf::Color{255, 0, 0, 150});
                     float telap = _gameObjectManager._clock.getElapsedTime().asSeconds();
