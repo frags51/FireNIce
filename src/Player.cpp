@@ -1,6 +1,6 @@
 #include "Player.h"
 #include "GameState.h"
-Player::Player(std::string fName, sf::Keyboard::Key _u, sf::Keyboard::Key _l, sf::Keyboard::Key _r) :
+Player::Player(const std::string &fName, sf::Keyboard::Key _u, sf::Keyboard::Key _l, sf::Keyboard::Key _r) :
         _velocity(0),
         _maxVelocity(600.0f),
         dJump {0.f},
@@ -19,8 +19,8 @@ Player::Player(std::string fName, sf::Keyboard::Key _u, sf::Keyboard::Key _l, sf
 }
 
 
-Player::~Player()
-{
+Player::~Player() {
+
 }
 
 
@@ -33,45 +33,28 @@ void Player::Update(float elapsedTime,sf::Event& _event)
 {
     int row =0;
     bool toRight = true;
-    /*if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-    {
-        _player.move(-1.5f,0);
-        row =1;
-        toRight = false;
-    }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-    {
-        _player.move(1.5f,0);
-        row =1;
-    }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !isJumping)
-    {
-        row = 2;
-        _player.move(0, -2.f);
-    }
-     */
-    if((_event.type==sf::Event::KeyPressed && _event.key.code==sf::Keyboard::Left) || isLPressed)
+    if((_event.type==sf::Event::KeyPressed && _event.key.code==l) || isLPressed)
     {
         isLPressed=true;
         _player.move(-1.5f,0);
         row =1;
         toRight = false;
     }
-    if((_event.type==sf::Event::KeyPressed && _event.key.code==sf::Keyboard::Right) || isRPressed)
+    if((_event.type==sf::Event::KeyPressed && _event.key.code==r) || isRPressed)
     {
         isRPressed=true;
         _player.move(1.5f,0);
         row =1;
     }
-    if(((_event.type==sf::Event::KeyPressed && _event.key.code==sf::Keyboard::Up) || isUpPressed) && !isJumping)
+    if(((_event.type==sf::Event::KeyPressed && _event.key.code==u) || isUpPressed) && !isJumping)
     {
         isUpPressed=true;
         row = 2;
         _player.move(0, -2.f);
     }
-    if((_event.type==sf::Event::KeyReleased && _event.key.code==sf::Keyboard::Left)) isLPressed=false;
-    if((_event.type==sf::Event::KeyReleased && _event.key.code==sf::Keyboard::Right)) isRPressed=false;
-    if((_event.type==sf::Event::KeyReleased && _event.key.code==sf::Keyboard::Up)) isUpPressed=false;
+    if((_event.type==sf::Event::KeyReleased && _event.key.code==l)) isLPressed=false;
+    if((_event.type==sf::Event::KeyReleased && _event.key.code==r)) isRPressed=false;
+    if((_event.type==sf::Event::KeyReleased && _event.key.code==u)) isUpPressed=false;
 
 
     // Simulate Gravity -> Add Collision platform detection here

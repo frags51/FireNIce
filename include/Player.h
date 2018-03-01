@@ -5,10 +5,11 @@
 
 class Player : public VisibleGameObject{
 public:
-    Player(std::string fName, sf::Keyboard::Key _u, sf::Keyboard::Key _l, sf::Keyboard::Key _r);
+    Player(const std::string &fName, sf::Keyboard::Key _u, sf::Keyboard::Key _l, sf::Keyboard::Key _r);
     ~Player();
 
-    void Update(float elapsedTime,sf::Event& _event);
+
+    void Update(float elapsedTime,sf::Event& _event) override;
 
     float GetVelocity() const;
 
