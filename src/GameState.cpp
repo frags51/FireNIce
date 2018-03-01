@@ -30,8 +30,8 @@ void GameState::play() {
     while(!isExiting()) {
         gameLoop(fireboy);
     }
-    if(isClient) client.socket.disconnect();
-    else GameState::server.client.disconnect();
+    if(isClient) client.listenSocket.disconnect();
+    else GameState::server.sendSocket.disconnect();
     _mainWindow.close();
 } // play()
 
@@ -70,7 +70,7 @@ void GameState::gameLoop(VisibleGameObject *fireboy) {
                 std::cout << "Waiting for clients to join!" << std::endl;
                 t1.join();
                 while (!res); // Wait to get connection
-                std::cout << "Connected to: " << server.client.getRemoteAddress() << std::endl;
+                std::cout << "Connected to: " << server.sendSocket.getRemoteAddress() << std::endl;
                 isClient = false;
                 _state = GameState::state::Playing;
             }
@@ -102,7 +102,7 @@ void GameState::gameLoop(VisibleGameObject *fireboy) {
                                 enter += static_cast<char>(_event.text.unicode);
                             else {
                                 std::cout << "Got an enter! after " << enter << std::endl;
-                                if (client.socket.connect(enter, 45004) != sf::Socket::Done) {
+                                if (client.listenSocket.connect(enter, 45004) != sf::Socket::Done) {
                                     std::cerr << "Error in Client Socket!" << std::endl;
                                     enter = "";
                                 } else {
@@ -142,7 +142,7 @@ void GameState::gameLoop(VisibleGameObject *fireboy) {
                     //    std::cout<<"sent: "<<_gameObjectManager.get("Fireboy")->GetPosition().x<<" "<<_gameObjectManager.get("Fireboy")->GetPosition().y<<std::endl;
                         sf::Packet t;
                         t<<_event.key.code<<(_event.type==sf::Event::KeyPressed) <<telap;
-                        server.client.send(t);
+                        server.sendSocket.send(t);
                     }
                     else if(_event.type==sf::Event::Closed){
                         _state=Exiting;
@@ -157,7 +157,7 @@ void GameState::gameLoop(VisibleGameObject *fireboy) {
                     _gameObjectManager.remove("Fireboy");
                     _mainWindow.clear(sf::Color::Cyan);
 
-                    //client.receive();
+                    //sendSocket.receive();
 
                     if (_event.type == sf::Event::Closed) {
                         _state = GameState::state::Exiting;
@@ -174,17 +174,17 @@ void GameState::gameLoop(VisibleGameObject *fireboy) {
                     _gameObjectManager.updateAll(_event);
                     _gameObjectManager.drawAll(_mainWindow);
 
-                    /*if(client.recdStatus.wait_for(std::chrono::seconds(0))==std::future_status::ready){
-                        if(client.recdStatus.get()==sf::Socket::Done){
+                    /*if(sendSocket.recdStatus.wait_for(std::chrono::seconds(0))==std::future_status::ready){
+                        if(sendSocket.recdStatus.get()==sf::Socket::Done){
                             float x,y;
-                            client.recd>>x>>y;
-                            std::cout<<"in client code:: "<<x<<" "<<y<<fireboy->IsLoaded()<<std::endl;
+                            sendSocket.recd>>x>>y;
+                            std::cout<<"in sendSocket code:: "<<x<<" "<<y<<fireboy->IsLoaded()<<std::endl;
                             fireboy->SetPosition(x,y);
                             fireboy->Draw(_mainWindow);
                         }
                     } */
                     sf::Packet t;
-                    if(client.socket.receive(t)==sf::Socket::Done){
+                    if(client.listenSocket.receive(t)==sf::Socket::Done){
                         int x; bool press; float telap;
                         t>>x>>press>>telap;
 
@@ -201,9 +201,9 @@ void GameState::gameLoop(VisibleGameObject *fireboy) {
                         __event.key = data;
 
                         fireboy->Update(telap, __event);
-                        fireboy->Draw(_mainWindow);
-                    }
 
+                    }
+                    fireboy->Draw(_mainWindow);
                     _mainWindow.display();
 
 

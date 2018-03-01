@@ -7,7 +7,7 @@ void Server::waitForClient(bool *res) {
     if(listener.listen(this->port)!=sf::Socket::Done){
         std::cerr<<"Server error while listening @ the port"<<std::endl;
     }
-    if(listener.accept(client) != sf::Socket::Done){
+    if(listener.accept(sendSocket) != sf::Socket::Done){
         std::cerr<<"Error while accepting conection"<<std::endl;
     }
     listener.close();
@@ -26,5 +26,5 @@ void Server::checkSent() {
 sf::Socket::Status Server::sdrive(sf::Vector2f v) {
     sf::Packet p;
     p << v.x<<v.x;
-    return this->client.send(p);
+    return this->sendSocket.send(p);
 }

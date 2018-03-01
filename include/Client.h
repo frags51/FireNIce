@@ -10,7 +10,7 @@
 class Client {
 public:
     Client();
-    sf::TcpSocket socket;
+    sf::TcpSocket listenSocket;
     std::thread worker;
     sf::Packet recd;
     std::future<sf::Socket::Status> recdStatus;

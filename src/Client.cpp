@@ -8,7 +8,7 @@ void Client::receive() {
 }
 
 sf::Socket::Status Client::rdr() {
-    return this->socket.receive(recd);
+    return this->listenSocket.receive(recd);
 };
 
 

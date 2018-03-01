@@ -16,7 +16,7 @@ public:
     Server(unsigned short port);
     void waitForClient(bool *res);
     //~Server();
-    sf::TcpSocket client;
+    sf::TcpSocket sendSocket;
     std::thread worker;
     void send(sf::Vector2f v);
     sf::Socket::Status sdrive(sf::Vector2f v);
