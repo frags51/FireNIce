@@ -165,7 +165,7 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
                     }
                     else {
                         sf::Packet tDash;
-                        tDash<<-1<<false<<0.f;
+                        tDash<<-2<<false<<fireboy->GetPosition().y;
                         sf::Socket::Status st= server.sendSocket.send(tDash);
                         if(st!=sf::Socket::Done) {std::cout<<"Couldnt upd packet"<<std::endl; }
                     }
@@ -177,9 +177,9 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
 
                         int x; bool press; float telap;
                         t>>x>>press>>telap;
-                        if(x==-1) {
+                        if(x<0) {
                             need_upd=false;
-
+                            if(x==-2) watergirl->SetPosition(fireboy->GetPosition().x, telap);
                         }
                         else need_upd=true;
                         if(need_upd) resa = std::async(std::launch::async,
@@ -199,8 +199,6 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
                                                           __event.key = data;
 
                                                           watergirl->Update(telap, __event);
-                                                          std::cout<<"Got key: "<<x<<"\n";
-                                                          std::cout<<"new pos: "<<watergirl->GetPosition().x<<" "<<watergirl->GetPosition().y<<std::endl;
 
                                                       }, watergirl, x, press, telap);
                     }
@@ -227,8 +225,10 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
 
                         int x; bool press; float telap;
                         t>>x>>press>>telap;
-                        if(x==-1) {
+                        if(x<0) {
                             need_upd=false;
+                            if(x==-2) fireboy->SetPosition(fireboy->GetPosition().x, telap);
+
                         }
                         else need_upd=true;
                         if(need_upd) res = std::async(std::launch::async,
@@ -271,7 +271,7 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
                     }
                     else{
                         sf::Packet tDash;
-                        tDash<<-1<<false<<0.f;
+                        tDash<<-1<<false<<watergirl->GetPosition().y;
                         sf::Socket::Status st= client.sendSocket.send(tDash);
                         if(st!=sf::Socket::Done) {std::cout<<"Couldnt send packet(1) to Server!"<<std::endl; }
                     }
