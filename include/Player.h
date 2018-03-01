@@ -13,6 +13,9 @@ public:
     float GetVelocity() const;
 
 private:
+    bool isUpPressed;
+    bool isLPressed;
+    bool isRPressed;
     bool isJumping;
     float dJump;
     float _velocity;  // -- left ++ right

@@ -6,7 +6,7 @@
 
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
-Server GameState::server{45000};
+Server GameState::server{45004};
 Client GameState::client{};
 
 ObjMan GameState::_gameObjectManager;
@@ -19,7 +19,7 @@ void GameState::play() {
     static_assert(_resX <= 1920 && _resY <= 1080, "Invalid Screen Resolution!");
     if(_state!=Not_init) return;
     _mainWindow.create(sf::VideoMode(_resX, _resY, 32), "Fire & Ice");
-    Player *fireboy;
+    Player *fireboy= nullptr;
     if(!filePath)fireboy = new Player("../res/img/tux.png");
     else fireboy = new Player("res/img/tux.png");
     fireboy->SetPosition(0,_resY-_resY/8);
@@ -28,9 +28,10 @@ void GameState::play() {
     _state=state::AtSplash;
 
     while(!isExiting()) {
-        gameLoop();
+        gameLoop(fireboy);
     }
-
+    if(isClient) {client.listenSocket.disconnect();delete(fireboy);}
+    else GameState::server.sendSocket.disconnect();
     _mainWindow.close();
 } // play()
 
@@ -38,7 +39,7 @@ bool GameState::isExiting() {
     return _state==state::Exiting;
 } // isExiting
 
-void GameState::gameLoop() {
+void GameState::gameLoop(VisibleGameObject *fireboy) {
     sf::Event _event;
     _mainWindow.pollEvent(_event);
         switch (_state) {
@@ -69,7 +70,7 @@ void GameState::gameLoop() {
                 std::cout << "Waiting for clients to join!" << std::endl;
                 t1.join();
                 while (!res); // Wait to get connection
-                std::cout << "Connected to: " << server.client.getRemoteAddress() << std::endl;
+                std::cout << "Connected to: " << server.sendSocket.getRemoteAddress() << std::endl;
                 isClient = false;
                 _state = GameState::state::Playing;
             }
@@ -101,7 +102,7 @@ void GameState::gameLoop() {
                                 enter += static_cast<char>(_event.text.unicode);
                             else {
                                 std::cout << "Got an enter! after " << enter << std::endl;
-                                if (client.socket.connect(enter, 45000) != sf::Socket::Done) {
+                                if (client.listenSocket.connect(enter, 45004) != sf::Socket::Done) {
                                     std::cerr << "Error in Client Socket!" << std::endl;
                                     enter = "";
                                 } else {
@@ -125,17 +126,93 @@ void GameState::gameLoop() {
             } // Wait for server
                 break;
             case GameState::state::Playing: {
-                _mainWindow.pollEvent(_event);
-                if (_event.type == sf::Event::Closed) {
-                    _state = GameState::state::Exiting;
+
+                if(!isClient){ // Server
+                    server.sendSocket.setBlocking(true);
+                    _mainWindow.clear(sf::Color{255, 0, 0, 150});
+                    float telap = _gameObjectManager._clock.getElapsedTime().asSeconds();
+                    _gameObjectManager.updateAll(_event);
+
+                    if (_event.type == sf::Event::Closed) {
+                        _state = GameState::state::Exiting;
+                    }
+                    else if(_event.type==sf::Event::KeyPressed || _event.type==sf::Event::KeyReleased){
+                         sf::Packet t;
+                        t<<_event.key.code<<(_event.type==sf::Event::KeyPressed) <<telap;
+                        sf::Socket::Status st= server.sendSocket.send(t);
+                        if(st!=sf::Socket::Done) {std::cerr<<"Couldnt upd packet"<<std::endl;}
+                    }
+                    else {
+                        sf::Packet t;
+                        t<<-1<<false<<0.f;
+                        sf::Socket::Status st= server.sendSocket.send(t);
+                        if(st!=sf::Socket::Done) {std::cout<<"Couldnt upd packet"<<std::endl; }
+                    }
+                    _gameObjectManager.drawAll(_mainWindow);
+                    _mainWindow.display();
+
+
                 }
-                _mainWindow.clear(sf::Color{255, 0, 0, 150});
-                _gameObjectManager.updateAll(_event);
-                _gameObjectManager.drawAll(_mainWindow);
-                _mainWindow.display();
+                else{ // Client
+                    _gameObjectManager.remove("Fireboy");
+                    bool need_upd {false};
+                    std::future<void> res;
+                    sf::Packet t;
+                    if(client.listenSocket.receive(t)==sf::Socket::Done) {
 
+                        int x; bool press; float telap;
+                        t>>x>>press>>telap;
+                        if(x==-1) {
+                            need_upd=false;
+                        }
+                        else need_upd=true;
+                        if(need_upd) res = std::async(std::launch::async,
+                                                      [](VisibleGameObject* fireboy, bool* nUpd,
+                                                      int x, bool press, float telap
+                                                      ){
+
+                                *nUpd=true;
+                                sf::Event::KeyEvent data;
+                                data.code = (sf::Keyboard::Key)x;
+                                data.alt = false;
+                                data.control = false;
+                                data.shift = false;
+                                data.system = false;
+
+                                sf::Event __event;
+                                if(press)__event.type = sf::Event::KeyPressed;
+                                else __event.type=sf::Event::KeyReleased;
+                                __event.key = data;
+
+                                fireboy->Update(telap, __event);
+
+                        }, fireboy, &need_upd, x, press, telap);
+                    }
+
+
+                    if (_event.type == sf::Event::Closed) {
+                        _state = GameState::state::Exiting;
+                    }
+                    else if(_event.type==sf::Event::KeyPressed){
+                        //server.checkSent();
+                        //server.send(_gameObjectManager.get("Fireboy")->GetPosition());
+                    }
+                    else if(_event.type==sf::Event::Closed){
+                        _state=Exiting;
+                        break;
+                    }
+                    _mainWindow.clear(sf::Color{255, 0, 0, 150});
+                    _gameObjectManager.updateAll(_event);
+                    _gameObjectManager.drawAll(_mainWindow);
+
+
+                    if(need_upd) {std::cout<<"Waiting for get!\n"; res.get();}
+                    fireboy->Draw(_mainWindow);
+                    _mainWindow.display();
+
+
+                }
                 break;
-
             } // Case Playing.
 
             default:
