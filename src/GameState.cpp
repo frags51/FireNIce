@@ -205,7 +205,10 @@ void GameState::gameLoop(VisibleGameObject *fireboy) {
                     _gameObjectManager.drawAll(_mainWindow);
 
 
-                    if(need_upd) {std::cout<<"Waiting for get!\n"; res.get();}
+                    if(need_upd) {
+                        //std::cout<<"Waiting for get!\n";
+                        res.get();
+                    }
                     fireboy->Draw(_mainWindow);
                     _mainWindow.display();
 
