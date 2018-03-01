@@ -40,8 +40,6 @@ bool GameState::isExiting() {
 } // isExiting
 
 void GameState::gameLoop(VisibleGameObject *fireboy) {
-    bool execdOnce=false;
-
     sf::Event _event;
     _mainWindow.pollEvent(_event);
         switch (_state) {
