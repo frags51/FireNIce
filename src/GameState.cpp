@@ -30,7 +30,7 @@ void GameState::play() {
     while(!isExiting()) {
         gameLoop(fireboy);
     }
-    if(isClient) client.listenSocket.disconnect();
+    if(isClient) {client.listenSocket.disconnect();delete(fireboy);}
     else GameState::server.sendSocket.disconnect();
     _mainWindow.close();
 } // play()
@@ -137,10 +137,7 @@ void GameState::gameLoop(VisibleGameObject *fireboy) {
                         _state = GameState::state::Exiting;
                     }
                     else if(_event.type==sf::Event::KeyPressed || _event.type==sf::Event::KeyReleased){
-                    //    server.checkSent();
-                        //   server.send(_gameObjectManager.get("Fireboy")->GetPosition());
-                    //    std::cout<<"sent: "<<_gameObjectManager.get("Fireboy")->GetPosition().x<<" "<<_gameObjectManager.get("Fireboy")->GetPosition().y<<std::endl;
-                        sf::Packet t;
+                         sf::Packet t;
                         t<<_event.key.code<<(_event.type==sf::Event::KeyPressed) <<telap;
                         sf::Socket::Status st= server.sendSocket.send(t);
                         if(st!=sf::Socket::Done) {std::cerr<<"Couldnt upd packet"<<std::endl;}
@@ -188,7 +185,6 @@ void GameState::gameLoop(VisibleGameObject *fireboy) {
                                 __event.key = data;
 
                                 fireboy->Update(telap, __event);
-                                std::cout<<"recd & updated\n";
 
                         }, fireboy, &need_upd, x, press, telap);
                     }
