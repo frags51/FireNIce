@@ -20,8 +20,8 @@ void GameState::play() {
     if(_state!=Not_init) return;
     _mainWindow.create(sf::VideoMode(_resX, _resY, 32), "Fire & Ice");
     Player *fireboy= nullptr;
-    if(!filePath)fireboy = new Player("../res/img/tux.png");
-    else fireboy = new Player("res/img/tux.png");
+    if(!filePath)fireboy = new Player("../res/img/tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
+    else fireboy = new Player("res/img/tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
     fireboy->SetPosition(0,_resY-_resY/8);
     _gameObjectManager.add("Fireboy",fireboy);
 

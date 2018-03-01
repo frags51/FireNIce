@@ -1,12 +1,15 @@
 #include "Player.h"
 #include "GameState.h"
-Player::Player(std::string fName) :
+Player::Player(std::string fName, sf::Keyboard::Key _u, sf::Keyboard::Key _l, sf::Keyboard::Key _r) :
         _velocity(0),
         _maxVelocity(600.0f),
         dJump {0.f},
         isRPressed{false},
         isLPressed{false},
-        isUpPressed{false}
+        isUpPressed{false},
+        u{_u},
+        l{_l},
+        r{_r}
 
 {
     Load(fName, GameState::_resX/16,GameState::_resY/8);

@@ -5,7 +5,7 @@
 
 class Player : public VisibleGameObject{
 public:
-    Player(std::string fName);
+    Player(std::string fName, sf::Keyboard::Key _u, sf::Keyboard::Key _l, sf::Keyboard::Key _r);
     ~Player();
 
     void Update(float elapsedTime,sf::Event& _event);
@@ -13,6 +13,9 @@ public:
     float GetVelocity() const;
 
 private:
+    sf::Keyboard::Key u;
+    sf::Keyboard::Key l;
+    sf::Keyboard::Key r;
     bool isUpPressed;
     bool isLPressed;
     bool isRPressed;
