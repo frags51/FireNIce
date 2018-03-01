@@ -16,9 +16,9 @@ public:
     int getObjCount() const;
     VisibleGameObject *get(std::string name) const;
     void drawAll(sf::RenderWindow &renderWindow);
+    void dAU(sf::RenderWindow &renderWindow, sf::Event & _event);
     sf::Clock _clock;
 private:
-
     std::map<std::string, VisibleGameObject*> _gameObjects;
 
     struct GameObjDealloc{

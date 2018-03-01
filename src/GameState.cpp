@@ -27,13 +27,20 @@ void GameState::play() {
     fireboy->SetPosition(0,_resY-_resY/8);
     _gameObjectManager.add("Fireboy",fireboy);
 
+    Player *fireboy2= nullptr;
+    if(!filePath)fireboy2 = new Player("../res/img/tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
+    else fireboy2 = new Player("res/img/tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
+    fireboy2->SetPosition(500,_resY-_resY/8);
+    _gameObjectManager.add("Fireboy2",fireboy2);
+
+
     Player *watergirl= nullptr;
     if(!filePath)watergirl = new Player("../res/img/tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
     else watergirl= new Player("res/img/tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
     watergirl->SetPosition(_resX-_resX/16,_resY-_resY/8);
     _gameObjectManager.add("Watergirl",watergirl);
 
-    _state=state::AtSplash;
+    _state=state::Playing;
 
     while(!isExiting()) {
         gameLoop(fireboy, watergirl);
@@ -203,17 +210,16 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
                                                       }, watergirl, x, press, telap);
                     }
 
-                    _gameObjectManager.updateAll(_event);
 
-                    _gameObjectManager.drawAll(_mainWindow);
-
+                    //_gameObjectManager.updateAll(_event); // Update Events
+                    //_gameObjectManager.drawAll(_mainWindow);
+                    _gameObjectManager.dAU(_mainWindow, _event);
                     if(need_upd){
                         resa.get();
                     }
 
                     watergirl->Draw(_mainWindow);
                     _mainWindow.display();
-
 
                 }
                 else{ // Client

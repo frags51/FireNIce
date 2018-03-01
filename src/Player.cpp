@@ -36,21 +36,21 @@ void Player::Update(float elapsedTime,sf::Event& _event)
     if((_event.type==sf::Event::KeyPressed && _event.key.code==l) || isLPressed)
     {
         isLPressed=true;
-        _player.move(-1.5f,0);
+        _player.move(-20.f,0);
         row =1;
         toRight = false;
     }
     if((_event.type==sf::Event::KeyPressed && _event.key.code==r) || isRPressed)
     {
         isRPressed=true;
-        _player.move(1.5f,0);
+        _player.move(20.f,0);
         row =1;
     }
     if(((_event.type==sf::Event::KeyPressed && _event.key.code==u) || isUpPressed) && !isJumping)
     {
         isUpPressed=true;
         row = 2;
-        _player.move(0, -2.f);
+        _player.move(0, -150.f);
     }
     if((_event.type==sf::Event::KeyReleased && _event.key.code==l)) isLPressed=false;
     if((_event.type==sf::Event::KeyReleased && _event.key.code==r)) isRPressed=false;
@@ -59,12 +59,12 @@ void Player::Update(float elapsedTime,sf::Event& _event)
 
     // Simulate Gravity -> Add Collision platform detection here
     if(isJumping && _player.getPosition().y < GameState::_resY-GameState::_resY/8) {
-        _velocity+=1.f;
+        _velocity+=20.f;
         _player.move(0,_velocity*elapsedTime);
         dJump=0.f;
     }
     else if(!isJumping){
-        dJump+=2.f;
+        dJump+=150.f;
         if(dJump>=150.f) isJumping=true;
     }
     else {_velocity=0;isJumping=false;}
