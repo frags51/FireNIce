@@ -143,13 +143,13 @@ void GameState::gameLoop(VisibleGameObject *fireboy) {
                         sf::Packet t;
                         t<<_event.key.code<<(_event.type==sf::Event::KeyPressed) <<telap;
                         sf::Socket::Status st= server.sendSocket.send(t);
-                        while(st!=sf::Socket::Done) {std::cout<<st<<std::endl; st=server.sendSocket.send(t);}
+                        if(st!=sf::Socket::Done) {std::cerr<<"Couldnt upd packet"<<std::endl;}
                     }
                     else {
                         sf::Packet t;
                         t<<-1<<false<<0.f;
                         sf::Socket::Status st= server.sendSocket.send(t);
-                        while(st!=sf::Socket::Done) {std::cout<<st<<std::endl; st=server.sendSocket.send(t);}
+                        if(st!=sf::Socket::Done) {std::cout<<"Couldnt upd packet"<<std::endl; }
                     }
                     _gameObjectManager.drawAll(_mainWindow);
                     _mainWindow.display();
