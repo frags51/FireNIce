@@ -28,20 +28,18 @@ Player::~Player() {
 }
 
 
-float Player::GetVelocity() const
-{
-    return _velocity;
-}
 
 void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, VisibleGameObject*>& _object)
 {
     bool isCollide = false;
     for(auto it:_object){
         if(it.first!="Fireboy" && it.first!="Watergirl"){
-            if(checkCollision(it.second,0.0f)) isCollide = true;
+            if(checkCollision(it.second,0.0f)){
+                isCollide = true;
+            }
         }
     }
-    if(isCollide) return ;
+    //if(isCollide) return ;
 
     int row =0;
     bool toRight = true;
@@ -93,7 +91,7 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
 
 }
 
-bool Player::checkCollision(VisibleGameObject* other,sf::Vector2f& dir, float e){
+bool Player::checkCollision(VisibleGameObject* other, float e){
     sf::Vector2f otherPosition = other->GetPosition();
     sf::Vector2f otherHalfSize = other->GetHalfSize();
     sf::Vector2f thisPosition = GetPosition();
@@ -109,35 +107,30 @@ bool Player::checkCollision(VisibleGameObject* other,sf::Vector2f& dir, float e)
             if(deltaX >0.0f){
                 move(intersectX * (1.0f -e),0.0f);
                 other->move((-intersectX*e),0.0f);
-                dir.x = 1.0f;
-                dir.y = 0.0f;
+
             }
             else{
                 move(-intersectX * (1.0f -e),0.0f);
                 other->move(intersectX*e,0.0f);
-                dir.x = -1.0f;
-                dir.y = 0.0f;
+
             }
         }
         else{
             if(deltaY >0.0f){
+                isJumping = false;
                 move(0.0f,intersectY * (1.0f -e));
                 other->move(0.0f,(-intersectY*e));
-                dir.x = 0.0f;
-                dir.y = 1.0f;
+
             }
             else{
                 move(0.0f,-intersectY * (1.0f -e));
                 other->move(0.0f,intersectY*e);
-                dir.x = 0.0f;
-                dir.y = -1.0f;
             }
         }
         return true;
     }
     return false;
 }
-
 
 
 

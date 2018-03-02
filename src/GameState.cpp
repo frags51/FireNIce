@@ -37,6 +37,11 @@ void GameState::play() {
     if(!filePath) platform2 = new Platform("../res/img/tux.png",sf::Vector2f(100.0f,100.0f),sf::Vector2f(400.0f,_resY-100));
     else platform2 = new Platform("res/img/tux.png",sf::Vector2f(100.0f,100.0f),sf::Vector2f(400.0f,_resY-100));
     _gameObjectManager.add("Plt2",platform2);
+    //Platform *platform3 = nullptr;
+    //if(!filePath) platform3 = new Platform("../res/img/tux.png",sf::Vector2f(1600,100.0f),sf::Vector2f(0,_resY));
+    //else platform3 = new Platform("res/img/tux.png",sf::Vector2f(1600.0f,200.0f),sf::Vector2f(0.0f,_resY-100));
+    //_gameObjectManager.add("Plt3",platform3);
+
 
     _state=state::AtSplash;
 
