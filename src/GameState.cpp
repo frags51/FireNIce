@@ -13,7 +13,7 @@ Client GameState::client{};
 
 ObjMan GameState::_gameObjectManager;
 
-bool GameState::filePath {false}; // false for linux, true for OSX
+bool GameState::filePath {true}; // false for linux, true for OSX
 
 bool GameState::isClient;
 
@@ -33,7 +33,7 @@ void GameState::play() {
     watergirl->SetPosition(_resX-_resX/16,_resY-_resY/8);
     _gameObjectManager.add("Watergirl",watergirl);
 
-    _state=state::AtSplash;
+    _state=state::Playing;
 
     while(!isExiting()) {
         gameLoop(fireboy, watergirl);
