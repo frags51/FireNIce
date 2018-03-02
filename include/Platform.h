@@ -7,7 +7,7 @@
 #include "VisibleGameObject.h"
 class Platform : public VisibleGameObject {
 public:
-    Platform(sf::Texture* texture , sf::Vector2f size, sf::Vector2f position);
+    Platform(const std::string &fName , sf::Vector2f size, sf::Vector2f position);
     ~Platform();
 
     void Draw(sf::RenderWindow& window);
