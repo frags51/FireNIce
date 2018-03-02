@@ -14,6 +14,8 @@ public:
     virtual void Update(float elapsedTime,sf::Event& event);
     virtual sf::Vector2f GetPosition() const;
     virtual bool IsLoaded() const;
+    virtual sf::Vector2f GetHalfSize() { return _player.getSize()/2.0f;}
+    virtual void move(float dx,float dy){ _player.move(dx,dy); }
 protected:
     sf::RectangleShape _player;
     sf::Texture playerTexture;

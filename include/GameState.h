@@ -7,6 +7,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include "Player.h"
+#include "Platform.h"
 #include "Server.h"
 #include "ObjMan.h"
 #include "VisibleGameObject.h"

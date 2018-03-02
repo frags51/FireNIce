@@ -12,15 +12,13 @@ public:
     ~ObjMan();
     void add(std::string name, VisibleGameObject *gameObject);
     void remove(std::string name);
-    void updateAll(sf::Event& _event);
     void updateAll(sf::Event& _event, float elapsedTime);
     int getObjCount() const;
     VisibleGameObject *get(std::string name) const;
     void drawAll(sf::RenderWindow &renderWindow);
     sf::Clock _clock;
-private:
 
-    std::map<std::string, VisibleGameObject*> _gameObjects;
+    static std::map<std::string, VisibleGameObject*> _gameObjects;
 
     struct GameObjDealloc{
         void operator()(const std::pair<std::string, VisibleGameObject*> &a) const{

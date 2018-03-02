@@ -10,8 +10,10 @@ public:
 
 
     void Update(float elapsedTime,sf::Event& _event) override;
+    bool checkCollision(VisibleGameObject* other, float e);
 
     float GetVelocity() const;
+
 
 private:
     sf::Keyboard::Key u;

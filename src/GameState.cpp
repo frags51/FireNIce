@@ -2,7 +2,6 @@
 #include "GameState.h"
 #include "Splash.h"
 #include <thread>
-#include <iostream>
 
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
@@ -33,7 +32,10 @@ void GameState::play() {
     watergirl->SetPosition(_resX-_resX/16,_resY-_resY/8);
     _gameObjectManager.add("Watergirl",watergirl);
 
-    _state=state::Playing;
+    Platform *platform2 = new Platform(nullptr,sf::Vector2f(100.0f,100.0f),sf::Vector2f(400.0f,_resY-100));
+    _gameObjectManager.add("Plt2",platform2);
+
+    _state=state::AtSplash;
 
     while(!isExiting()) {
         gameLoop(fireboy, watergirl);

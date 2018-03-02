@@ -1,12 +1,17 @@
-//
-// Created by Mayank on 3/2/18.
-//
+
 
 #ifndef FIRENICE_PLATFORM_H
-#define FIRENICE_PLATFORM_H
+    #define FIRENICE_PLATFORM_H
 
+#include <SFML/Graphics.hpp>
+#include "VisibleGameObject.h"
+class Platform : public VisibleGameObject {
+public:
+    Platform(sf::Texture* texture , sf::Vector2f size, sf::Vector2f position);
+    ~Platform();
 
-class Platform {
+    void Draw(sf::RenderWindow& window);
+
 
 };
 

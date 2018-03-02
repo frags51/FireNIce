@@ -13,7 +13,7 @@ set(SOURCE_FILES
         src/Player.cpp include/Player.h 
         src/Animation.cpp include/Animation.h
         src/VisibleGameObject.cpp include/VisibleGameObject.h 
-        src/Client.cpp include/Client.h include/ObjMan.h src/ObjMan.cpp)
+        src/Client.cpp include/Client.h include/ObjMan.h src/ObjMan.cpp src/Platform.cpp include/Platform.h)
 
 add_executable(FireNIce ${SOURCE_FILES})
 
