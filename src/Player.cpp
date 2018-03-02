@@ -75,42 +75,18 @@ void Player::Update(float elapsedTime,sf::Event& _event)
 
 }
 bool Player::checkCollision(VisibleGameObject* other, float e){
-    sf::Vector2f otherPosition = other->GetPosition();
-    sf::Vector2f otherHalfSize = other->GetHalfSize();
-    sf::Vector2f thisPosition = GetPosition();
-    sf::Vector2f thisHalfSize = GetHalfSize();
+    auto tPos=this->_player.getPosition();
+    auto tSize = this->_player.getSize();
+    auto oPos=other->_player.getPosition();
+    auto oSize = other->_player.getSize();
 
-    float deltaX = otherPosition.x - thisPosition.x;
-    float deltaY = otherPosition.y - thisPosition.y;
-    float intersectX = abs(deltaX) - (otherHalfSize.x + thisHalfSize.x);
-    float intersectY = abs(deltaY) - (otherHalfSize.y + thisHalfSize.y);
-    if(intersectX<0.0f && intersectY<0.0f) {
-        e = std::min(std::max(e,0.0f),1.0f);
-        if( intersectX > intersectY) {
-            if(deltaX >0.0f){
-                move(intersectX * (1.0f -e),0.0f);
-                other->move((-intersectX*e),0.0f);
-            }
-            else{
-                move(-intersectX * (1.0f -e),0.0f);
-                other->move(intersectX*e,0.0f);
-            }
-        }
-        else{
-            if(deltaY >0.0f){
-                move(0.0f,intersectY * (1.0f -e));
-                other->move(0.0f,(-intersectY*e));
-            }
-            else{
-                move(0.0f,-intersectY * (1.0f -e));
-                other->move(0.0f,intersectY*e);
-            }
-        }
-        setCollision = true;
-        return true;
-    }
-    setCollision = false;
-    return false;
+    sf::Rect<float> a {tPos.x-tSize.x/2, tPos.y-tSize.y/2, this->_player.getSize().x, this->_player.getSize().y};
+    sf::Rect<float> b {oPos.x-oSize.x/2, oPos.y-oSize.y/2, other->_player.getSize().x, other->_player.getSize().y};
+
+
+    bool x = a.intersects(b);
+    //if(x) {std::cout<<"Intersect\nAPos: "<<tPos.x<<" "<<tPos.y<<" Bpos: "<<oPos.x<<" "<<oPos.y<<std::endl;}
+    return x;
 }
 
 

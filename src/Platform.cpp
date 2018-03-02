@@ -3,7 +3,8 @@ Platform::Platform(sf::Texture* texture , sf::Vector2f size, sf::Vector2f positi
     Load("",size.x,size.y);
     _player.setSize(size);
     _player.setPosition(position);
-    _player.setOrigin(size/2.0f);
+    //_player.setOrigin(size/2.0f);
+    _player.setFillColor(sf::Color::Green);
 }
 Platform::~Platform() {
 
