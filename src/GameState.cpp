@@ -22,14 +22,14 @@ void GameState::play() {
     if(_state!=Not_init) return;
     _mainWindow.create(sf::VideoMode(_resX, _resY, 32), "Fire & Ice");
     Player *fireboy= nullptr;
-    if(!filePath)fireboy = new Player("../res/img/tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
-    else fireboy = new Player("res/img/tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
+    if(!filePath)fireboy = new Player("../res/img/red_tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
+    else fireboy = new Player("res/img/red_tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
     fireboy->SetPosition(0,_resY-_resY/8);
     _gameObjectManager.add("Fireboy",fireboy);
 
     Player *watergirl= nullptr;
-    if(!filePath)watergirl = new Player("../res/img/tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
-    else watergirl= new Player("res/img/tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
+    if(!filePath)watergirl = new Player("../res/img/blue_tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
+    else watergirl= new Player("res/img/blue_tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
     watergirl->SetPosition(_resX-_resX/16,_resY-_resY/8);
     _gameObjectManager.add("Watergirl",watergirl);
 
