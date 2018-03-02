@@ -9,7 +9,9 @@ Player::Player(const std::string &fName, sf::Keyboard::Key _u, sf::Keyboard::Key
         isUpPressed{false},
         u{_u},
         l{_l},
-        r{_r}
+        r{_r},
+        _xVal {550.f},
+        _upVel {550.f}
 
 {
     Load(fName, GameState::_resX/16,GameState::_resY/8);
@@ -36,25 +38,26 @@ void Player::Update(float elapsedTime,sf::Event& _event)
     if((_event.type==sf::Event::KeyPressed && _event.key.code==l) || isLPressed)
     {
         isLPressed=true;
-        _player.move(-1.5f,0);
+        _player.move(-_xVal*elapsedTime,0);
         row =1;
         toRight = false;
     }
     if((_event.type==sf::Event::KeyPressed && _event.key.code==r) || isRPressed)
     {
         isRPressed=true;
-        _player.move(1.5f,0);
+        _player.move(_xVal*elapsedTime,0);
         row =1;
     }
     if(((_event.type==sf::Event::KeyPressed && _event.key.code==u) || isUpPressed) && !isJumping)
     {
         isUpPressed=true;
         row = 2;
-        _player.move(0, -2.f);
+        //_player.move(0, -2.f);
+        _player.move(0, -_upVel*elapsedTime);
     }
     if((_event.type==sf::Event::KeyReleased && _event.key.code==l)) isLPressed=false;
     if((_event.type==sf::Event::KeyReleased && _event.key.code==r)) isRPressed=false;
-    if((_event.type==sf::Event::KeyReleased && _event.key.code==u)) isUpPressed=false;
+    if((_event.type==sf::Event::KeyReleased && _event.key.code==u)) {isUpPressed=false;isJumping=true;}
 
 
     // Simulate Gravity -> Add Collision platform detection here
@@ -64,7 +67,7 @@ void Player::Update(float elapsedTime,sf::Event& _event)
         dJump=0.f;
     }
     else if(!isJumping){
-        dJump+=2.f;
+        dJump+=_upVel*elapsedTime;
         if(dJump>=150.f) isJumping=true;
     }
     else {_velocity=0;isJumping=false;}

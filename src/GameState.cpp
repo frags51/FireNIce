@@ -6,7 +6,7 @@
 
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
-unsigned short GameState::port1 {45005};
+unsigned short GameState::port1 {45002};
 unsigned short GameState::port2 {45000};
 Server GameState::server{GameState::port1, GameState::port2};
 Client GameState::client{};
@@ -148,7 +148,7 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
                     server.sendSocket.setBlocking(true);
                     _mainWindow.clear(sf::Color{255, 0, 0, 150});
 
-                    float telap = _gameObjectManager._clock.getElapsedTime().asSeconds();
+                    float telap = _gameObjectManager._clock.restart().asSeconds();
                     if (_event.type == sf::Event::Closed) {
                         sf::Packet tDash;
                         tDash<<-1<<false<<0.f;
@@ -203,7 +203,7 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
                                                       }, watergirl, x, press, telap);
                     }
 
-                    _gameObjectManager.updateAll(_event);
+                    _gameObjectManager.updateAll(_event, telap);
 
                     _gameObjectManager.drawAll(_mainWindow);
 
@@ -253,7 +253,7 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
                         }, fireboy, x, press, telap);
                     }
 
-                    float telap = _gameObjectManager._clock.getElapsedTime().asSeconds();
+                    float telap = _gameObjectManager._clock.restart().asSeconds();
 
                     if (_event.type == sf::Event::Closed) {
                         sf::Packet tDash;
@@ -276,7 +276,7 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
                         if(st!=sf::Socket::Done) {std::cout<<"Couldnt send packet(1) to Server!"<<std::endl; }
                     }
                     _mainWindow.clear(sf::Color{255, 0, 0, 150});
-                    _gameObjectManager.updateAll(_event);
+                    _gameObjectManager.updateAll(_event, telap);
                     _gameObjectManager.drawAll(_mainWindow);
 
 
