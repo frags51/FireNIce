@@ -13,6 +13,7 @@ public:
     void add(std::string name, VisibleGameObject *gameObject);
     void remove(std::string name);
     void updateAll(sf::Event& _event);
+    void updateAll(sf::Event& _event, float elapsedTime);
     int getObjCount() const;
     VisibleGameObject *get(std::string name) const;
     void drawAll(sf::RenderWindow &renderWindow);

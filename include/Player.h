@@ -20,9 +20,15 @@ private:
     bool isUpPressed;
     bool isLPressed;
     bool isRPressed;
+    //! \brief is It falling down after ataining max distance it can jump? Not if it is actually jumping
     bool isJumping;
+    //! \brief The distance it jumped before falling down.
     float dJump;
-    float _velocity;  // -- left ++ right
+    //! \brief Velocity for Jump.
+    float _upVel;
+    //! \brief Velocity to move left/right.
+    float _xVal;
+    float _velocity;  // -- Downward Velocity..
     float _maxVelocity;
     Animation animation;
 };
