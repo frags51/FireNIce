@@ -9,7 +9,7 @@ public:
     ~Player();
 
 
-    void Update(float elapsedTime,sf::Event& _event) override;
+    void Update(float elapsedTime,sf::Event& _event,std::map<std::string, VisibleGameObject*>& _object);
     bool checkCollision(VisibleGameObject* other, float e);
 
     float GetVelocity() const;

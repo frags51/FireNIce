@@ -39,7 +39,7 @@ void ObjMan::updateAll(sf::Event &_event, float elapsedTime) {
 
     while(itr != _gameObjects.end())
     {
-        itr->second->Update(elapsedTime,_event);
+        itr->second->Update(elapsedTime,_event,_gameObjects);
         itr++;
     }
 

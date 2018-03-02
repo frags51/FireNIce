@@ -5,8 +5,8 @@
 
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
-unsigned short GameState::port1 {45002};
-unsigned short GameState::port2 {45000};
+unsigned short GameState::port1 {45010};
+unsigned short GameState::port2 {45011};
 Server GameState::server{GameState::port1, GameState::port2};
 Client GameState::client{};
 
@@ -35,7 +35,7 @@ void GameState::play() {
     Platform *platform2 = new Platform(nullptr,sf::Vector2f(100.0f,100.0f),sf::Vector2f(400.0f,_resY-100));
     _gameObjectManager.add("Plt2",platform2);
 
-    _state=state::AtSplash;
+    _state=state::Playing;
 
     while(!isExiting()) {
         gameLoop(fireboy, watergirl);
@@ -200,7 +200,7 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
                                                           else __event.type=sf::Event::KeyReleased;
                                                           __event.key = data;
 
-                                                          watergirl->Update(telap, __event);
+                                                          watergirl->Update(telap, __event,_gameObjectManager._gameObjects);
 
                                                       }, watergirl, x, press, telap);
                     }
@@ -219,7 +219,7 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
 
                 }
                 else{ // Client
-                    _gameObjectManager.remove("Fireboy");
+                    //_gameObjectManager.remove("Fireboy");
                     bool need_upd {false};
                     std::future<void> res;
                     sf::Packet t;
@@ -250,7 +250,7 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
                                 else __event.type=sf::Event::KeyReleased;
                                 __event.key = data;
 
-                                fireboy->Update(telap, __event);
+                                fireboy->Update(telap, __event,_gameObjectManager._gameObjects);
 
                         }, fireboy, x, press, telap);
                     }

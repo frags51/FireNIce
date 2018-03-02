@@ -1,8 +1,6 @@
 #include "Player.h"
-#include "ObjMan.h"
 #include "GameState.h"
 #include <cmath>
-std::map<std::string, VisibleGameObject*> ObjMan::_gameObjects;
 Player::Player(const std::string &fName, sf::Keyboard::Key _u, sf::Keyboard::Key _l, sf::Keyboard::Key _r) :
         _velocity(0),
         _maxVelocity(600.0f),
@@ -35,10 +33,10 @@ float Player::GetVelocity() const
     return _velocity;
 }
 
-void Player::Update(float elapsedTime,sf::Event& _event)
+void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, VisibleGameObject*>& _object)
 {
     bool isCollide = false;
-    for(auto it:ObjMan::_gameObjects){
+    for(auto it:_object){
         if(checkCollision(it.second,1.0f)) isCollide = true;
     }
     if(isCollide) return;
