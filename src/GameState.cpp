@@ -23,9 +23,9 @@ void GameState::play() {
     else fireboy = new Player("res/img/tux.png");
     fireboy->SetPosition(0,_resY-_resY/8);
     _gameObjectManager.add("Fireboy",fireboy);
-    Platform *platform1 = new Platform(nullptr,sf::Vector2f(400.0f,200.0f),sf::Vector2f(500.0f,200.0f));
+    //Platform *platform1 = new Platform(nullptr,sf::Vector2f(400.0f,200.0f),sf::Vector2f(500.0f,200.0f));
     Platform *platform2 = new Platform(nullptr,sf::Vector2f(100.0f,200.0f),sf::Vector2f(200.0f,800.0f));
-    _gameObjectManager.add("Plt1",platform1);
+    //_gameObjectManager.add("Plt1",platform1);
     _gameObjectManager.add("Plt2",platform2);
 
 
@@ -142,8 +142,8 @@ void GameState::gameLoop() {
                 _mainWindow.clear(sf::Color{255, 0, 0, 150});
                 _gameObjectManager.updateAll(_event);
                 Collision boi = _gameObjectManager._gameObjects["Fireboy"]->GetCollider();
-                _gameObjectManager._gameObjects["Plt1"]->GetCollider().checkCollision(boi,0.0f);
-                _gameObjectManager._gameObjects["Plt2"]->GetCollider().checkCollision(boi,0.0f);
+                //_gameObjectManager._gameObjects["Plt1"]->GetCollider().checkCollision(boi,0.0f);
+                _gameObjectManager._gameObjects["Plt2"]->GetCollider().checkCollision(boi,1.0f);
 
 
                 _gameObjectManager.drawAll(_mainWindow);
