@@ -33,6 +33,7 @@ void GameState::play() {
     _gameObjectManager.add("Watergirl",watergirl);
 
     Platform *platform2 = nullptr;
+
     if(!filePath) platform2 = new Platform("../res/img/tux.png",sf::Vector2f(100.0f,100.0f),sf::Vector2f(400.0f,_resY-100));
     else platform2 = new Platform("res/img/tux.png",sf::Vector2f(100.0f,100.0f),sf::Vector2f(400.0f,_resY-100));
     _gameObjectManager.add("Plt2",platform2);
@@ -42,8 +43,8 @@ void GameState::play() {
     while(!isExiting()) {
         gameLoop(fireboy, watergirl);
     }
-    if(isClient) {client.listenSocket.disconnect();delete(fireboy);}
-    else {GameState::server.sendSocket.disconnect(); delete(watergirl);}
+    if(isClient) {}
+    else {}
     _mainWindow.close();
 } // play()
 
@@ -159,6 +160,7 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
                         sf::Socket::Status st= server.sendSocket.send(tDash);
                         if(st!=sf::Socket::Done) {std::cout<<"Couldnt send packet(1) to Server!"<<std::endl; }
                         _state = GameState::state::Exiting;
+                        GameState::server.sendSocket.disconnect(); delete(watergirl);
                         break;
                     }
                     else if(_event.type==sf::Event::KeyPressed || _event.type==sf::Event::KeyReleased){
@@ -264,6 +266,7 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
                         tDash<<-1<<false<<0.f;
                         sf::Socket::Status st= client.sendSocket.send(tDash);
                         if(st!=sf::Socket::Done) {std::cout<<"Couldnt send packet(1) to Server!"<<std::endl; }
+                        client.listenSocket.disconnect();delete(fireboy);
                         _state = GameState::state::Exiting;
                         break;
                     }
