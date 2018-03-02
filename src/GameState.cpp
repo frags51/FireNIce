@@ -219,7 +219,7 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
 
                 }
                 else{ // Client
-                    //_gameObjectManager.remove("Fireboy");
+                    _gameObjectManager.remove("Fireboy");
                     bool need_upd {false};
                     std::future<void> res;
                     sf::Packet t;
