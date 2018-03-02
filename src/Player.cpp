@@ -37,9 +37,10 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
 {
     bool isCollide = false;
     for(auto it:_object){
-        if(it.first!="Fireboy" && it.first!="Watergirl")
+        if(it.first!="Fireboy" && it.first!="Watergirl"){
+            std::cout<<it.first<<": "<<it.second->GetPosition().x<<" "<<it.second->GetPosition().y<<"\n";
         if(checkCollision(it.second,1.0f)) isCollide = true;
-    }
+    } }
     if(isCollide) return;
     int row =0;
     bool toRight = true;
