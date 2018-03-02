@@ -1,14 +1,16 @@
 #include "Player.h"
 #include "GameState.h"
+#include <cmath>
 Player::Player(std::string fName) :
         _velocity(0),
         _maxVelocity(600.0f),
         dJump {0.f}
 
 {
-    Load(fName, GameState::_resX/16,GameState::_resY/8);
+    Load(fName, GameState::_resX/16,GameState::_resY/9);
     animation.create(&playerTexture,sf::Vector2u(3,9),0.3f);
     isJumping=false;
+    setCollision = false;
 
 }
 
@@ -18,13 +20,12 @@ Player::~Player()
 }
 
 
-float Player::GetVelocity() const
-{
-    return _velocity;
-}
 
 void Player::Update(float elapsedTime,sf::Event& _event)
 {
+    if(setCollision){
+        return ;
+    }
     int row =0;
     bool toRight = true;
     if((_event.type==sf::Event::KeyPressed && _event.key.code==sf::Keyboard::Left) || isLPressed)
@@ -72,6 +73,44 @@ void Player::Update(float elapsedTime,sf::Event& _event)
     _player.setTextureRect(animation.uvRect);
 
 
+}
+bool Player::checkCollision(VisibleGameObject* other, float e){
+    sf::Vector2f otherPosition = other->GetPosition();
+    sf::Vector2f otherHalfSize = other->GetHalfSize();
+    sf::Vector2f thisPosition = GetPosition();
+    sf::Vector2f thisHalfSize = GetHalfSize();
+
+    float deltaX = otherPosition.x - thisPosition.x;
+    float deltaY = otherPosition.y - thisPosition.y;
+    float intersectX = abs(deltaX) - (otherHalfSize.x + thisHalfSize.x);
+    float intersectY = abs(deltaY) - (otherHalfSize.y + thisHalfSize.y);
+    if(intersectX<0.0f && intersectY<0.0f) {
+        e = std::min(std::max(e,0.0f),1.0f);
+        if( intersectX > intersectY) {
+            if(deltaX >0.0f){
+                move(intersectX * (1.0f -e),0.0f);
+                other->move((-intersectX*e),0.0f);
+            }
+            else{
+                move(-intersectX * (1.0f -e),0.0f);
+                other->move(intersectX*e,0.0f);
+            }
+        }
+        else{
+            if(deltaY >0.0f){
+                move(0.0f,intersectY * (1.0f -e));
+                other->move(0.0f,(-intersectY*e));
+            }
+            else{
+                move(0.0f,-intersectY * (1.0f -e));
+                other->move(0.0f,intersectY*e);
+            }
+        }
+        setCollision = true;
+        return true;
+    }
+    setCollision = false;
+    return false;
 }
 
 

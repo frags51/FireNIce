@@ -14,10 +14,7 @@ public:
 
     void Draw(sf::RenderWindow& window);
 
-public:
-    Collision GetCollider(){return Collision(_player);}
 
-private:
 };
 
 

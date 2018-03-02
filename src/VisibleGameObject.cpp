@@ -8,7 +8,8 @@ VisibleGameObject::~VisibleGameObject(){
 }
 
 void VisibleGameObject::Load(std::string filename,float x,float y){
-    if(playerTexture.loadFromFile(filename) == false){
+
+    if(filename!= "" && playerTexture.loadFromFile(filename) == false){
         std::cerr<<"Player file not loaded\n";
         _filename = "";
         _isLoaded = false;
@@ -44,12 +45,4 @@ sf::Vector2f VisibleGameObject::GetPosition() const
         return _player.getPosition();
     }
     return sf::Vector2f();
-}
-
-bool VisibleGameObject::IsLoaded() const
-{
-    return _isLoaded;
-}
-Collision VisibleGameObject::GetCollider() {
-
 }
