@@ -36,14 +36,19 @@ void ObjMan::drawAll(sf::RenderWindow &renderWindow) {
 
 void ObjMan::updateAll(sf::Event &_event, float elapsedTime) {
     std::map<std::string,VisibleGameObject*>::const_iterator itr = _gameObjects.begin();
-
     while(itr != _gameObjects.end())
     {
         itr->second->Update(elapsedTime,_event,_gameObjects);
         itr++;
     }
+}
 
-
+void ObjMan::removeAndDelete(std::string name) {
+    auto it = _gameObjects.find(name); // This is an iterator
+    if(it!=_gameObjects.end()){
+        delete it->second;
+        _gameObjects.erase(it);
+    }
 }
 
 

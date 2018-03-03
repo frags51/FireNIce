@@ -14,7 +14,7 @@ Client GameState::client{};
 
 ObjMan GameState::_gameObjectManager;
 
-bool GameState::filePath {true}; // false for linux, true for OSX
+bool GameState::filePath {false}; // false for linux, true for OSX
 
 bool GameState::isClient;
 
@@ -28,17 +28,7 @@ void GameState::play() {
     // Warning: Do not change name of textures of fireboy/watergirl -> Used in Player::Update to check if
     // Object is fireboy or not
     Player *fireboy= nullptr;
-    if(!filePath)fireboy = new Player("../res/img/red_tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
-    else fireboy = new Player("res/img/red_tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
-    fireboy->SetPosition(0,_resY-_resY/8);
-    _gameObjectManager.add("Fireboy",fireboy);
-
     Player *watergirl= nullptr;
-    if(!filePath)watergirl = new Player("../res/img/blue_tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
-    else watergirl= new Player("res/img/blue_tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
-    watergirl->SetPosition(_resX-_resX/16,_resY-_resY/8);
-    _gameObjectManager.add("Watergirl",watergirl);
-
 
     _state=state::AtSplash;
 
@@ -52,7 +42,7 @@ bool GameState::isExiting() {
     return _state==state::Exiting;
 } // isExiting
 
-void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergirl) {
+void GameState::gameLoop(Player *&fireboy, Player *&watergirl) {
     sf::Event _event;
     _mainWindow.pollEvent(_event);
     Stater: switch (_state) {
@@ -108,6 +98,24 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
                 isClient = false;
                 sf::Packet selected_level;
                 selected_level<<GameState::_curLevel;
+                // Destroy already existing things and load here.
+                for(auto v:_gameObjectManager._gameObjects){
+                    _gameObjectManager.removeAndDelete(v.first);
+                }
+                if(watergirl!= nullptr){
+                    delete(watergirl);
+                    watergirl=nullptr;
+                }
+                if(!filePath)fireboy = new Player("../res/img/red_tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
+                else fireboy = new Player("res/img/red_tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
+                fireboy->SetPosition(0,_resY-_resY/8);
+                _gameObjectManager.add("Fireboy",fireboy);
+
+                if(!filePath)watergirl = new Player("../res/img/blue_tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
+                else watergirl= new Player("res/img/blue_tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
+                watergirl->SetPosition(_resX-_resX/16,_resY-_resY/8);
+                _gameObjectManager.add("Watergirl",watergirl);
+
                 server.sendSocket.send(selected_level);
                 _state = GameState::state::Playing;
             }
@@ -153,6 +161,26 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
                                     sf::Packet selected_level;
                                     client.listenSocket.receive(selected_level);
                                     selected_level>>GameState::_curLevel;
+
+                                    // Destroy already existing things and load here.
+                                    for(auto v:_gameObjectManager._gameObjects){
+                                        _gameObjectManager.removeAndDelete(v.first);
+                                    }
+                                    if(fireboy!= nullptr){
+                                        delete(fireboy);
+                                        fireboy=nullptr;
+                                    }
+
+                                    if(!filePath)fireboy = new Player("../res/img/red_tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
+                                    else fireboy = new Player("res/img/red_tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
+                                    fireboy->SetPosition(0,_resY-_resY/8);
+                                    _gameObjectManager.add("Fireboy",fireboy);
+
+                                    if(!filePath)watergirl = new Player("../res/img/blue_tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
+                                    else watergirl= new Player("res/img/blue_tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
+                                    watergirl->SetPosition(_resX-_resX/16,_resY-_resY/8);
+                                    _gameObjectManager.add("Watergirl",watergirl);
+
                                     _state = Playing;
                                     flag = false;
                                     break;

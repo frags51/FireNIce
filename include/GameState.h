@@ -43,7 +43,7 @@ private:
 
     //! \brief Check if the game is in Exiting state.
     static bool isExiting();
-    static void gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergirl);
+    static void gameLoop(Player *&fireboy, Player*&watergirl);
 
     //! \brief Init and show a splash screen.
     static void showSplashScreen();

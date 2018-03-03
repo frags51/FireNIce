@@ -12,6 +12,7 @@ public:
     ~ObjMan();
     void add(std::string name, VisibleGameObject *gameObject);
     void remove(std::string name);
+    void removeAndDelete(std::string name);
     void updateAll(sf::Event& _event, float elapsedTime);
     int getObjCount() const;
     VisibleGameObject *get(std::string name) const;
