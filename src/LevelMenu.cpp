@@ -54,7 +54,7 @@ unsigned short LevelMenu::show(sf::RenderWindow &renderWindow) {
                 } // key released
                 case sf::Event::Closed:{
                     renderWindow.close();
-                    return -1;
+                    return 0;
                     break;
                 }
                 default: break;

@@ -17,7 +17,7 @@ public:
 
 
 private:
-    short curIndex;
+    unsigned short curIndex;
     sf::Text item;
     sf::Font font;
 };
