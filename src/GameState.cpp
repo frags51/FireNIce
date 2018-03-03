@@ -12,7 +12,7 @@ Client GameState::client{};
 
 ObjMan GameState::_gameObjectManager;
 
-bool GameState::filePath {true}; // false for linux, true for OSX
+bool GameState::filePath {false}; // false for linux, true for OSX
 
 bool GameState::isClient;
 
@@ -89,7 +89,11 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
                 t1.join();
                 t2.join();
                 while (!res || !res2){
-
+                    _mainWindow.pollEvent(_event);
+                    if(_event.type==sf::Event::Closed){
+                        _state=Exiting;
+                        break;
+                    }
                 } // Wait to get connection
                 std::cout << "Connected to: " << server.sendSocket.getRemoteAddress() << std::endl;
                 isClient = false;

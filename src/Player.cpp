@@ -38,6 +38,7 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
             if(checkCollision(it.second,0.0f)){
                 isCollide = true;
                 isJumping = false;
+                _velocity=0;
             }
         }
     }
