@@ -31,32 +31,62 @@ void GameState::play() {
     else watergirl= new Player("res/img/blue_tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
     watergirl->SetPosition(_resX-_resX/16,_resY-_resY/8);
     _gameObjectManager.add("Watergirl",watergirl);
-
     Platform *platform2 = nullptr;
 
     if(!filePath) platform2 = new Platform("../res/img/tux.png",sf::Vector2f(100.0f,100.0f),sf::Vector2f(1500.0f,_resY-100));
     else platform2 = new Platform("res/img/tux.png",sf::Vector2f(100.0f,100.0f),sf::Vector2f(1500.0f,_resY-100));
     _gameObjectManager.add("Plt2",platform2);
     Platform *platform3 = nullptr;
-    if(!filePath) platform3 = new Platform("../res/img/splash.png",sf::Vector2f(1400.0f,50.0f),sf::Vector2f(0.0f,650.0f));
-    else platform3 = new Platform("res/img/platform_r.png",sf::Vector2f(1400.0f,100.0f),sf::Vector2f(0.0f,650.0f));
+    if(!filePath) platform3 = new Platform("../res/img/platform_r.png",sf::Vector2f(1400.0f,50.0f),sf::Vector2f(0.0f,650.0f));
+    else platform3 = new Platform("res/img/platform_r.png",sf::Vector2f(1400.0f,50.0f),sf::Vector2f(0.0f,650.0f));
     _gameObjectManager.add("Plt3",platform3);
     Platform *platform4 = nullptr;
-    if(!filePath) platform4 = new Platform("../res/img/tux.png",sf::Vector2f(150.0f,75.0f),sf::Vector2f(1000.0f,600.0f));
+    if(!filePath) platform4 = new Platform("../res/img/red_fire.png",sf::Vector2f(150.0f,25.0f),sf::Vector2f(1000.0f,625.0f));
     else platform4= new Platform("res/img/red_fire.png",sf::Vector2f(150.0f,25.0f),sf::Vector2f(1000.0f,625.0f));
     _gameObjectManager.add("Fireee",platform4);
     Platform *platform5 = nullptr;
-    if(!filePath) platform5 = new Platform("../res/img/splash.png",sf::Vector2f(150.0f,25.0f),sf::Vector2f(800.0f,625.0f));
+    if(!filePath) platform5 = new Platform("../res/img/blue_fire.png",sf::Vector2f(150.0f,25.0f),sf::Vector2f(800.0f,625.0f));
     else platform5 = new Platform("res/img/blue_fire.png",sf::Vector2f(150.0f,25.0f),sf::Vector2f(800.0f,625.0f));
     _gameObjectManager.add("Icee",platform5);
+
+    Platform *platform12 = nullptr;
+
+    if(!filePath) platform12 = new Platform("../res/img/green_fire.png",sf::Vector2f(150.0f,25.0f),sf::Vector2f(200.0f,625.0f));
+    else platform12 = new Platform("res/img/green_fire.png",sf::Vector2f(150.0f,25.0f),sf::Vector2f(200.0f,625.0f));
+    _gameObjectManager.add("Marja",platform12);
+
     Platform *platform6 = nullptr;
-    if(!filePath) platform6 = new Platform("../res/img/splash.png",sf::Vector2f(10.0f,150.0f),sf::Vector2f(600.0f,500.0f));
+    if(!filePath) platform6 = new Platform("../res/img/v_barrier.png",sf::Vector2f(10.0f,150.0f),sf::Vector2f(600.0f,500.0f));
     else platform6 = new Platform("res/img/v_barrier.png",sf::Vector2f(10.0f,150.0f),sf::Vector2f(600.0f,500.0f));
     _gameObjectManager.add("Barrier",platform6);
     Platform *platform7 = nullptr;
-    if(!filePath) platform7 = new Platform("../res/img/splash.png",sf::Vector2f(10.0f,10.0f),sf::Vector2f(500.0f,640.0f));
-    else platform7 = new Platform("res/img/v_barrier_switch.png",sf::Vector2f(10.0f,10.0f),sf::Vector2f(500.0f,640.0f));
+    if(!filePath) platform7 = new Platform("../res/img/v_barrier_switch.png",sf::Vector2f(40.0f,20.0f),sf::Vector2f(500.0f,630.0f));
+    else platform7 = new Platform("res/img/v_barrier_switch.png",sf::Vector2f(40.0f,20.0f),sf::Vector2f(500.0f,630.0f));
     _gameObjectManager.add("Switchh",platform7);
+    Platform *platform8 = nullptr;
+    if(!filePath) platform8 = new Platform("../res/img/platform_r.png",sf::Vector2f(1400.0f,50.0f),sf::Vector2f(200.0f,400.0f));
+    else platform8 = new Platform("res/img/platform_r.png",sf::Vector2f(1400.0f,50.0f),sf::Vector2f(200.0f,400.0f));
+    _gameObjectManager.add("Plt8",platform8);
+
+    Platform *platform9 = nullptr;
+    if(!filePath) platform9 = new Platform("../res/img/v_barrier_switch.png",sf::Vector2f(40.0f,20.0f),sf::Vector2f(700.0f,630.0f));
+    else platform9 = new Platform("res/img/v_barrier_switch.png",sf::Vector2f(40.0f,20.0f),sf::Vector2f(700.0f,630.0f));
+    _gameObjectManager.add("Switchh2",platform9);
+
+    Platform *platform10 = nullptr;
+    if(!filePath) platform10 = new Platform("../res/img/blue_door.png",sf::Vector2f(100.0f,200.0f),sf::Vector2f(600.0f,200.0f));
+    else platform10 = new Platform("res/img/blue_door.png",sf::Vector2f(100.0f,200.0f),sf::Vector2f(600.0f,200.0f));
+    _gameObjectManager.add("blue_door",platform10);
+    Platform *platform11 = nullptr;
+    if(!filePath) platform11 = new Platform("../res/img/blue_door.png",sf::Vector2f(100.0f,200.0f),sf::Vector2f(1000.0f,200.0f));
+    else platform11 = new Platform("res/img/red_door.png",sf::Vector2f(100.0f,200.0f),sf::Vector2f(1000.0f,200.0f));
+    _gameObjectManager.add("red_door",platform11);
+
+
+    /*Platform *platform11 = nullptr;
+    if(!filePath) platform11 = new Platform("../res/img/red_door.png",sf::Vector2f(100.0f,200.0f),sf::Vector2f(200.0f,400.0f));
+    else platform11 = new Platform("res/img/red_door.png",sf::Vector2f(100.0f,200.0f),sf::Vector2f(800.0f,200.0f));
+    _gameObjectManager.add("red_door",platform11);*/
 
 
 
@@ -305,7 +335,7 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
                         sf::Socket::Status st= client.sendSocket.send(tDash);
                         if(st!=sf::Socket::Done) {std::cout<<"Couldnt send packet(1) to Server!"<<std::endl; }
                     }
-                    _mainWindow.clear(sf::Color{255, 0, 0, 150});
+                    _mainWindow.clear(sf::Color::Transparent);
                     _gameObjectManager.updateAll(_event, telap);
                     _gameObjectManager.drawAll(_mainWindow);
 
@@ -345,5 +375,4 @@ void GameState::showMainMenu() {
     else if(res==0) _state=WaitForClient;
     else if(res==1) _state=WaitForServer;
 }
-
 
