@@ -28,19 +28,20 @@ Player::~Player() {
 }
 
 
-float Player::GetVelocity() const
-{
-    return _velocity;
-}
 
 void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, VisibleGameObject*>& _object)
 {
     bool isCollide = false;
     for(auto it:_object){
+
         if(it.first!="Fireboy" && it.first!="Watergirl"){
-        if(checkCollision(it.second,1.0f)) isCollide = true;
-    } }
-    if(isCollide) return;
+            if(checkCollision(it.second,0.0f)){
+                isCollide = true;
+            }
+        }
+    }
+    if(isCollide) return ;
+
     int row =0;
     bool toRight = true;
     if((_event.type==sf::Event::KeyPressed && _event.key.code==l) || isLPressed)
@@ -107,16 +108,20 @@ bool Player::checkCollision(VisibleGameObject* other, float e){
             if(deltaX >0.0f){
                 move(intersectX * (1.0f -e),0.0f);
                 other->move((-intersectX*e),0.0f);
+
             }
             else{
                 move(-intersectX * (1.0f -e),0.0f);
                 other->move(intersectX*e,0.0f);
+
             }
         }
         else{
             if(deltaY >0.0f){
+                isJumping = false;
                 move(0.0f,intersectY * (1.0f -e));
                 other->move(0.0f,(-intersectY*e));
+
             }
             else{
                 move(0.0f,-intersectY * (1.0f -e));
@@ -127,7 +132,6 @@ bool Player::checkCollision(VisibleGameObject* other, float e){
     }
     return false;
 }
-
 
 
 
