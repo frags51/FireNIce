@@ -13,7 +13,7 @@ Client GameState::client{};
 
 ObjMan GameState::_gameObjectManager;
 
-bool GameState::filePath {false}; // false for linux, true for OSX
+bool GameState::filePath {true}; // false for linux, true for OSX
 
 bool GameState::isClient;
 
@@ -35,16 +35,6 @@ void GameState::play() {
     else watergirl= new Player("res/img/blue_tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
     watergirl->SetPosition(_resX-_resX/16,_resY-_resY/8);
     _gameObjectManager.add("Watergirl",watergirl);
-
-    Platform *platform2 = nullptr;
-
-    if(!filePath) platform2 = new Platform("../res/img/tux.png",sf::Vector2f(100.0f,100.0f),sf::Vector2f(400.0f,_resY-100));
-    else platform2 = new Platform("res/img/tux.png",sf::Vector2f(100.0f,100.0f),sf::Vector2f(400.0f,_resY-100));
-    _gameObjectManager.add("Plt2",platform2);
-    Platform *platform3 = nullptr;
-    if(!filePath) platform3 = new Platform("../res/img/tux.png",sf::Vector2f(100.0f,100.0f),sf::Vector2f(100.0f,0.0f));
-    else platform3 = new Platform("res/img/tux.png",sf::Vector2f(100.0f,100.0f),sf::Vector2f(-50.0f,0.0f));
-    _gameObjectManager.add("Plt3",platform3);
 
 
     _state=state::AtSplash;
