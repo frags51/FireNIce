@@ -36,6 +36,8 @@ public:
     static unsigned short port1;
     static unsigned short port2;
 
+    static unsigned short _curLevel;
+
 private:
 
     //! \brief Check if the game is in Exiting state.

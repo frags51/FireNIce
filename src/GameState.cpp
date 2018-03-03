@@ -17,6 +17,8 @@ bool GameState::filePath {true}; // false for linux, true for OSX
 
 bool GameState::isClient;
 
+unsigned short GameState::_curLevel {0};
+
 void GameState::play() {
     static_assert(_resX <= 1920 && _resY <= 1080, "Invalid Screen Resolution!");
     if(_state!=Not_init) return;
@@ -350,6 +352,10 @@ void GameState::showLevelScreen(){
     LevelMenu mm(_mainWindow.getSize().x, _mainWindow.getSize().y);
     short res = mm.show(_mainWindow);
     if(res==-1) _state=Exiting;
+    else{
+        _curLevel = res;
+        _state=WaitForServer;
+    }
 }
 
 

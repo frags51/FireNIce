@@ -11,7 +11,7 @@ public:
     static const short N_LEVELS = 2;
     LevelMenu(float width, float height);
 
-    short show(sf::RenderWindow &renderWindow); // Returns the id of the pressed button
+    unsigned short show(sf::RenderWindow &renderWindow); // Returns the id of the pressed button
     void up();
     void down();
 

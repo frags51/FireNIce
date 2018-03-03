@@ -20,7 +20,7 @@ LevelMenu::LevelMenu(float width, float height) {
     item.setString("Your choosen level"+std::to_string(curIndex));
 } // Constructor
 
-short LevelMenu::show(sf::RenderWindow &renderWindow) {
+unsigned short LevelMenu::show(sf::RenderWindow &renderWindow) {
     renderWindow.draw(item);
     renderWindow.display();
 
