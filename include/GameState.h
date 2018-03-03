@@ -27,7 +27,7 @@ public:
     static void play();
 
     //! \brief The set of possible states of the game
-    enum state {Not_init, AtSplash, AtMenu, WaitForClient, WaitForServer, Playing, Exiting}; // More maybe added later.
+    enum state {Not_init ,LevelCheck , AtSplash, AtMenu, WaitForClient, WaitForServer, Playing, Exiting}; // More maybe added later.
     static state _state;
     static Server server;
     static Client client;
@@ -35,6 +35,8 @@ public:
 
     static unsigned short port1;
     static unsigned short port2;
+
+    static unsigned short _curLevel;
 
 private:
 
@@ -45,6 +47,7 @@ private:
     //! \brief Init and show a splash screen.
     static void showSplashScreen();
     static void showMainMenu();
+    static void showLevelScreen();
     //! \brief The current state of the game
 
 private:

@@ -1,11 +1,12 @@
 #include "MainMenu.h"
 #include "GameState.h"
 #include "Splash.h"
+#include "LevelMenu.h"
 #include <thread>
 
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
-unsigned short GameState::port1 {45000};
+unsigned short GameState::port1 {45001};
 unsigned short GameState::port2 {45011};
 Server GameState::server{GameState::port1, GameState::port2};
 Client GameState::client{};
@@ -15,6 +16,8 @@ ObjMan GameState::_gameObjectManager;
 bool GameState::filePath {false}; // false for linux, true for OSX
 
 bool GameState::isClient;
+
+unsigned short GameState::_curLevel {0};
 
 void GameState::play() {
     static_assert(_resX <= 1920 && _resY <= 1080, "Invalid Screen Resolution!");
@@ -65,6 +68,11 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
                 showSplashScreen();
             }
                 break; // Showing Splash screen
+
+            case GameState::state::LevelCheck: {
+                showLevelScreen();
+            }
+                break;
             case GameState::state::AtMenu: {
                 showMainMenu();
             }
@@ -106,6 +114,9 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
 
                 std::cout << "Connected to: " << server.sendSocket.getRemoteAddress() << std::endl;
                 isClient = false;
+                sf::Packet selected_level;
+                selected_level<<GameState::_curLevel;
+                server.sendSocket.send(selected_level);
                 _state = GameState::state::Playing;
             }
                 break;
@@ -144,8 +155,12 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
                                     std::cerr << "Error in Client Send Socket!" << std::endl;
                                 }
                                 else {
+
                                     std::cout<<"Connected@\n";
                                     isClient = true;
+                                    sf::Packet selected_level;
+                                    client.listenSocket.receive(selected_level);
+                                    selected_level>>GameState::_curLevel;
                                     _state = Playing;
                                     flag = false;
                                     break;
@@ -339,8 +354,18 @@ void GameState::showMainMenu() {
     MainMenu mm(_mainWindow.getSize().x, _mainWindow.getSize().y);
     short res = mm.show(_mainWindow);
     if(res==-1 || res== 2) _state=Exiting;
-    else if(res==0) _state=WaitForClient;
+    else if(res==0) GameState::_state=LevelCheck;
     else if(res==1) _state=WaitForServer;
+}
+
+void GameState::showLevelScreen(){
+    LevelMenu mm(_mainWindow.getSize().x, _mainWindow.getSize().y);
+    short res = mm.show(_mainWindow);
+    if(res==0) _state=Exiting;
+    else{
+        _curLevel = res;
+        _state=WaitForClient;
+    }
 }
 
 
