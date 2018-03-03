@@ -1,8 +1,8 @@
-#include "MainMenu.h"
+#include "LevelMenu.h"
 #include <iostream>
 #include <GameState.h>
 
-MainMenu::MainMenu(float width, float height) {
+LevelMenu::LevelMenu(float width, float height) {
     std::string fontFileM;
     if(!GameState::filePath) fontFileM="../res/fonts/Phetsarath_OT.ttf";
     else fontFileM="res/fonts/Phetsarath_OT.ttf";
@@ -20,7 +20,7 @@ MainMenu::MainMenu(float width, float height) {
     item.setString("Your choosen level"+std::to_string(curIndex));
 } // Constructor
 
-short MainMenu::show(sf::RenderWindow &renderWindow) {
+short LevelMenu::show(sf::RenderWindow &renderWindow) {
     renderWindow.draw(item);
     renderWindow.display();
 
@@ -63,7 +63,7 @@ short MainMenu::show(sf::RenderWindow &renderWindow) {
     }
 } // show
 
-void MainMenu::up() {
+void LevelMenu::up() {
     if (curIndex < N_LEVELS)
     {
         curIndex++;
@@ -71,7 +71,7 @@ void MainMenu::up() {
     item.setString("Your choosen level"+std::to_string(curIndex));
 }
 
-void MainMenu::down(){
+void LevelMenu::down(){
     if (curIndex > 0)
     {
         curIndex--;
