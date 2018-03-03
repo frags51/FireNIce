@@ -17,10 +17,11 @@ LevelMenu::LevelMenu(float width, float height) {
 
 
     curIndex=1;
-    item.setString("Your choosen level"+std::to_string(curIndex));
+    item.setString("Your choosen level: "+std::to_string(curIndex));
 } // Constructor
 
 unsigned short LevelMenu::show(sf::RenderWindow &renderWindow) {
+    renderWindow.clear(sf::Color::Cyan);
     renderWindow.draw(item);
     renderWindow.display();
 
@@ -28,6 +29,7 @@ unsigned short LevelMenu::show(sf::RenderWindow &renderWindow) {
 
     while(true){ // Event Handling loop
         while(renderWindow.pollEvent(event)){
+            renderWindow.clear(sf::Color::Cyan);
             switch (event.type){
                 case sf::Event::KeyPressed:{ // Not KeyReleased, since pollEvent (in GameState::gameLoop())
                     // would need another event to actually display something
@@ -35,14 +37,10 @@ unsigned short LevelMenu::show(sf::RenderWindow &renderWindow) {
                         case sf::Keyboard::Up:{
                             up();
 
-                            renderWindow.draw(item);
-                            renderWindow.display();
                             break;
                         }
                         case sf::Keyboard::Down:{
                             down();
-                            renderWindow.draw(item);
-                            renderWindow.display();
                             break;
                         }
                         case sf::Keyboard::Return:{
@@ -59,6 +57,8 @@ unsigned short LevelMenu::show(sf::RenderWindow &renderWindow) {
                 }
                 default: break;
             } // switch type
+            renderWindow.draw(item);
+            renderWindow.display();
         } // while
     }
 } // show
@@ -68,13 +68,13 @@ void LevelMenu::up() {
     {
         curIndex++;
     }
-    item.setString("Your choosen level"+std::to_string(curIndex));
+    item.setString("Your choosen level: "+std::to_string(curIndex));
 }
 
 void LevelMenu::down(){
-    if (curIndex > 0)
+    if (curIndex > 1)
     {
         curIndex--;
     }
-    item.setString("Your choosen level"+std::to_string(curIndex));
+    item.setString("Your choosen level: "+std::to_string(curIndex));
 }

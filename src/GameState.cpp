@@ -6,14 +6,14 @@
 
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
-unsigned short GameState::port1 {45000};
+unsigned short GameState::port1 {45001};
 unsigned short GameState::port2 {45011};
 Server GameState::server{GameState::port1, GameState::port2};
 Client GameState::client{};
 
 ObjMan GameState::_gameObjectManager;
 
-bool GameState::filePath {true}; // false for linux, true for OSX
+bool GameState::filePath {false}; // false for linux, true for OSX
 
 bool GameState::isClient;
 
@@ -112,6 +112,9 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
 
                 std::cout << "Connected to: " << server.sendSocket.getRemoteAddress() << std::endl;
                 isClient = false;
+                sf::Packet selected_level;
+                selected_level<<GameState::_curLevel;
+                server.sendSocket.send(selected_level);
                 _state = GameState::state::Playing;
             }
                 break;
@@ -150,7 +153,11 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
                                     std::cerr << "Error in Client Send Socket!" << std::endl;
                                 }
                                 else {
+
                                     isClient = true;
+                                    sf::Packet selected_level;
+                                    client.listenSocket.receive(selected_level);
+                                    selected_level>>GameState::_curLevel;
                                     _state = Playing;
                                     flag = false;
                                     break;
