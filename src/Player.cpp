@@ -33,7 +33,7 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
 {
     bool isCollide = false;
     for(auto it:_object){
-        std::cout<<it.first<<" "<<it.second->GetPosition().x<<std::endl;
+        //std::cout<<it.first<<" "<<it.second->GetPosition().x<<std::endl;
         if(it.first!="Fireboy" && it.first!="Watergirl"){
             if(it.first.find("Plt")!=std::string::npos){ // Check collision with platforms
                 if(checkCollision(it.second,0.0f)){
