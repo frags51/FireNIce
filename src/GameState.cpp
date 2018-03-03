@@ -38,8 +38,8 @@ void GameState::play() {
     else platform2 = new Platform("res/img/tux.png",sf::Vector2f(100.0f,100.0f),sf::Vector2f(400.0f,_resY-100));
     _gameObjectManager.add("Plt2",platform2);
     Platform *platform3 = nullptr;
-    if(!filePath) platform3 = new Platform("../res/img/tux.png",sf::Vector2f(100.0f,900.0f),sf::Vector2f(100.0f,0.0f));
-    else platform3 = new Platform("res/img/tux.png",sf::Vector2f(100.0f,700.0f),sf::Vector2f(100.0f,0.0f));
+    if(!filePath) platform3 = new Platform("../res/img/tux.png",sf::Vector2f(100.0f,100.0f),sf::Vector2f(100.0f,0.0f));
+    else platform3 = new Platform("res/img/tux.png",sf::Vector2f(100.0f,100.0f),sf::Vector2f(-50.0f,0.0f));
     _gameObjectManager.add("Plt3",platform3);
 
 
@@ -88,7 +88,9 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
                 std::cout << "Waiting for clients to join!" << std::endl;
                 t1.join();
                 t2.join();
-                while (!res || !res2); // Wait to get connection
+                while (!res || !res2){
+
+                } // Wait to get connection
                 std::cout << "Connected to: " << server.sendSocket.getRemoteAddress() << std::endl;
                 isClient = false;
                 _state = GameState::state::Playing;

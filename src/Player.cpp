@@ -33,10 +33,11 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
 {
     bool isCollide = false;
     for(auto it:_object){
-
+        std::cout<<it.first<<" "<<it.second->GetPosition().x<<std::endl;
         if(it.first!="Fireboy" && it.first!="Watergirl"){
             if(checkCollision(it.second,0.0f)){
                 isCollide = true;
+                isJumping = false;
             }
         }
     }
@@ -118,7 +119,6 @@ bool Player::checkCollision(VisibleGameObject* other, float e){
         }
         else{
             if(deltaY >0.0f){
-                isJumping = false;
                 move(0.0f,intersectY * (1.0f -e));
                 other->move(0.0f,(-intersectY*e));
 
