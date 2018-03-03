@@ -24,10 +24,10 @@ public:
     void send(sf::Vector2f v);
     sf::Socket::Status sdrive(sf::Vector2f v);
     void checkSent();
-private:
-    std::future<sf::Socket::Status> sentStatus;
     sf::TcpListener listener;
     sf::TcpListener listener2;
+private:
+    std::future<sf::Socket::Status> sentStatus;
     //! \brief Port for sendSocket.
     unsigned short port1;
     //! \brief Port for listenSocket.

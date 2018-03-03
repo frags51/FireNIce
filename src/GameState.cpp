@@ -5,7 +5,7 @@
 
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
-unsigned short GameState::port1 {45012};
+unsigned short GameState::port1 {45000};
 unsigned short GameState::port2 {45011};
 Server GameState::server{GameState::port1, GameState::port2};
 Client GameState::client{};
@@ -58,7 +58,7 @@ bool GameState::isExiting() {
 void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergirl) {
     sf::Event _event;
     _mainWindow.pollEvent(_event);
-        switch (_state) {
+    Stater: switch (_state) {
             case GameState::state::AtSplash: {
                 showSplashScreen();
             }
@@ -70,6 +70,9 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
             case GameState::state::WaitForClient: {
                 bool res {false};
                 bool res2 {false};
+                //std::future<void> g1, g2;
+                //g1 = std::async(std::launch::async, &Server::waitForClientSendSocket, &server, &res);
+                //g2 = std::async(std::launch::async, &Server::waitForClientListenSocket, &server, &res2)
                 std::thread t1(&Server::waitForClientSendSocket, &server, &res);
                 std::thread t2(&Server::waitForClientListenSocket, &server, &res2);
                 _mainWindow.clear(sf::Color::Cyan);
@@ -86,15 +89,19 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
                 _mainWindow.draw(dmsg);
                 _mainWindow.display();
                 std::cout << "Waiting for clients to join!" << std::endl;
-                t1.join();
-                t2.join();
                 while (!res || !res2){
                     _mainWindow.pollEvent(_event);
                     if(_event.type==sf::Event::Closed){
+                        std::cout<<"Clsoe!\n";
                         _state=Exiting;
-                        break;
+                        server.listener2.close();
+                        server.listener.close();
+                        goto Stater;
                     }
                 } // Wait to get connection
+                t1.join();
+                t2.join();
+
                 std::cout << "Connected to: " << server.sendSocket.getRemoteAddress() << std::endl;
                 isClient = false;
                 _state = GameState::state::Playing;
