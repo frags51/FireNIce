@@ -1,6 +1,7 @@
 #include "MainMenu.h"
 #include "GameState.h"
 #include "Splash.h"
+#include <fstream>
 #include <thread>
 
 GameState::state GameState::_state = Not_init; // Need to initialize these
@@ -17,6 +18,7 @@ bool GameState::filePath {false}; // false for linux, true for OSX
 bool GameState::isClient;
 
 void GameState::play() {
+    LoadFromFile(1);
     static_assert(_resX <= 1920 && _resY <= 1080, "Invalid Screen Resolution!");
     if(_state!=Not_init) return;
     _mainWindow.create(sf::VideoMode(_resX, _resY, 32), "Fire & Ice");
@@ -341,6 +343,39 @@ void GameState::showMainMenu() {
     if(res==-1 || res== 2) _state=Exiting;
     else if(res==0) _state=WaitForClient;
     else if(res==1) _state=WaitForServer;
+}
+
+void GameState::LoadFromFile(unsigned int level){
+    std::string s = "Level";
+    s = "res/" + s + std::to_string(level) +".txt";
+    std::ifstream infile;
+    infile.open(s);
+    std::string t;
+    while(infile>>t){
+        std::string header;
+        header = t;
+        infile>>t;
+        std::string src;
+        if(!filePath) src = "../"+ t;
+        else src = t;
+        infile>>t;
+        float x = std::stof(t);
+        infile>>t;
+        float y = std::stof(t);
+        infile>>t;
+        float size_x = std::stof(t);
+        infile>>t;
+        float size_y = std::stof(t);
+        Platform *platform2 = new Platform(src,sf::Vector2f(size_x,size_y),sf::Vector2f(x,y));
+        _gameObjectManager.add(header,platform2);
+
+
+
+    }
+
+
+
+
 }
 
 

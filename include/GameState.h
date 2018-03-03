@@ -25,6 +25,7 @@ public:
 
     //! \brief Start Playing the game!
     static void play();
+    static void LoadFromFile(unsigned int level);
 
     //! \brief The set of possible states of the game
     enum state {Not_init, AtSplash, AtMenu, WaitForClient, WaitForServer, Playing, Exiting}; // More maybe added later.
