@@ -351,7 +351,7 @@ void GameState::showMainMenu() {
 void GameState::showLevelScreen(){
     LevelMenu mm(_mainWindow.getSize().x, _mainWindow.getSize().y);
     short res = mm.show(_mainWindow);
-    if(res==-1) _state=Exiting;
+    if(res==0) _state=Exiting;
     else{
         _curLevel = res;
         _state=WaitForClient;
