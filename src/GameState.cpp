@@ -34,14 +34,31 @@ void GameState::play() {
 
     Platform *platform2 = nullptr;
 
-    if(!filePath) platform2 = new Platform("../res/img/tux.png",sf::Vector2f(100.0f,100.0f),sf::Vector2f(400.0f,_resY-100));
-    else platform2 = new Platform("res/img/tux.png",sf::Vector2f(100.0f,100.0f),sf::Vector2f(400.0f,_resY-100));
+    if(!filePath) platform2 = new Platform("../res/img/tux.png",sf::Vector2f(100.0f,100.0f),sf::Vector2f(1500.0f,_resY-100));
+    else platform2 = new Platform("res/img/tux.png",sf::Vector2f(100.0f,100.0f),sf::Vector2f(1500.0f,_resY-100));
     _gameObjectManager.add("Plt2",platform2);
     Platform *platform3 = nullptr;
-    if(!filePath) platform3 = new Platform("../res/img/tux.png",sf::Vector2f(100.0f,100.0f),sf::Vector2f(100.0f,0.0f));
-    else platform3 = new Platform("res/img/tux.png",sf::Vector2f(100.0f,100.0f),sf::Vector2f(-50.0f,0.0f));
+    if(!filePath) platform3 = new Platform("../res/img/splash.png",sf::Vector2f(1400.0f,50.0f),sf::Vector2f(0.0f,650.0f));
+    else platform3 = new Platform("res/img/platform_r.png",sf::Vector2f(1400.0f,100.0f),sf::Vector2f(0.0f,650.0f));
     _gameObjectManager.add("Plt3",platform3);
-    
+    Platform *platform4 = nullptr;
+    if(!filePath) platform4 = new Platform("../res/img/tux.png",sf::Vector2f(150.0f,75.0f),sf::Vector2f(1000.0f,600.0f));
+    else platform4= new Platform("res/img/red_fire.png",sf::Vector2f(150.0f,25.0f),sf::Vector2f(1000.0f,625.0f));
+    _gameObjectManager.add("Fireee",platform4);
+    Platform *platform5 = nullptr;
+    if(!filePath) platform5 = new Platform("../res/img/splash.png",sf::Vector2f(150.0f,25.0f),sf::Vector2f(800.0f,625.0f));
+    else platform5 = new Platform("res/img/blue_fire.png",sf::Vector2f(150.0f,25.0f),sf::Vector2f(800.0f,625.0f));
+    _gameObjectManager.add("Icee",platform5);
+    Platform *platform6 = nullptr;
+    if(!filePath) platform6 = new Platform("../res/img/splash.png",sf::Vector2f(10.0f,150.0f),sf::Vector2f(600.0f,500.0f));
+    else platform6 = new Platform("res/img/v_barrier.png",sf::Vector2f(10.0f,150.0f),sf::Vector2f(600.0f,500.0f));
+    _gameObjectManager.add("Barrier",platform6);
+    Platform *platform7 = nullptr;
+    if(!filePath) platform7 = new Platform("../res/img/splash.png",sf::Vector2f(10.0f,10.0f),sf::Vector2f(500.0f,640.0f));
+    else platform7 = new Platform("res/img/v_barrier_switch.png",sf::Vector2f(10.0f,10.0f),sf::Vector2f(500.0f,640.0f));
+    _gameObjectManager.add("Switchh",platform7);
+
+
 
 
     _state=state::AtSplash;
@@ -274,7 +291,6 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
                         if(st!=sf::Socket::Done) {std::cout<<"Couldnt send packet(1) to Server!"<<std::endl; }
                         client.listenSocket.disconnect();delete(fireboy);
                         _state = GameState::state::Exiting;
-                        client.listenSocket.disconnect();delete(fireboy);
                         break;
                     }
                     else if(_event.type==sf::Event::KeyPressed || _event.type==sf::Event::KeyReleased){
