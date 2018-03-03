@@ -1,6 +1,7 @@
 #include "MainMenu.h"
 #include "GameState.h"
 #include "Splash.h"
+#include <fstream>
 #include "LevelMenu.h"
 #include <thread>
 
@@ -13,13 +14,14 @@ Client GameState::client{};
 
 ObjMan GameState::_gameObjectManager;
 
-bool GameState::filePath {false}; // false for linux, true for OSX
+bool GameState::filePath {true}; // false for linux, true for OSX
 
 bool GameState::isClient;
 
 unsigned short GameState::_curLevel {0};
 
 void GameState::play() {
+    LoadFromFile(1);
     static_assert(_resX <= 1920 && _resY <= 1080, "Invalid Screen Resolution!");
     if(_state!=Not_init) return;
     _mainWindow.create(sf::VideoMode(_resX, _resY, 32), "Fire & Ice");
@@ -36,16 +38,6 @@ void GameState::play() {
     else watergirl= new Player("res/img/blue_tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
     watergirl->SetPosition(_resX-_resX/16,_resY-_resY/8);
     _gameObjectManager.add("Watergirl",watergirl);
-
-    Platform *platform2 = nullptr;
-
-    if(!filePath) platform2 = new Platform("../res/img/tux.png",sf::Vector2f(100.0f,100.0f),sf::Vector2f(400.0f,_resY-100));
-    else platform2 = new Platform("res/img/tux.png",sf::Vector2f(100.0f,100.0f),sf::Vector2f(400.0f,_resY-100));
-    _gameObjectManager.add("Plt2",platform2);
-    Platform *platform3 = nullptr;
-    if(!filePath) platform3 = new Platform("../res/img/tux.png",sf::Vector2f(100.0f,100.0f),sf::Vector2f(100.0f,0.0f));
-    else platform3 = new Platform("res/img/tux.png",sf::Vector2f(100.0f,100.0f),sf::Vector2f(-50.0f,0.0f));
-    _gameObjectManager.add("Plt3",platform3);
 
 
     _state=state::AtSplash;
@@ -357,6 +349,37 @@ void GameState::showMainMenu() {
     else if(res==0) GameState::_state=LevelCheck;
     else if(res==1) _state=WaitForServer;
 }
+
+void GameState::LoadFromFile(unsigned int level) {
+    std::string s = "Level";
+    s = "res/" + s + std::to_string(level) + ".txt";
+    std::ifstream infile;
+    infile.open(s);
+    std::string t;
+    while (infile >> t) {
+        std::string header;
+        header = t;
+        infile >> t;
+        std::string src;
+        if (!filePath) src = "../" + t;
+        else src = t;
+        infile >> t;
+        float x = std::stof(t);
+        infile >> t;
+        float y = std::stof(t);
+        infile >> t;
+        float size_x = std::stof(t);
+        infile >> t;
+        float size_y = std::stof(t);
+        Platform *platform2 = new Platform(src, sf::Vector2f(size_x, size_y), sf::Vector2f(x, y));
+        _gameObjectManager.add(header, platform2);
+
+
+    }
+}
+
+
+
 
 void GameState::showLevelScreen(){
     LevelMenu mm(_mainWindow.getSize().x, _mainWindow.getSize().y);
