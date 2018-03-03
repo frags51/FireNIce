@@ -1,6 +1,7 @@
 #include "MainMenu.h"
 #include "GameState.h"
 #include "Splash.h"
+#include "LevelMenu.h"
 #include <thread>
 
 GameState::state GameState::_state = Not_init; // Need to initialize these
@@ -63,6 +64,11 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
                 showSplashScreen();
             }
                 break; // Showing Splash screen
+
+            case GameState::state::LevelCheck: {
+                showLevelScreen();
+            }
+                break;
             case GameState::state::AtMenu: {
                 showMainMenu();
             }
@@ -338,6 +344,12 @@ void GameState::showMainMenu() {
     if(res==-1 || res== 2) _state=Exiting;
     else if(res==0) _state=WaitForClient;
     else if(res==1) _state=WaitForServer;
+}
+
+void GameState::showLevelScreen(){
+    LevelMenu mm(_mainWindow.getSize().x, _mainWindow.getSize().y);
+    short res = mm.show(_mainWindow);
+    if(res==-1) _state=Exiting;
 }
 
 
