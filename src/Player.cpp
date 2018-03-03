@@ -35,11 +35,13 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
     for(auto it:_object){
         std::cout<<it.first<<" "<<it.second->GetPosition().x<<std::endl;
         if(it.first!="Fireboy" && it.first!="Watergirl"){
-            if(checkCollision(it.second,0.0f)){
-                isCollide = true;
-                isJumping = false;
-                _velocity=0;
-            }
+            if(it.first.find("Plt")!=std::string::npos){ // Check collision with platforms
+                if(checkCollision(it.second,0.0f)){
+                    isCollide = true;
+                    isJumping = false;
+                    _velocity=0;
+                }
+            } // Collision with platforms
         }
     }
     if(isCollide) return ;
