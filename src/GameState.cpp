@@ -7,7 +7,7 @@
 
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
-unsigned short GameState::port1 {45001};
+unsigned short GameState::port1 {45003};
 unsigned short GameState::port2 {45011};
 Server GameState::server{GameState::port1, GameState::port2};
 Client GameState::client{};
@@ -106,6 +106,9 @@ void GameState::gameLoop(Player *&fireboy, Player *&watergirl) {
                     delete(watergirl);
                     watergirl=nullptr;
                 }
+                std::cout<<_curLevel<<"\n";
+                LoadFromFile(_curLevel);
+
                 if(!filePath)fireboy = new Player("../res/img/red_tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
                 else fireboy = new Player("res/img/red_tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
                 fireboy->SetPosition(0,_resY-_resY/8);
@@ -170,6 +173,8 @@ void GameState::gameLoop(Player *&fireboy, Player *&watergirl) {
                                         delete(fireboy);
                                         fireboy=nullptr;
                                     }
+
+                                    LoadFromFile(_curLevel);
 
                                     if(!filePath)fireboy = new Player("../res/img/red_tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
                                     else fireboy = new Player("res/img/red_tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
@@ -382,6 +387,7 @@ void GameState::LoadFromFile(unsigned int level) {
     std::string s = "Level";
     s = "res/" + s + std::to_string(level) + ".txt";
     std::ifstream infile;
+    if(!filePath) s = "../"+s;
     infile.open(s);
     std::string t;
     while (infile >> t) {
