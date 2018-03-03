@@ -32,17 +32,18 @@ Player::~Player() {
 void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, VisibleGameObject*>& _object)
 {
     bool isCollide = false;
+    bool isThisFireboy = this->_filename.find("red_tux")!=std::string::npos;
+    
     for(auto it:_object){
         //std::cout<<it.first<<" "<<it.second->GetPosition().x<<std::endl;
-        if(it.first!="Fireboy" && it.first!="Watergirl"){
+
             if(it.first.find("Plt")!=std::string::npos){ // Check collision with platforms
                 if(checkCollision(it.second,0.0f)){
                     isCollide = true;
                     isJumping = false;
                     _velocity=0;
                 }
-            } // Collision with platforms
-        }
+            }
     }
     if(isCollide) return ;
 

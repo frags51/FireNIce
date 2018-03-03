@@ -23,6 +23,8 @@ void GameState::play() {
     static_assert(_resX <= 1920 && _resY <= 1080, "Invalid Screen Resolution!");
     if(_state!=Not_init) return;
     _mainWindow.create(sf::VideoMode(_resX, _resY, 32), "Fire & Ice");
+    // Warning: Do not change name of textures of fireboy/watergirl -> Used in Player::Update to check if
+    // Object is fireboy or not
     Player *fireboy= nullptr;
     if(!filePath)fireboy = new Player("../res/img/red_tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
     else fireboy = new Player("res/img/red_tux.png", sf::Keyboard::Up,sf::Keyboard::Left, sf::Keyboard::Right);
@@ -154,6 +156,7 @@ void GameState::gameLoop(VisibleGameObject *fireboy, VisibleGameObject *watergir
                                 }
                                 else {
 
+                                    std::cout<<"Connected@\n";
                                     isClient = true;
                                     sf::Packet selected_level;
                                     client.listenSocket.receive(selected_level);
