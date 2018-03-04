@@ -8,8 +8,8 @@
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
 
-unsigned short GameState::port1 {45001};
-unsigned short GameState::port2 {45012};
+unsigned short GameState::port1 {45008};
+unsigned short GameState::port2 {45006};
 
 Server GameState::server{GameState::port1, GameState::port2};
 Client GameState::client{};
@@ -230,6 +230,9 @@ void GameState::gameLoop() {
                                 t>>xP;
                                 watergirl->SetPosition(fireboy->GetPosition().x, telap);
                             }
+                            else if(x==-3){
+                                _state=GameState::GameOver;
+                            }
                         }
                         else {need_upd=true;t>>XX>>YY;}
                         if(need_upd) resa = std::async(std::launch::async,
@@ -282,6 +285,9 @@ void GameState::gameLoop() {
                                 t>>xP;
                                 fireboy->SetPosition(xP, telap);
                             }
+                            else if(x==-3){
+                                _state=GameState::GameOver;
+                            }
 
                         }
                         else {need_upd=true; t>>XX>>YY;}
@@ -301,8 +307,8 @@ void GameState::gameLoop() {
                                 if(press)__event.type = sf::Event::KeyPressed;
                                 else __event.type=sf::Event::KeyReleased;
                                 __event.key = data;
-                                                          fireboy->SetPosition(XX,YY);
                                 fireboy->Update(telap, __event,_gameObjectManager._gameObjects);
+                                                          fireboy->SetPosition(XX,YY);
 
                         }, fireboy, x, press, telap);
                     }
@@ -370,9 +376,17 @@ void GameState::gameLoop() {
                     _mainWindow.display();
                 }
 
-                if(!isClient) {_state=GameState::state::LevelCheck;server.sendSocket.disconnect();
+                if(!isClient) {
+                    sf::Packet y;
+                    y<<-3<<false<<0;
+                    server.sendSocket.send(y);
+                    _state=GameState::state::LevelCheck;server.sendSocket.disconnect();
                     server.listenSocket.disconnect();}
-                else {_state=GameState::state::AtMenu;client.sendSocket.disconnect();client.listenSocket.disconnect();}
+                else {
+                    sf::Packet y;
+                    y<<-3<< false<<0;
+                    client.sendSocket.send(y);
+                    _state=GameState::state::AtMenu;client.sendSocket.disconnect();client.listenSocket.disconnect();}
             }
             break;
 
