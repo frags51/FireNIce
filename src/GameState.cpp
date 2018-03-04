@@ -8,8 +8,8 @@
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
 
-unsigned short GameState::port1 {45032};
-unsigned short GameState::port2 {45036};
+unsigned short GameState::port1 {45024};
+unsigned short GameState::port2 {45021};
 
 
 
@@ -418,6 +418,7 @@ void GameState::gameLoop() {
                     _mainWindow.display();
                 }
                 _mainWindow.draw(gT);
+                _mainWindow.display();
                 sf::Event event;
                 while(!_mainWindow.pollEvent(event));
 
@@ -467,6 +468,7 @@ void GameState::gameLoop() {
                     _mainWindow.display();
                 }
                 _mainWindow.draw(gT);
+                _mainWindow.display();
                 sf::Event event;
                 while(!_mainWindow.pollEvent(event));
                 _state = GameState::state ::AtMenu;
