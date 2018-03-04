@@ -52,8 +52,13 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
                     _velocity=0;
                 }
             }
-
-                
+            else if(it.first.find("vBarrier")!=std::string::npos){
+                if(checkCollision(it.second, 0.0f)){
+                    isCollide=true;
+                    isJumping=false;
+                    _velocity=0;
+                }
+            }
             else if(it.first.find("vbSwitch")!=std::string::npos){
 
                 if(checkCollision(it.second, 0.0f)){
@@ -68,6 +73,9 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
                         GameState::_objToBeActed.push_back(it.second);
                     }
                     GameState::race.unlock();
+                    //isCollide=true;
+                    //isJumping=false;
+                    //_velocity=0;
                 }
                 else if(std::find(GameState::_objToBeActed.begin(), GameState::_objToBeActed.end(), it.second)!=GameState::_objToBeActed.end()){
                     GameState::race.lock();
