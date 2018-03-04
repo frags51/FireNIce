@@ -1,7 +1,7 @@
 #include "Player.h"
 #include "GameState.h"
 #include <cmath>
-#include <zconf.h>
+
 Player::Player(const std::string &fName, sf::Keyboard::Key _u, sf::Keyboard::Key _l, sf::Keyboard::Key _r) :
         _velocity(0),
         _maxVelocity(600.0f),
@@ -13,7 +13,8 @@ Player::Player(const std::string &fName, sf::Keyboard::Key _u, sf::Keyboard::Key
         l{_l},
         r{_r},
         _xVal {550.f},
-        _upVel {550.f}
+        _upVel {550.f},
+        vBarrierMoveDist{105.f}
 
 
 {
@@ -51,8 +52,34 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
                     _velocity=0;
                 }
             }
-            else if(isThisFireboy && (it.first.find("Blue_fire") != std::string::npos || it.first.find("Green_fire") != std::string::npos)) {
-                if (checkCollision(it.second, 0.0f)) {
+
+            else if(it.first.find("vbSwitch")!=std::string::npos){
+                if(checkCollision(it.second, 0.0f)){
+                    auto num = it.first.substr(8);
+                    GameState::race.lock();
+                    if(it.second->_stateOfObj==DEF){
+                        // Assuming corresponding vBarrier is always found!
+                        VisibleGameObject* bar = _object.find("vBarrier"+num)->second;
+                        bar->SetPosition(bar->GetPosition().x, bar->GetPosition().y-vBarrierMoveDist);
+                        it.second->_stateOfObj=VBSPRESSED;
+                        GameState::_objToBeActed.push_back(it.second);
+                    }
+                    GameState::race.unlock();
+                }
+                else if(std::find(GameState::_objToBeActed.begin(), GameState::_objToBeActed.end(), it.second)!=GameState::_objToBeActed.end()){
+                    GameState::race.lock();
+                    if(it.second->_stateOfObj==VBSPRESSED){
+                        auto num = it.first.substr(8);
+                        VisibleGameObject* bar = _object.find("vBarrier"+num)->second;
+                        bar->SetPosition(bar->GetPosition().x, bar->GetPosition().y+vBarrierMoveDist);
+                        it.second->_stateOfObj=DEF;
+                        GameState::_objToBeActed.erase(std::find(GameState::_objToBeActed.begin(), GameState::_objToBeActed.end(), it.second));
+                    }
+                    GameState::race.unlock();
+                } // Didnt collide, but earlier pressed the switch
+            }
+            else if(isThisFireboy && (it.first.find("Blue_fire") != std::string::npos || it.first.find("Green_fire") != std::string::npos)){
+                if(checkCollision(it.second,0.0f)) {
                     isCollide=true;
                     GameState::_state = GameState::state::GameOver;
 
