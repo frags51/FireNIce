@@ -30,11 +30,12 @@ MainMenu::MainMenu(float width, float height) {
 } // Constructor
 
 short MainMenu::show(sf::RenderWindow &renderWindow) {
+    renderWindow.clear(sf::Color::Cyan);
     for (const auto &item : items) renderWindow.draw(item);
     renderWindow.display();
 
     sf::Event event;
-    renderWindow.clear(sf::Color::Cyan);
+
     while(true){ // Event Handling loop
         while(renderWindow.pollEvent(event)){
             switch (event.type){

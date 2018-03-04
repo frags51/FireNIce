@@ -16,3 +16,6 @@ vbSwitch1 /res/img/v_barrier_switch.png
 vBarrier1 /res/img/v_barrier.png
 920 800
 20 100
+vbSwitch1_o /res/img/v_barrier_switch.png
+400 830
+80 20
