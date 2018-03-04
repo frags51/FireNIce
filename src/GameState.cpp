@@ -8,13 +8,10 @@
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
 
-<<<<<<< HEAD
+
 unsigned short GameState::port1 {45009};
 unsigned short GameState::port2 {45006};
-=======
-unsigned short GameState::port1 {45031};
-unsigned short GameState::port2 {45038};
->>>>>>> 1732651d1ca830c01bebadfb91599fcf98507f24
+
 
 Server GameState::server{GameState::port1, GameState::port2};
 Client GameState::client{};
@@ -33,13 +30,12 @@ Player* GameState::watergirl= nullptr;
 std::mutex GameState::race;
 std::vector<VisibleGameObject *> GameState::_objToBeActed;
 
-<<<<<<< HEAD
+
 unsigned short GameState::redGemsCollected {0};
 unsigned short GameState::blueGemsCollected {0};
-=======
+
 bool GameState::_winF {false};
 bool GameState::_winI {false};
->>>>>>> 1732651d1ca830c01bebadfb91599fcf98507f24
 
 void GameState::play() {
     LoadFromFile(1);
@@ -127,14 +123,13 @@ void GameState::gameLoop() {
                 std::cout<<_curLevel<<"\n";
                 LoadFromFile(_curLevel);
 
-<<<<<<< HEAD
+
                 redGemsCollected=0;
                 blueGemsCollected=0;
-
-=======
+                
                 _winF=false;
                 _winI=false;
->>>>>>> 1732651d1ca830c01bebadfb91599fcf98507f24
+
                 server.sendSocket.send(selected_level);
                 _state = GameState::state::Playing;
             }

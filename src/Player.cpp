@@ -112,8 +112,6 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
                     GameState::_objToBeActed.push_back(it.second);
                 }
             }
-    } // for iterate over ObjMan
-
             else if(isThisFireboy && it.first.find("Red_door")!=std::string::npos){
                 VisibleGameObject* door = it.second;
                 if(checkCollision(it.second,0.0f)){
@@ -140,7 +138,9 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
                     GameState::_winI=false;
                 }
             }
-    }
+    } // for iterate over ObjMan
+
+
     if(GameState::_winI && GameState::_winF) {
         GameState::_state=GameState::state::GameWon;
         return;
