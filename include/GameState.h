@@ -28,7 +28,7 @@ public:
     static void LoadFromFile(unsigned int level);
 
     //! \brief The set of possible states of the game
-    enum state {Not_init ,LevelCheck , AtSplash, AtMenu, WaitForClient, WaitForServer, Playing, Exiting}; // More maybe added later.
+    enum state {Not_init ,LevelCheck , AtSplash, AtMenu, WaitForClient, WaitForServer, Playing, Exiting,GameOver}; // More maybe added later.
     static state _state;
     static Server server;
     static Client client;
