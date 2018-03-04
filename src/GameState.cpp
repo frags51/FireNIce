@@ -11,6 +11,8 @@ sf::RenderWindow GameState::_mainWindow;
 unsigned short GameState::port1 {45028};
 unsigned short GameState::port2 {45029};
 
+
+
 Server GameState::server{GameState::port1, GameState::port2};
 Client GameState::client{};
 
@@ -27,6 +29,12 @@ Player* GameState::watergirl= nullptr;
 
 std::mutex GameState::race;
 std::vector<VisibleGameObject *> GameState::_objToBeActed;
+
+
+unsigned short GameState::redGemsCollected {0};
+unsigned short GameState::blueGemsCollected {0};
+unsigned short GameState::maxRedGems {0};
+unsigned short GameState::maxBlueGems {0};
 
 bool GameState::_winF {false};
 bool GameState::_winI {false};
@@ -117,8 +125,13 @@ void GameState::gameLoop() {
                 std::cout<<_curLevel<<"\n";
                 LoadFromFile(_curLevel);
 
+
+                redGemsCollected=0;
+                blueGemsCollected=0;
+
                 _winF=false;
                 _winI=false;
+
                 server.sendSocket.send(selected_level);
                 _state = GameState::state::Playing;
             }
@@ -173,8 +186,12 @@ void GameState::gameLoop() {
                                     LoadFromFile(_curLevel);
 
 
+                                    redGemsCollected=0;
+                                    blueGemsCollected=0;
+
                                     _winF=false;
                                     _winI=false;
+
                                     _state = Playing;
                                     flag = false;
                                     break;
@@ -272,7 +289,12 @@ void GameState::gameLoop() {
                     if(need_upd){
                         resa.get();
                     }
+                    /*for(auto v: _objToBeActed){
+                        if(v->getFileName()=="Red_gem"){
+                            redGemsCollected++;
 
+                        }
+                    }*/
                     watergirl->Draw(_mainWindow);
                     _mainWindow.display();
 
@@ -389,7 +411,7 @@ void GameState::gameLoop() {
                     sf::Packet y;
                     y<<-3<<false<<0;
                     server.sendSocket.send(y);
-                    _state=GameState::state::LevelCheck;server.sendSocket.disconnect();
+                    _state=GameState::state::AtMenu;server.sendSocket.disconnect();
                     server.listenSocket.disconnect();}
                 else {
                     sf::Packet y;
@@ -444,6 +466,7 @@ void GameState::LoadFromFile(unsigned int level) {
     std::ifstream infile;
     if(!filePath) s = "../"+s;
     infile.open(s);
+    infile>>maxRedGems>>maxBlueGems;
     std::string t;
     while (infile >> t) {
         std::string header;
@@ -475,6 +498,7 @@ void GameState::LoadFromFile(unsigned int level) {
             _gameObjectManager.add(header, platform2);
         }
     }
+    infile.close();
 }
 
 

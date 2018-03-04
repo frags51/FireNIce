@@ -42,8 +42,14 @@ public:
     static std::mutex race;
     static std::vector<VisibleGameObject *> _objToBeActed;
 
+    static unsigned short redGemsCollected;
+    static unsigned short blueGemsCollected;
+    static unsigned short maxRedGems;
+    static unsigned short maxBlueGems;
+
     static bool _winI;
     static bool _winF;
+
 private:
 
     //! \brief Check if the game is in Exiting state.
