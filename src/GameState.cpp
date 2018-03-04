@@ -354,7 +354,7 @@ void GameState::gameLoop() {
                 int row = 8;
                 if(!isClient) std::cout<<"bit\n";
                 bool toRight = true;
-                for(int i=0;i<5;i++){
+                for(int i=0;i<500;i++){
                     _mainWindow.pollEvent(_event);
                     _mainWindow.clear(sf::Color::Red);
                     float telap = _gameObjectManager._clock.restart().asSeconds();
@@ -367,7 +367,10 @@ void GameState::gameLoop() {
                     else fireboy->Draw(_mainWindow);
                     _mainWindow.display();
                 }
-                _state=GameState::state::LevelCheck;
+
+                if(!isClient) {_state=GameState::state::LevelCheck;server.sendSocket.disconnect();
+                    server.listenSocket.disconnect();}
+                else {_state=GameState::state::AtMenu;client.sendSocket.disconnect();client.listenSocket.disconnect();}
             }
             break;
 
