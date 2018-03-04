@@ -206,7 +206,7 @@ void GameState::gameLoop() {
                     }
                     else {
                         sf::Packet tDash;
-                        tDash<<-2<<false<<fireboy->GetPosition().y;
+                        tDash<<-2<<false<<fireboy->GetPosition().y<<fireboy->GetPosition().x;
                         sf::Socket::Status st= server.sendSocket.send(tDash);
                         if(st!=sf::Socket::Done) {std::cout<<"Couldnt upd packet"<<std::endl; }
                     }
@@ -220,7 +220,11 @@ void GameState::gameLoop() {
                         t>>x>>press>>telap;
                         if(x<0) {
                             need_upd=false;
-                            if(x==-2) watergirl->SetPosition(fireboy->GetPosition().x, telap);
+                            if(x==-2) {
+                                float xP;
+                                t>>xP;
+                                watergirl->SetPosition(fireboy->GetPosition().x, telap);
+                            }
                         }
                         else need_upd=true;
                         if(need_upd) resa = std::async(std::launch::async,
@@ -268,7 +272,11 @@ void GameState::gameLoop() {
                         t>>x>>press>>telap;
                         if(x<0) {
                             need_upd=false;
-                            if(x==-2) fireboy->SetPosition(fireboy->GetPosition().x, telap);
+                            if(x==-2) {
+                                float xP;
+                                t>>xP;
+                                fireboy->SetPosition(xP, telap);
+                            }
 
                         }
                         else need_upd=true;
@@ -314,7 +322,7 @@ void GameState::gameLoop() {
                     }
                     else{
                         sf::Packet tDash;
-                        tDash<<-1<<false<<watergirl->GetPosition().y;
+                        tDash<<-1<<false<<watergirl->GetPosition().y<<watergirl->GetPosition().x;
                         sf::Socket::Status st= client.sendSocket.send(tDash);
                         if(st!=sf::Socket::Done) {std::cout<<"Couldnt send packet(1) to Server!"<<std::endl; }
                     }

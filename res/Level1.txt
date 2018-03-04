@@ -7,3 +7,6 @@ Watergirl res/img/blue_tux.png
 Plt1 res/img/platform.png
 500 650
 300 40
+Plt2 res/img/platform.png
+500 390
+300 40
