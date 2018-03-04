@@ -7,7 +7,7 @@
 
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
-unsigned short GameState::port1 {45003};
+unsigned short GameState::port1 {45004};
 unsigned short GameState::port2 {45011};
 Server GameState::server{GameState::port1, GameState::port2};
 Client GameState::client{};
@@ -24,7 +24,7 @@ Player* GameState::fireboy= nullptr;
 Player* GameState::watergirl= nullptr;
 
 std::mutex GameState::race;
-
+std::vector<VisibleGameObject *> GameState::_objToBeActed;
 void GameState::play() {
     LoadFromFile(1);
     static_assert(_resX <= 1920 && _resY <= 1080, "Invalid Screen Resolution!");

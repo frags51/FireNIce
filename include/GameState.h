@@ -40,6 +40,7 @@ public:
     static unsigned short _curLevel;
 
     static std::mutex race;
+    static std::vector<VisibleGameObject *> _objToBeActed;
 
 private:
 

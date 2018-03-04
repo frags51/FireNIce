@@ -15,6 +15,7 @@ public:
 
 
 private:
+    const float vBarrierMoveDist;
     sf::Keyboard::Key u;
     sf::Keyboard::Key l;
     sf::Keyboard::Key r;
