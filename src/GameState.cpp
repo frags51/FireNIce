@@ -8,8 +8,8 @@
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
 
-unsigned short GameState::port1 {45010};
-unsigned short GameState::port2 {45018};
+unsigned short GameState::port1 {45014};
+unsigned short GameState::port2 {45013};
 
 
 
@@ -391,7 +391,6 @@ void GameState::gameLoop() {
                 gT.setString("Game OVER!");
                 gT.setPosition(800, 450);
                 int row = 8;
-                if(!isClient) std::cout<<"bit\n";
                 bool toRight = true;
                 for(int i=0;i<500;i++){
                     _mainWindow.pollEvent(_event);
@@ -426,6 +425,21 @@ void GameState::gameLoop() {
                 sf::Text gT;
                 gT.setString("Game Won!");
                 gT.setPosition(800, 450);
+                int row = 6;
+                bool toRight = false;
+                for(int i=0;i<3000;i++){
+                    _mainWindow.pollEvent(_event);
+                    _mainWindow.clear(sf::Color::Red);
+                    float telap = _gameObjectManager._clock.restart().asSeconds();
+                    fireboy->animation.update(row, telap, toRight);
+                    fireboy->_player.setTextureRect(fireboy->animation.uvRect);
+                    watergirl->animation.update(row, telap, toRight);
+                    watergirl->_player.setTextureRect(watergirl->animation.uvRect);
+                    _gameObjectManager.drawAll(_mainWindow);
+                    if(!isClient) watergirl->Draw(_mainWindow);
+                    else fireboy->Draw(_mainWindow);
+                    _mainWindow.display();
+                }
                 _state = GameState::state ::AtMenu;
                 if(!isClient) {
                     _state=GameState::state::LevelCheck;server.sendSocket.disconnect();
