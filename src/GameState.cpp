@@ -407,7 +407,7 @@ void GameState::LoadFromFile(unsigned int level) {
         float size_x = std::stof(t);
         infile >> t;
         float size_y = std::stof(t);
-        Platform *platform2 = new Platform(src, sf::Vector2f(size_x, size_y), sf::Vector2f(x, y));
+        Platform *platform2 = new Platform(src, sf::Vector2f(size_x, size_y), sf::Vector2f(x+size_x/2.f, y+size_y/2.f));
         _gameObjectManager.add(header, platform2);
 
 
