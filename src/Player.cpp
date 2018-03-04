@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "GameState.h"
 #include <cmath>
+#include <zconf.h>
 Player::Player(const std::string &fName, sf::Keyboard::Key _u, sf::Keyboard::Key _l, sf::Keyboard::Key _r) :
         _velocity(0),
         _maxVelocity(600.0f),
@@ -55,7 +56,8 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
                     row = 9;
                     animation.update(row,elapsedTime,toRight);
                     _player.setTextureRect(animation.uvRect);
-                    
+                    sleep(2);
+                    GameState::_state = GameState::state::Exiting;
                 }
     }
     if(isCollide) return ;
