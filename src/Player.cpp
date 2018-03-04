@@ -35,7 +35,8 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
 {
     bool isCollide = false;
     bool isThisFireboy = this->_filename.find("red_tux")!=std::string::npos;
-    
+    int row =0;
+    bool toRight = true;
     for(auto it:_object){
         //std::cout<<it.first<<" "<<it.second->GetPosition().x<<std::endl;
 
@@ -51,13 +52,14 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
             }
             else if(isThisFireboy && (it.first.find("Blue_fire") != std::string::npos || it.first.find("Green_fire") != std::string::npos)){
                 if(checkCollision(it.second,0.0f)) {
-                    std::cout << "Hi\n";
+                    row = 9;
+                    animation.update(row,elapsedTime,toRight);
+                    _player.setTextureRect(animation.uvRect);
+                    
                 }
     }
     if(isCollide) return ;
 
-    int row =0;
-    bool toRight = true;
     if((_event.type==sf::Event::KeyPressed && _event.key.code==l) || isLPressed)
     {
         isLPressed=true;
