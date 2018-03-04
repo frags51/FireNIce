@@ -8,8 +8,8 @@
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
 
-unsigned short GameState::port1 {45002};
-unsigned short GameState::port2 {45005};
+unsigned short GameState::port1 {45007};
+unsigned short GameState::port2 {45006};
 
 Server GameState::server{GameState::port1, GameState::port2};
 Client GameState::client{};
@@ -301,8 +301,8 @@ void GameState::gameLoop() {
                                 if(press)__event.type = sf::Event::KeyPressed;
                                 else __event.type=sf::Event::KeyReleased;
                                 __event.key = data;
-                                                          fireboy->SetPosition(XX,YY);
                                 fireboy->Update(telap, __event,_gameObjectManager._gameObjects);
+                                                          fireboy->SetPosition(XX,YY);
 
                         }, fireboy, x, press, telap);
                     }

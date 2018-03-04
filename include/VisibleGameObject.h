@@ -18,7 +18,7 @@ public:
     virtual void move(float dx,float dy){ _player.move(dx,dy); }
     sf::RectangleShape _player;
 
-    enum stateOfObj {DEF, VBSPRESSED, VBMOVED};
+    enum stateOfObj {DEF, VBSPRESSED_F, VBSPRESSED_W, VBMOVED};
     stateOfObj _stateOfObj;
 protected:
     sf::Texture playerTexture;
