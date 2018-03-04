@@ -8,8 +8,8 @@
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
 
-unsigned short GameState::port1 {45014};
-unsigned short GameState::port2 {45013};
+unsigned short GameState::port1 {45032};
+unsigned short GameState::port2 {45036};
 
 
 
@@ -390,6 +390,18 @@ void GameState::gameLoop() {
                 sf::Text gT;
                 gT.setString("Game OVER!");
                 gT.setPosition(800, 450);
+                gT.setFillColor(sf::Color::Black);
+                sf::Font font;
+                std::string fontFileM;
+                if(!GameState::filePath) fontFileM="../res/fonts/Phetsarath_OT.ttf";
+                else fontFileM="res/fonts/Phetsarath_OT.ttf";
+                if(!font.loadFromFile(fontFileM)){
+                    std::cerr<<"Error Loading Font MainMenu!";
+                    return;
+                }
+                gT.setFont(font);
+
+
                 int row = 8;
                 bool toRight = true;
                 for(int i=0;i<500;i++){
@@ -405,6 +417,9 @@ void GameState::gameLoop() {
                     else fireboy->Draw(_mainWindow);
                     _mainWindow.display();
                 }
+                _mainWindow.draw(gT);
+                sf::Event event;
+                while(!_mainWindow.pollEvent(event));
 
                 if(!isClient) {
                     sf::Packet y;
@@ -425,6 +440,17 @@ void GameState::gameLoop() {
                 sf::Text gT;
                 gT.setString("Game Won!");
                 gT.setPosition(800, 450);
+                gT.setFillColor(sf::Color::Black);
+                sf::Font font;
+                std::string fontFileM;
+                if(!GameState::filePath) fontFileM="../res/fonts/Phetsarath_OT.ttf";
+                else fontFileM="res/fonts/Phetsarath_OT.ttf";
+                if(!font.loadFromFile(fontFileM)){
+                    std::cerr<<"Error Loading Font MainMenu!";
+                    return;
+                }
+                gT.setFont(font);
+
                 int row = 6;
                 bool toRight = false;
                 for(int i=0;i<3000;i++){
@@ -440,6 +466,9 @@ void GameState::gameLoop() {
                     else fireboy->Draw(_mainWindow);
                     _mainWindow.display();
                 }
+                _mainWindow.draw(gT);
+                sf::Event event;
+                while(!_mainWindow.pollEvent(event));
                 _state = GameState::state ::AtMenu;
                 if(!isClient) {
                     _state=GameState::state::LevelCheck;server.sendSocket.disconnect();
