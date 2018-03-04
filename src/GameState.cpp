@@ -7,14 +7,14 @@
 
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
-unsigned short GameState::port1 {45006};
+unsigned short GameState::port1 {45002};
 unsigned short GameState::port2 {45011};
 Server GameState::server{GameState::port1, GameState::port2};
 Client GameState::client{};
 
 ObjMan GameState::_gameObjectManager;
 
-bool GameState::filePath {true}; // false for linux, true for OSX
+bool GameState::filePath {false}; // false for linux, true for OSX
 
 bool GameState::isClient;
 
@@ -200,7 +200,7 @@ void GameState::gameLoop() {
                     }
                     else if(_event.type==sf::Event::KeyPressed || _event.type==sf::Event::KeyReleased){
                         sf::Packet tDash;
-                        tDash<<_event.key.code<<(_event.type==sf::Event::KeyPressed) <<telap;
+                        tDash<<_event.key.code<<(_event.type==sf::Event::KeyPressed) <<telap<<fireboy->GetPosition().x<<fireboy->GetPosition().y;
                         sf::Socket::Status st= server.sendSocket.send(tDash);
                         if(st!=sf::Socket::Done) {std::cerr<<"Couldnt upd packet"<<std::endl;}
                     }
@@ -216,7 +216,7 @@ void GameState::gameLoop() {
                     sf::Packet t;
                     if(server.listenSocket.receive(t)==sf::Socket::Done) {
 
-                        int x; bool press; float telap;
+                        int x; bool press; float telap, XX, YY;
                         t>>x>>press>>telap;
                         if(x<0) {
                             need_upd=false;
@@ -226,7 +226,7 @@ void GameState::gameLoop() {
                                 watergirl->SetPosition(fireboy->GetPosition().x, telap);
                             }
                         }
-                        else need_upd=true;
+                        else {need_upd=true;t>>XX>>YY;}
                         if(need_upd) resa = std::async(std::launch::async,
                                                       [](VisibleGameObject* watergirl,
                                                          int x, bool press, float telap
@@ -242,7 +242,7 @@ void GameState::gameLoop() {
                                                           if(press)__event.type = sf::Event::KeyPressed;
                                                           else __event.type=sf::Event::KeyReleased;
                                                           __event.key = data;
-
+                                                          watergirl->SetPosition(XX, YY);
                                                           watergirl->Update(telap, __event,_gameObjectManager._gameObjects);
 
                                                       }, watergirl, x, press, telap);

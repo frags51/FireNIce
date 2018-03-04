@@ -53,6 +53,7 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
                 if(checkCollision(it.second,0.0f)) {
                     std::cout << "Hi\n";
                 }
+            }
     }
     if(isCollide) return ;
 
