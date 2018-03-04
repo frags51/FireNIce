@@ -126,7 +126,7 @@ void GameState::gameLoop() {
 
                 redGemsCollected=0;
                 blueGemsCollected=0;
-                
+
                 _winF=false;
                 _winI=false;
 
@@ -495,6 +495,7 @@ void GameState::LoadFromFile(unsigned int level) {
             _gameObjectManager.add(header, platform2);
         }
     }
+    infile.close();
 }
 
 

@@ -23,7 +23,7 @@ public:
     std::string _filename;
 
 
-    enum stateOfObj {DEF, VBSPRESSED_F, VBSPRESSED_W, VBMOVED};
+    enum stateOfObj {DEF, VBSPRESSED_F, VBSPRESSED_W, VBMOVED, GEMCONSUMED};
     stateOfObj _stateOfObj;
 protected:
     sf::Texture playerTexture;

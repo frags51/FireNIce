@@ -11,7 +11,7 @@ Watergirl res/img/blue_tux.png
 1450 750
 100 112
 Blue_fire res/img/blue_fire.png
-600 630
+600 610
 100 50
 Plt1 res/img/platform.png
 500 650
@@ -28,3 +28,6 @@ vBarrier1 res/img/v_barrier.png
 vbSwitch1_o res/img/v_barrier_switch.png
 400 830
 80 20
+Red_gem1 res/img/red_gem.png
+250 800
+40 40

@@ -75,7 +75,6 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
                         auto num = it.first.substr(8,1);
                         VisibleGameObject* bar = _object.find("vBarrier"+num)->second;
                         bar->SetPosition(bar->GetPosition().x, bar->GetPosition().y+vBarrierMoveDist);
-                        std::cout<<"Back!\n";
                         bar->_stateOfObj=DEF;
                         it.second->_stateOfObj=DEF;
                         GameState::_objToBeActed.erase(std::find(GameState::_objToBeActed.begin(), GameState::_objToBeActed.end(), it.second));
@@ -84,7 +83,6 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
                         auto num = it.first.substr(8,1);
                         VisibleGameObject* bar = _object.find("vBarrier"+num)->second;
                         bar->SetPosition(bar->GetPosition().x, bar->GetPosition().y+vBarrierMoveDist);
-                        std::cout<<"Back!\n";
                         bar->_stateOfObj=DEF;
                         it.second->_stateOfObj=DEF;
                         GameState::_objToBeActed.erase(std::find(GameState::_objToBeActed.begin(), GameState::_objToBeActed.end(), it.second));
@@ -108,8 +106,20 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
                 }
             }
             else if(isThisFireboy && it.first.find("Red_gem")!=std::string::npos){
-                if(checkCollision(it.second, 0.0f)){
-                    GameState::_objToBeActed.push_back(it.second);
+                if(it.second->_stateOfObj==DEF && checkCollision(it.second, 0.0f)){
+                    if(!GameState::filePath)it.second->Load(it.second->getFileName(),0,0);
+                    else it.second->Load(it.second->getFileName(),0.f,0.f);
+                    it.second->_stateOfObj=GEMCONSUMED;
+                    GameState::redGemsCollected++;
+                    std::cout<<"Colide with gem\n";
+                }
+            }
+            else if(!isThisFireboy && it.first.find("Blue_gem")!=std::string::npos){
+                if( it.second->_stateOfObj==DEF && checkCollision(it.second, 0.0f)){
+                    if(!GameState::filePath)it.second->Load(it.second->getFileName(),0.f,0.f);
+                    else it.second->Load(it.second->getFileName(),0.f,0.f);
+                    it.second->_stateOfObj=GEMCONSUMED;
+                    GameState::blueGemsCollected++;
                 }
             }
             else if(isThisFireboy && it.first.find("Red_door")!=std::string::npos){
