@@ -7,8 +7,8 @@
 
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
-unsigned short GameState::port1 {45006};
-unsigned short GameState::port2 {45011};
+unsigned short GameState::port1 {45007};
+unsigned short GameState::port2 {45012};
 Server GameState::server{GameState::port1, GameState::port2};
 Client GameState::client{};
 
@@ -342,6 +342,23 @@ void GameState::gameLoop() {
                 }
                 break;
             } // Case Playing.
+
+            case GameState::state ::GameOver:{
+                sf::Text gT;
+                gT.setString("Game OVER!");
+                gT.setPosition(800, 450);
+                int row = 8;
+                bool toRight = true;
+                for(int i=0;i<10;i++){
+                    float telap = _gameObjectManager._clock.restart().asSeconds();
+                    fireboy->animation.update(row, telap, toRight);
+                    fireboy->_player.setTextureRect(fireboy->animation.uvRect);
+                    watergirl->animation.update(row, telap, toRight);
+                    watergirl->_player.setTextureRect(watergirl->animation.uvRect);
+                }
+                GameState::state::LevelCheck;
+            }
+
 
             default:
                 break;

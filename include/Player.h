@@ -11,6 +11,7 @@ public:
 
     void Update(float elapsedTime,sf::Event& _event,std::map<std::string, VisibleGameObject*>& _object);
     bool checkCollision(VisibleGameObject* other, float e);
+    Animation animation;
 
 
 
@@ -31,6 +32,5 @@ private:
     float _xVal;
     float _velocity;  // -- Downward Velocity..
     float _maxVelocity;
-    Animation animation;
 };
 #endif // PLAYER_H
