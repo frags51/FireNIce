@@ -390,6 +390,14 @@ void GameState::gameLoop() {
             }
             break;
 
+            case GameState::state::GameWon:{
+                sf::Text gT;
+                gT.setString("Game Won!");
+                gT.setPosition(800, 450);
+                _state = GameState::state ::AtMenu;
+            }
+            break;
+
             default:
                 break;
         } //switch

@@ -35,6 +35,7 @@ Player::~Player() {
 
 void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, VisibleGameObject*>& _object)
 {
+    bool winF=false , winI = false;
     bool isCollide = false;
     bool isThisFireboy = this->_filename.find("red_tux")!=std::string::npos;
     int row =0;
@@ -105,6 +106,7 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
                 if(checkCollision(it.second,0.0f)){
                     if(!GameState::filePath)door->Load("../res/img/door_clear.png",120.0,150.0);
                     else door->Load("res/img/door_clear.png",120.0,150.0);
+                    winF = true;
                 }
                 else{
                     if(!GameState::filePath) door->Load("../res/img/red_door.png",120.0,150.0);
@@ -116,6 +118,7 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
                 if(checkCollision(it.second,0.0f)){
                     if(!GameState::filePath)door->Load("../res/img/door_clear.png",120.0,150.0);
                     else door->Load("res/img/door_clear.png",120.0,150.0);
+                    winI = true;
                 }
                 else{
                     if(!GameState::filePath) door->Load("../res/img/blue_door.png",120.0,150.0);
@@ -167,6 +170,7 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
 
     if(_velocity < -_maxVelocity)
         _velocity = -_maxVelocity;
+    if(winF ==true && winI == true) GameState::_state = GameState::state::GameWon;
     animation.update(row,elapsedTime,toRight);
     _player.setTextureRect(animation.uvRect);
 
