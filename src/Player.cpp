@@ -21,7 +21,7 @@ Player::Player(const std::string &fName, sf::Keyboard::Key _u, sf::Keyboard::Key
     isJumping=false;
     _player.setOutlineColor(sf::Color::Black);
     _player.setOutlineThickness(3.f);
-    _player.setOrigin(0.f,0.f);
+    _player.setOrigin(_player.getSize()/2.f);
 }
 
 
@@ -103,11 +103,12 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
 }
 
 bool Player::checkCollision(VisibleGameObject* other, float e){
-    sf::Vector2f otherPosition = other->GetPosition();
     sf::Vector2f otherHalfSize = other->GetHalfSize();
-    sf::Vector2f thisPosition = GetPosition();
     sf::Vector2f thisHalfSize = GetHalfSize();
-    
+
+    sf::Vector2f otherPosition = other->GetPosition();
+    sf::Vector2f thisPosition = GetPosition();
+
     float deltaX = otherPosition.x - thisPosition.x;
     float deltaY = otherPosition.y - thisPosition.y;
     float intersectX = abs(deltaX) - (otherHalfSize.x + thisHalfSize.x);
@@ -137,8 +138,11 @@ bool Player::checkCollision(VisibleGameObject* other, float e){
                 other->move(0.0f,intersectY*e);
             }
         }
+
         return true;
     }
+
+
     return false;
 }
 

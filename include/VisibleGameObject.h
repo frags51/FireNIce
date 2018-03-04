@@ -16,8 +16,8 @@ public:
     virtual bool IsLoaded() const;
     virtual sf::Vector2f GetHalfSize() { return _player.getSize()/2.0f;}
     virtual void move(float dx,float dy){ _player.move(dx,dy); }
-protected:
     sf::RectangleShape _player;
+protected:
     sf::Texture playerTexture;
     std::string _filename;
     bool _isLoaded;
