@@ -4,6 +4,9 @@ Fireboy res/img/red_tux.png
 Watergirl res/img/blue_tux.png
 1450 750
 100 112
+Blue_fire res/img/blue_fire.png
+600 630
+100 50
 Plt1 res/img/platform.png
 500 650
 300 40
