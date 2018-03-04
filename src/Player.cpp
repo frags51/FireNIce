@@ -119,7 +119,6 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
                     else it.second->Load(it.second->getFileName(),0.f,0.f);
                     it.second->_stateOfObj=GEMCONSUMED;
                     GameState::redGemsCollected++;
-                    std::cout<<"Colide with gem\n";
                 }
             }
             else if(!isThisFireboy && it.first.find("Blue_gem")!=std::string::npos){

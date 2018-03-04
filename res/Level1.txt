@@ -26,6 +26,9 @@ vbSwitch1_o res/img/v_barrier_switch.png
 Red_gem1 res/img/red_gem.png
 250 800
 40 40
+Blue_gem1 res/img/blue_gem.png
+1000 800
+40 40
 Red_door res/img/red_door.png
 900 450
 120 150
