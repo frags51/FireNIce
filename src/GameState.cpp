@@ -228,7 +228,7 @@ void GameState::gameLoop() {
                         }
                         else {need_upd=true;t>>XX>>YY;}
                         if(need_upd) resa = std::async(std::launch::async,
-                                                      [](VisibleGameObject* watergirl,
+                                                      [=](VisibleGameObject* watergirl,
                                                          int x, bool press, float telap
                                                       ){
                                                           sf::Event::KeyEvent data;
@@ -268,7 +268,7 @@ void GameState::gameLoop() {
                     sf::Packet t;
                     if(GameState::client.listenSocket.receive(t)==sf::Socket::Done) {
 
-                        int x; bool press; float telap;
+                        int x; bool press; float telap, XX, YY;
                         t>>x>>press>>telap;
                         if(x<0) {
                             need_upd=false;
@@ -279,9 +279,9 @@ void GameState::gameLoop() {
                             }
 
                         }
-                        else need_upd=true;
+                        else {need_upd=true; t>>XX>>YY;}
                         if(need_upd) res = std::async(std::launch::async,
-                                                      [](VisibleGameObject* fireboy,
+                                                      [=](VisibleGameObject* fireboy,
                                                       int x, bool press, float telap
                                                       ){
 
@@ -296,7 +296,7 @@ void GameState::gameLoop() {
                                 if(press)__event.type = sf::Event::KeyPressed;
                                 else __event.type=sf::Event::KeyReleased;
                                 __event.key = data;
-
+                                                          fireboy->SetPosition(XX,YY);
                                 fireboy->Update(telap, __event,_gameObjectManager._gameObjects);
 
                         }, fireboy, x, press, telap);
@@ -316,7 +316,7 @@ void GameState::gameLoop() {
                     }
                     else if(_event.type==sf::Event::KeyPressed || _event.type==sf::Event::KeyReleased){
                         sf::Packet tDash;
-                        tDash<<_event.key.code<<(_event.type==sf::Event::KeyPressed) <<telap;
+                        tDash<<_event.key.code<<(_event.type==sf::Event::KeyPressed) <<telap<<watergirl->GetPosition().x<<watergirl->GetPosition().y;
                         sf::Socket::Status st= client.sendSocket.send(tDash);
                         if(st!=sf::Socket::Done) {std::cerr<<"Couldnt send packet to Server!"<<std::endl;}
                     }
