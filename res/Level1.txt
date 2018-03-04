@@ -1,3 +1,9 @@
+Red_door res/img/red_door.png
+900 450
+120 150
+Blue_door res/img/blue_door.png
+1100 450
+120 150
 Fireboy res/img/red_tux.png
 10 750
 100 112
@@ -13,12 +19,6 @@ Plt1 res/img/platform.png
 Plt2 res/img/platform.png
 900 600
 400 40
-Red_door res/img/red_door.png
-900 450
-120 150
-Blue_door res/img/blue_door.png
-1100 450
-120 150
 vbSwitch1 res/img/v_barrier_switch.png
 720 630
 100 30

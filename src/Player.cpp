@@ -40,7 +40,6 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
     int row =0;
     bool toRight = true;
     for(auto it:_object){
-        //std::cout<<it.first<<" "<<it.second->GetPosition().x<<std::endl;
 
             if(it.first.find("Plt")!=std::string::npos){ // Check collision with platforms
                 if(checkCollision(it.second,0.0f)){
@@ -106,7 +105,6 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
                 if(checkCollision(it.second,0.0f)){
                     if(!GameState::filePath)door->Load("../res/img/door_clear.png",120.0,150.0);
                     else door->Load("res/img/door_clear.png",120.0,150.0);
-                    isCollide = true;
                 }
                 else{
                     if(!GameState::filePath) door->Load("../res/img/red_door.png",120.0,150.0);
@@ -118,7 +116,6 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
                 if(checkCollision(it.second,0.0f)){
                     if(!GameState::filePath)door->Load("../res/img/door_clear.png",120.0,150.0);
                     else door->Load("res/img/door_clear.png",120.0,150.0);
-                    isCollide = true;
                 }
                 else{
                     if(!GameState::filePath) door->Load("../res/img/blue_door.png",120.0,150.0);
