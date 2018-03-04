@@ -7,14 +7,14 @@
 
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
-unsigned short GameState::port1 {45007};
+unsigned short GameState::port1 {45001};
 unsigned short GameState::port2 {45012};
 Server GameState::server{GameState::port1, GameState::port2};
 Client GameState::client{};
 
 ObjMan GameState::_gameObjectManager;
 
-bool GameState::filePath {true}; // false for linux, true for OSX
+bool GameState::filePath {false}; // false for linux, true for OSX
 
 bool GameState::isClient;
 
@@ -348,17 +348,24 @@ void GameState::gameLoop() {
                 gT.setString("Game OVER!");
                 gT.setPosition(800, 450);
                 int row = 8;
+                if(!isClient) std::cout<<"bit\n";
                 bool toRight = true;
-                for(int i=0;i<10;i++){
+                for(int i=0;i<5;i++){
+                    _mainWindow.pollEvent(_event);
+                    _mainWindow.clear(sf::Color::Red);
                     float telap = _gameObjectManager._clock.restart().asSeconds();
                     fireboy->animation.update(row, telap, toRight);
                     fireboy->_player.setTextureRect(fireboy->animation.uvRect);
                     watergirl->animation.update(row, telap, toRight);
                     watergirl->_player.setTextureRect(watergirl->animation.uvRect);
+                    _gameObjectManager.drawAll(_mainWindow);
+                    if(!isClient) watergirl->Draw(_mainWindow);
+                    else fireboy->Draw(_mainWindow);
+                    _mainWindow.display();
                 }
-                GameState::state::LevelCheck;
+                _state=GameState::state::LevelCheck;
             }
-
+            break;
 
             default:
                 break;
