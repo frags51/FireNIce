@@ -53,6 +53,7 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
                 }
             }
 
+                
             else if(it.first.find("vbSwitch")!=std::string::npos){
                 if(checkCollision(it.second, 0.0f)){
                     auto num = it.first.substr(8);
