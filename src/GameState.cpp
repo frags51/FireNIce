@@ -7,7 +7,7 @@
 
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
-unsigned short GameState::port1 {45003};
+unsigned short GameState::port1 {45002};
 unsigned short GameState::port2 {45011};
 Server GameState::server{GameState::port1, GameState::port2};
 Client GameState::client{};
@@ -35,6 +35,8 @@ void GameState::play() {
     while(!isExiting()) {
         gameLoop(fireboy, watergirl);
     }
+    server.sendSocket.disconnect();
+    server.listenSocket.disconnect();
     _mainWindow.close();
 } // play()
 
@@ -219,7 +221,7 @@ void GameState::gameLoop(Player *&fireboy, Player *&watergirl) {
                         sf::Socket::Status st= server.sendSocket.send(tDash);
                         if(st!=sf::Socket::Done) {std::cout<<"Couldnt send packet(1) to Server!"<<std::endl; }
                         _state = GameState::state::Exiting;
-                        GameState::server.sendSocket.disconnect(); delete(watergirl);
+                        GameState::server.listenSocket.disconnect(); delete(watergirl);
                         break;
                     }
                     else if(_event.type==sf::Event::KeyPressed || _event.type==sf::Event::KeyReleased){
@@ -327,7 +329,7 @@ void GameState::gameLoop(Player *&fireboy, Player *&watergirl) {
                         if(st!=sf::Socket::Done) {std::cout<<"Couldnt send packet(1) to Server!"<<std::endl; }
                         client.listenSocket.disconnect();delete(fireboy);
                         _state = GameState::state::Exiting;
-                        client.listenSocket.disconnect();delete(fireboy);
+                        //client.listenSocket.disconnect();delete(fireboy);
                         break;
                     }
                     else if(_event.type==sf::Event::KeyPressed || _event.type==sf::Event::KeyReleased){

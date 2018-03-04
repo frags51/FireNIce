@@ -19,7 +19,9 @@ Player::Player(const std::string &fName, sf::Keyboard::Key _u, sf::Keyboard::Key
     Load(fName, GameState::_resX/16,GameState::_resY/8);
     animation.create(&playerTexture,sf::Vector2u(3,9),0.3f);
     isJumping=false;
-
+    _player.setOutlineColor(sf::Color::Black);
+    _player.setOutlineThickness(3.f);
+    _player.setOrigin(0.f,0.f);
 }
 
 
@@ -39,6 +41,9 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
 
             if(it.first.find("Plt")!=std::string::npos){ // Check collision with platforms
                 if(checkCollision(it.second,0.0f)){
+                    std::cout<<this->GetPosition().x<<" "<<this->GetPosition().y<<"; "<<it.second->GetPosition().x<<" "<<it.second->GetPosition().y<<"\n";
+                    std::cout<<this->GetHalfSize().x*2<<" "<<this->GetHalfSize().y*2<<"; "<<it.second->GetHalfSize().x*2<<" "<<it.second->GetHalfSize().y*2<<"\n";
+
                     isCollide = true;
                     isJumping = false;
                     _velocity=0;
