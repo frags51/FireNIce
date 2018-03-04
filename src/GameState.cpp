@@ -16,7 +16,7 @@ Client GameState::client{};
 
 ObjMan GameState::_gameObjectManager;
 
-bool GameState::filePath {true}; // false for linux, true for OSX
+bool GameState::filePath {false}; // false for linux, true for OSX
 
 bool GameState::isClient;
 
@@ -27,6 +27,10 @@ Player* GameState::watergirl= nullptr;
 
 std::mutex GameState::race;
 std::vector<VisibleGameObject *> GameState::_objToBeActed;
+
+bool GameState::_winF {false};
+bool GameState::_winI {false};
+
 void GameState::play() {
     LoadFromFile(1);
     static_assert(_resX <= 1920 && _resY <= 1080, "Invalid Screen Resolution!");
@@ -113,6 +117,8 @@ void GameState::gameLoop() {
                 std::cout<<_curLevel<<"\n";
                 LoadFromFile(_curLevel);
 
+                _winF=false;
+                _winI=false;
                 server.sendSocket.send(selected_level);
                 _state = GameState::state::Playing;
             }
@@ -166,6 +172,9 @@ void GameState::gameLoop() {
 
                                     LoadFromFile(_curLevel);
 
+
+                                    _winF=false;
+                                    _winI=false;
                                     _state = Playing;
                                     flag = false;
                                     break;
@@ -386,7 +395,8 @@ void GameState::gameLoop() {
                     sf::Packet y;
                     y<<-3<< false<<0;
                     client.sendSocket.send(y);
-                    _state=GameState::state::AtMenu;client.sendSocket.disconnect();client.listenSocket.disconnect();}
+                    _state=GameState::state::AtMenu;client.sendSocket.disconnect();client.listenSocket.disconnect();
+                }
             }
             break;
 
@@ -395,6 +405,12 @@ void GameState::gameLoop() {
                 gT.setString("Game Won!");
                 gT.setPosition(800, 450);
                 _state = GameState::state ::AtMenu;
+                if(!isClient) {
+                    _state=GameState::state::LevelCheck;server.sendSocket.disconnect();
+                    server.listenSocket.disconnect();}
+                else {
+                    _state=GameState::state::AtMenu;client.sendSocket.disconnect();client.listenSocket.disconnect();
+                }
             }
             break;
 
