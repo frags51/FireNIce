@@ -44,6 +44,8 @@ public:
 
     static unsigned short redGemsCollected;
     static unsigned short blueGemsCollected;
+    static unsigned short maxRedGems;
+    static unsigned short maxBlueGems;
 
     static bool _winI;
     static bool _winF;

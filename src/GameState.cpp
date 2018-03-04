@@ -9,7 +9,7 @@ GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
 
 
-unsigned short GameState::port1 {45009};
+unsigned short GameState::port1 {45010};
 unsigned short GameState::port2 {45006};
 
 
@@ -33,6 +33,8 @@ std::vector<VisibleGameObject *> GameState::_objToBeActed;
 
 unsigned short GameState::redGemsCollected {0};
 unsigned short GameState::blueGemsCollected {0};
+unsigned short GameState::maxRedGems {0};
+unsigned short GameState::maxBlueGems {0};
 
 bool GameState::_winF {false};
 bool GameState::_winI {false};
@@ -464,6 +466,7 @@ void GameState::LoadFromFile(unsigned int level) {
     std::ifstream infile;
     if(!filePath) s = "../"+s;
     infile.open(s);
+    infile>>maxRedGems>>maxBlueGems;
     std::string t;
     while (infile >> t) {
         std::string header;

@@ -62,7 +62,7 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
                     if(it.second->_stateOfObj==DEF){
                         // Assuming corresponding vBarrier is always found!
                         VisibleGameObject* bar = _object.find("vBarrier"+num)->second;
-                        {bar->SetPosition(bar->GetPosition().x, bar->GetPosition().y-vBarrierMoveDist); std::cout<<"Moved!\n";}
+                        bar->SetPosition(bar->GetPosition().x, bar->GetPosition().y-vBarrierMoveDist);
                         bar->_stateOfObj=VBMOVED;
                         it.second->_stateOfObj=isThisFireboy? VBSPRESSED_F:VBSPRESSED_W;
                         GameState::_objToBeActed.push_back(it.second);
@@ -124,28 +124,32 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
             }
             else if(isThisFireboy && it.first.find("Red_door")!=std::string::npos){
                 VisibleGameObject* door = it.second;
-                if(checkCollision(it.second,0.0f)){
-                    if(!GameState::filePath)door->Load("../res/img/door_clear.png",120.0,150.0);
-                    else door->Load("res/img/door_clear.png",120.0,150.0);
-                    GameState::_winF = true;
-                }
-                else{
-                    if(!GameState::filePath) door->Load("../res/img/red_door.png",120.0,150.0);
-                    else door->Load("res/img/red_door.png",120.0,150.0);
-                    GameState::_winF=false;
+                if(GameState::redGemsCollected==GameState::maxRedGems){
+                    if(checkCollision(it.second,0.0f)){
+                        if(!GameState::filePath)door->Load("../res/img/door_clear.png",120.0,150.0);
+                        else door->Load("res/img/door_clear.png",120.0,150.0);
+                        GameState::_winF = true;
+                    }
+                    else{
+                        if(!GameState::filePath) door->Load("../res/img/red_door.png",120.0,150.0);
+                        else door->Load("res/img/red_door.png",120.0,150.0);
+                        GameState::_winF=false;
+                    }
                 }
             }
             else if(!isThisFireboy && it.first.find("Blue_door")!=std::string::npos){
                 VisibleGameObject* door = it.second;
-                if(checkCollision(it.second,0.0f)){
-                    if(!GameState::filePath)door->Load("../res/img/door_clear.png",120.0,150.0);
-                    else door->Load("res/img/door_clear.png",120.0,150.0);
-                    GameState::_winI = true;
-                }
-                else{
-                    if(!GameState::filePath) door->Load("../res/img/blue_door.png",120.0,150.0);
-                    else door->Load("res/img/blue_door.png",120.0,150.0);
-                    GameState::_winI=false;
+                if(GameState::blueGemsCollected==GameState::maxBlueGems){
+                    if(checkCollision(it.second,0.0f)){
+                        if(!GameState::filePath)door->Load("../res/img/door_clear.png",120.0,150.0);
+                        else door->Load("res/img/door_clear.png",120.0,150.0);
+                        GameState::_winI = true;
+                    }
+                    else{
+                        if(!GameState::filePath) door->Load("../res/img/blue_door.png",120.0,150.0);
+                        else door->Load("res/img/blue_door.png",120.0,150.0);
+                        GameState::_winI=false;
+                    }
                 }
             }
     } // for iterate over ObjMan
