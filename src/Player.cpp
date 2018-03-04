@@ -51,14 +51,15 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
                     _velocity=0;
                 }
             }
-            else if(isThisFireboy && (it.first.find("Blue_fire") != std::string::npos || it.first.find("Green_fire") != std::string::npos)){
-                if(checkCollision(it.second,0.0f)) {
+            else if(isThisFireboy && (it.first.find("Blue_fire") != std::string::npos || it.first.find("Green_fire") != std::string::npos)) {
+                if (checkCollision(it.second, 0.0f)) {
                     row = 9;
-                    animation.update(row,elapsedTime,toRight);
+                    animation.update(row, elapsedTime, toRight);
                     _player.setTextureRect(animation.uvRect);
-                    sleep(2);
-                    GameState::_state = GameState::state::Exiting;
+                    //sleep(2);
+                    //GameState::_state = GameState::state::Exiting;
                 }
+            }
     }
     if(isCollide) return ;
 
