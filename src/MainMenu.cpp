@@ -34,7 +34,7 @@ short MainMenu::show(sf::RenderWindow &renderWindow) {
     renderWindow.display();
 
     sf::Event event;
-
+    renderWindow.clear(sf::Color::Cyan);
     while(true){ // Event Handling loop
         while(renderWindow.pollEvent(event)){
             switch (event.type){

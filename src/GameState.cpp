@@ -199,6 +199,7 @@ void GameState::gameLoop() {
                         sf::Socket::Status st= server.sendSocket.send(tDash);
                         if(st!=sf::Socket::Done) {std::cout<<"Couldnt send packet(1) to Server!"<<std::endl; }
                         _state = GameState::state::Exiting;
+                        server.sendSocket.disconnect();
                         GameState::server.listenSocket.disconnect(); delete(watergirl);
                         break;
                     }
@@ -313,6 +314,7 @@ void GameState::gameLoop() {
                         tDash<<-1<<false<<0.f;
                         sf::Socket::Status st= client.sendSocket.send(tDash);
                         if(st!=sf::Socket::Done) {std::cout<<"Couldnt send packet(1) to Server!"<<std::endl; }
+                        client.sendSocket.disconnect();
                         client.listenSocket.disconnect();delete(fireboy);
                         _state = GameState::state::Exiting;
                         //client.listenSocket.disconnect();delete(fireboy);
