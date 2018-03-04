@@ -113,6 +113,18 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
                     else door->Load("res/img/red_door.png",120.0,150.0);
                 }
             }
+            else if(!isThisFireboy && it.first.find("Blue_door")!=std::string::npos){
+                VisibleGameObject* door = it.second;
+                if(checkCollision(it.second,0.0f)){
+                    if(!GameState::filePath)door->Load("../res/img/door_clear.png",120.0,150.0);
+                    else door->Load("res/img/door_clear.png",120.0,150.0);
+                    isCollide = true;
+                }
+                else{
+                    if(!GameState::filePath) door->Load("../res/img/blue_door.png",120.0,150.0);
+                    else door->Load("res/img/blue_door.png",120.0,150.0);
+                }
+            }
     }
     if(isCollide) return ;
 
@@ -165,6 +177,7 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
 }
 
 bool Player::checkCollision(VisibleGameObject* other, float e){
+
     sf::Vector2f otherHalfSize = other->GetHalfSize();
     sf::Vector2f thisHalfSize = GetHalfSize();
 
@@ -176,6 +189,9 @@ bool Player::checkCollision(VisibleGameObject* other, float e){
     float intersectX = abs(deltaX) - (otherHalfSize.x + thisHalfSize.x);
     float intersectY = abs(deltaY) - (otherHalfSize.y + thisHalfSize.y);
     if(intersectX<0.0f && intersectY<0.0f) {
+        if(other->_filename.find("door")!=std::string::npos){
+            return true;
+        }
         e = std::min(std::max(e,0.0f),1.0f);
         if( intersectX > intersectY) {
             if(deltaX >0.0f){

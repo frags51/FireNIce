@@ -17,12 +17,13 @@ public:
     virtual sf::Vector2f GetHalfSize() { return _player.getSize()/2.0f;}
     virtual void move(float dx,float dy){ _player.move(dx,dy); }
     sf::RectangleShape _player;
+    std::string _filename;
+
 
     enum stateOfObj {DEF, VBSPRESSED_F, VBSPRESSED_W, VBMOVED};
     stateOfObj _stateOfObj;
 protected:
     sf::Texture playerTexture;
-    std::string _filename;
     bool _isLoaded;
 
 };
