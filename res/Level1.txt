@@ -10,6 +10,9 @@ Blue_fire res/img/blue_fire.png
 Plt1 res/img/platform.png
 500 650
 300 40
-Plt2 res/img/platform.png
-500 390
-300 40
+vbSwitch1 /res/img/v_barrier_switch.png
+700 630
+50 30
+vBarrier1 /res/img/v_barrier.png
+920 800
+20 100

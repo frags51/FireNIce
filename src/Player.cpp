@@ -49,6 +49,19 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
                     _velocity=0;
                 }
             }
+            else if(it.first.find("vbSwitch")!=std::string::npos){
+                if(checkCollision(it.second, 0.0f)){
+                    std::cout<<"on switch!\n";
+                    auto num = it.first.substr(8);
+                    GameState::race.lock();
+                    if(it.second->_stateOfObj==DEF){
+                        VisibleGameObject* bar = _object.find("vBarrier"+num)->second;
+                        bar->SetPosition(bar->GetPosition().x, bar->GetPosition().y-105.f);
+                        it.second->_stateOfObj=VBSPRESSED;
+                    }
+                    GameState::race.unlock();
+                }
+            }
             else if(isThisFireboy && (it.first.find("Blue_fire") != std::string::npos || it.first.find("Green_fire") != std::string::npos)){
                 if(checkCollision(it.second,0.0f)) {
                     std::cout << "Hi\n";

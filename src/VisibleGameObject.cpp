@@ -1,6 +1,6 @@
 #include "VisibleGameObject.h"
 
-VisibleGameObject::VisibleGameObject(): _isLoaded(false){
+VisibleGameObject::VisibleGameObject(): _isLoaded(false), _stateOfObj{DEF} {
 }
 
 

@@ -39,6 +39,8 @@ public:
 
     static unsigned short _curLevel;
 
+    static std::mutex race;
+
 private:
 
     //! \brief Check if the game is in Exiting state.
