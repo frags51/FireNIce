@@ -1,3 +1,9 @@
+Fireboy res/img/red_tux.png
+10 750
+100 112
+Watergirl res/img/blue_tux.png
+1450 750
+100 112
 Plt1 res/img/platform.png
-800 800
-400 20
+500 800
+300 40

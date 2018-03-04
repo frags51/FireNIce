@@ -46,7 +46,8 @@ void ObjMan::updateAll(sf::Event &_event, float elapsedTime) {
 void ObjMan::removeAndDelete(std::string name) {
     auto it = _gameObjects.find(name); // This is an iterator
     if(it!=_gameObjects.end()){
-        delete it->second;
+        if(it->second!= nullptr)delete it->second;
+        it->second= nullptr;
         _gameObjects.erase(it);
     }
 }
