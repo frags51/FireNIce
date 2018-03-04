@@ -50,3 +50,7 @@ bool VisibleGameObject::IsLoaded() const
 {
     return _isLoaded;
 }
+
+std::string VisibleGameObject::getFileName() const {
+    return _filename;
+}

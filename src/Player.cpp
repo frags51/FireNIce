@@ -95,12 +95,22 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
             else if(isThisFireboy && (it.first.find("Blue_fire") != std::string::npos || it.first.find("Green_fire") != std::string::npos)){
                 if(checkCollision(it.second,0.0f)) {
                     isCollide=true;
-                    if(GameState::isClient) std::cout<<"over!\n";
                     GameState::_state = GameState::state::GameOver;
 
                 }
             }
-    }
+            else if(!isThisFireboy && (it.first.find("Red_fire") != std::string::npos || it.first.find("Green_fire") != std::string::npos)){
+                if(checkCollision(it.second, 0.0f)){
+                    isCollide=true;
+                    GameState::_state = GameState::state::GameOver;
+                }
+            }
+            else if(isThisFireboy && it.first.find("Red_gem")!=std::string::npos){
+                if(checkCollision(it.second, 0.0f)){
+                    GameState::_objToBeActed.push_back(it.second);
+                }
+            }
+    } // for iterate over ObjMan
     if(isCollide) return ;
 
     if((_event.type==sf::Event::KeyPressed && _event.key.code==l) || isLPressed)

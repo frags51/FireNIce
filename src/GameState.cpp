@@ -8,7 +8,7 @@
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
 
-unsigned short GameState::port1 {45008};
+unsigned short GameState::port1 {45009};
 unsigned short GameState::port2 {45006};
 
 Server GameState::server{GameState::port1, GameState::port2};
@@ -27,6 +27,10 @@ Player* GameState::watergirl= nullptr;
 
 std::mutex GameState::race;
 std::vector<VisibleGameObject *> GameState::_objToBeActed;
+
+unsigned short GameState::redGemsCollected {0};
+unsigned short GameState::blueGemsCollected {0};
+
 void GameState::play() {
     LoadFromFile(1);
     static_assert(_resX <= 1920 && _resY <= 1080, "Invalid Screen Resolution!");
@@ -113,6 +117,9 @@ void GameState::gameLoop() {
                 std::cout<<_curLevel<<"\n";
                 LoadFromFile(_curLevel);
 
+                redGemsCollected=0;
+                blueGemsCollected=0;
+
                 server.sendSocket.send(selected_level);
                 _state = GameState::state::Playing;
             }
@@ -166,6 +173,8 @@ void GameState::gameLoop() {
 
                                     LoadFromFile(_curLevel);
 
+                                    redGemsCollected=0;
+                                    blueGemsCollected=0;
                                     _state = Playing;
                                     flag = false;
                                     break;
@@ -263,7 +272,12 @@ void GameState::gameLoop() {
                     if(need_upd){
                         resa.get();
                     }
+                    /*for(auto v: _objToBeActed){
+                        if(v->getFileName()=="Red_gem"){
+                            redGemsCollected++;
 
+                        }
+                    }*/
                     watergirl->Draw(_mainWindow);
                     _mainWindow.display();
 
@@ -380,7 +394,7 @@ void GameState::gameLoop() {
                     sf::Packet y;
                     y<<-3<<false<<0;
                     server.sendSocket.send(y);
-                    _state=GameState::state::LevelCheck;server.sendSocket.disconnect();
+                    _state=GameState::state::AtMenu;server.sendSocket.disconnect();
                     server.listenSocket.disconnect();}
                 else {
                     sf::Packet y;
