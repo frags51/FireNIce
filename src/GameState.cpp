@@ -9,6 +9,7 @@ GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
 
 
+
 unsigned short GameState::port1 {46976};
 unsigned short GameState::port2 {46430};
 
@@ -409,10 +410,11 @@ void GameState::gameLoop() {
                     client.sendSocket.send(y);
                 }
                 sf::Text gT;
-                gT.setString("Game OVER! Press any key to continue!");
-                gT.setPosition(700, 450);
+                gT.setString("Game OVER! Press any Key to Continue!");
+                gT.setCharacterSize(42);
+                gT.setPosition(GameState::_resX/2-400, GameState::_resY/2);
                 gT.setFillColor(sf::Color::Black);
-                gT.setOutlineThickness(6.f);
+                gT.setOutlineThickness(10.f);
                 gT.setFillColor(sf::Color::White);
                 gT.setOutlineColor(sf::Color::Black);
                 sf::Font font;
@@ -467,8 +469,9 @@ void GameState::gameLoop() {
                 }
                 sf::Text gT;
                 gT.setString("Game Won! Press any key to continue!");
-                gT.setPosition(700, 450);
-                gT.setOutlineThickness(6.f);
+                gT.setPosition(500, 450);
+                gT.setCharacterSize(42);
+                gT.setOutlineThickness(10.f);
                 gT.setFillColor(sf::Color::White);
                 gT.setOutlineColor(sf::Color::Black);
                 sf::Font font;
