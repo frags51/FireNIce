@@ -8,7 +8,7 @@
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
 
-unsigned short GameState::port1 {45024};
+unsigned short GameState::port1 {45025};
 unsigned short GameState::port2 {45021};
 
 
@@ -18,7 +18,7 @@ Client GameState::client{};
 
 ObjMan GameState::_gameObjectManager;
 
-bool GameState::filePath {true}; // false for linux, true for OSX
+bool GameState::filePath {false}; // false for linux, true for OSX
 
 bool GameState::isClient;
 
@@ -387,10 +387,23 @@ void GameState::gameLoop() {
             } // Case Playing.
 
             case GameState::state ::GameOver:{
+                if(!isClient){
+                    sf::Packet y;
+                    y<<-3<<false<<0;
+                    server.sendSocket.send(y);
+                }
+                else{
+                    sf::Packet y;
+                    y<<-3<< false<<0;
+                    client.sendSocket.send(y);
+                }
                 sf::Text gT;
-                gT.setString("Game OVER!");
-                gT.setPosition(800, 450);
+                gT.setString("Game OVER! Press any key to continue!");
+                gT.setPosition(700, 450);
                 gT.setFillColor(sf::Color::Black);
+                gT.setOutlineThickness(6.f);
+                gT.setFillColor(sf::Color::White);
+                gT.setOutlineColor(sf::Color::Black);
                 sf::Font font;
                 std::string fontFileM;
                 if(!GameState::filePath) fontFileM="../res/fonts/Phetsarath_OT.ttf";
@@ -400,7 +413,6 @@ void GameState::gameLoop() {
                     return;
                 }
                 gT.setFont(font);
-
 
                 int row = 8;
                 bool toRight = true;
@@ -416,22 +428,16 @@ void GameState::gameLoop() {
                     if(!isClient) watergirl->Draw(_mainWindow);
                     else fireboy->Draw(_mainWindow);
                     _mainWindow.display();
+                    _mainWindow.draw(gT);
                 }
-                _mainWindow.draw(gT);
                 _mainWindow.display();
                 sf::Event event;
-                while(!_mainWindow.pollEvent(event));
+                while(!_mainWindow.pollEvent(event) || event.type!=sf::Event::KeyPressed);
 
                 if(!isClient) {
-                    sf::Packet y;
-                    y<<-3<<false<<0;
-                    server.sendSocket.send(y);
                     _state=GameState::state::AtMenu;server.sendSocket.disconnect();
                     server.listenSocket.disconnect();}
                 else {
-                    sf::Packet y;
-                    y<<-3<< false<<0;
-                    client.sendSocket.send(y);
                     _state=GameState::state::AtMenu;client.sendSocket.disconnect();client.listenSocket.disconnect();
                 }
             }
@@ -439,8 +445,11 @@ void GameState::gameLoop() {
 
             case GameState::state::GameWon:{
                 sf::Text gT;
-                gT.setString("Game Won!");
+                gT.setString("Game Won! Press any key to continue!");
                 gT.setPosition(800, 450);
+                gT.setOutlineThickness(6.f);
+                gT.setFillColor(sf::Color::White);
+                gT.setOutlineColor(sf::Color::Black);
                 gT.setFillColor(sf::Color::Black);
                 sf::Font font;
                 std::string fontFileM;

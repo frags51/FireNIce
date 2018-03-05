@@ -131,6 +131,7 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
             }
             else if(isThisFireboy && it.first.find("Red_door")!=std::string::npos){
                 VisibleGameObject* door = it.second;
+                //region Check if all redGems collected
                 if(GameState::redGemsCollected==GameState::maxRedGems){
                     if(checkCollision(it.second,0.0f)){
                         if(!GameState::filePath)door->Load("../res/img/door_clear.png",120.0,150.0);
@@ -143,6 +144,7 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
                         GameState::_winF=false;
                     }
                 }
+                //endregion
             }
             else if(!isThisFireboy && it.first.find("Blue_door")!=std::string::npos){
                 VisibleGameObject* door = it.second;
