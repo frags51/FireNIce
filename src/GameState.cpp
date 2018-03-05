@@ -9,8 +9,8 @@ GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
 
 
-unsigned short GameState::port1 {49198};
-unsigned short GameState::port2 {49140};
+unsigned short GameState::port1 {46976};
+unsigned short GameState::port2 {46430};
 
 
 Server GameState::server{GameState::port1, GameState::port2};
@@ -18,7 +18,7 @@ Client GameState::client{};
 
 ObjMan GameState::_gameObjectManager;
 
-bool GameState::filePath {false}; // false for linux, true for OSX
+bool GameState::filePath {true}; // false for linux, true for OSX
 
 bool GameState::isClient;
 
