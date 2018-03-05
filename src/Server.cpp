@@ -10,7 +10,7 @@ void Server::waitForClientSendSocket(bool *res) {
     if(listener.accept(sendSocket) != sf::Socket::Done){
         std::cerr<<"Error while accepting sendSocket conection"<<std::endl;
     }
-    listener.close();
+    //listener.close();
     *res=true;
 }
 
@@ -22,7 +22,7 @@ void Server::waitForClientListenSocket(bool *res) {
     if(listener2.accept(listenSocket) != sf::Socket::Done){
         std::cerr<<"Error while accepting listenSocket conection"<<std::endl;
     }
-    listener2.close();
+    //listener2.close();
     *res=true;
 }
 

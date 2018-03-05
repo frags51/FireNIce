@@ -8,8 +8,8 @@
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
 
-unsigned short GameState::port1 {45026};
-unsigned short GameState::port2 {45021};
+unsigned short GameState::port1 {45028};
+unsigned short GameState::port2 {45000};
 
 
 
@@ -52,8 +52,14 @@ void GameState::play() {
     while(!isExiting()) {
         gameLoop();
     }
-    server.sendSocket.disconnect();
-    server.listenSocket.disconnect();
+    if(isClient){
+        client.sendSocket.disconnect();
+        client.listenSocket.disconnect();
+    }
+    else{
+        server.listener.close();
+        server.listener2.close();
+    }
     _mainWindow.close();
 } // play()
 
@@ -105,8 +111,8 @@ void GameState::gameLoop() {
                     if(_event.type==sf::Event::Closed){
                         std::cout<<"Clsoe!\n";
                         _state=Exiting;
-                        server.listener2.close();
-                        server.listener.close();
+                        //server.listener2.close();
+                        //server.listener.close();
                         goto Stater;
                     }
                 } // Wait to get connection
