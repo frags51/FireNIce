@@ -8,9 +8,9 @@
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
 
-unsigned short GameState::port1 {45029};
-unsigned short GameState::port2 {45000};
 
+unsigned short GameState::port1 {49198};
+unsigned short GameState::port2 {49140};
 
 
 Server GameState::server{GameState::port1, GameState::port2};
