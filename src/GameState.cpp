@@ -8,7 +8,7 @@
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
 
-unsigned short GameState::port1 {45025};
+unsigned short GameState::port1 {45026};
 unsigned short GameState::port2 {45021};
 
 
@@ -259,6 +259,9 @@ void GameState::gameLoop() {
                             else if(x==-3){
                                 _state=GameState::GameOver;
                             }
+                            else if(x==-4){
+                                _state=GameState::GameWon;
+                            }
                         }
                         else {need_upd=true;t>>XX>>YY;}
                         if(need_upd) resa = std::async(std::launch::async,
@@ -319,7 +322,9 @@ void GameState::gameLoop() {
                             else if(x==-3){
                                 _state=GameState::GameOver;
                             }
-
+                            else if(x==-4){
+                                _state=GameState::GameWon;
+                            }
                         }
                         else {need_upd=true; t>>XX>>YY;}
                         if(need_upd) res = std::async(std::launch::async,
@@ -444,9 +449,19 @@ void GameState::gameLoop() {
             break;
 
             case GameState::state::GameWon:{
+                if(!isClient){
+                    sf::Packet y;
+                    y<<-4<<false<<0;
+                    server.sendSocket.send(y);
+                }
+                else{
+                    sf::Packet y;
+                    y<<-4<< false<<0;
+                    client.sendSocket.send(y);
+                }
                 sf::Text gT;
                 gT.setString("Game Won! Press any key to continue!");
-                gT.setPosition(800, 450);
+                gT.setPosition(700, 450);
                 gT.setOutlineThickness(6.f);
                 gT.setFillColor(sf::Color::White);
                 gT.setOutlineColor(sf::Color::Black);
@@ -463,7 +478,7 @@ void GameState::gameLoop() {
 
                 int row = 6;
                 bool toRight = false;
-                for(int i=0;i<3000;i++){
+                for(int i=0;i<600;i++){
                     _mainWindow.pollEvent(_event);
                     _mainWindow.clear(sf::Color::Red);
                     float telap = _gameObjectManager._clock.restart().asSeconds();
@@ -482,10 +497,10 @@ void GameState::gameLoop() {
                 while(!_mainWindow.pollEvent(event));
                 _state = GameState::state ::AtMenu;
                 if(!isClient) {
-                    _state=GameState::state::LevelCheck;server.sendSocket.disconnect();
+                    _state=GameState::state::AtMenu;server.sendSocket.disconnect();
                     server.listenSocket.disconnect();}
                 else {
-                    _state=GameState::state::AtMenu;client.sendSocket.disconnect();client.listenSocket.disconnect();
+                    client.sendSocket.disconnect();client.listenSocket.disconnect();
                 }
             }
             break;

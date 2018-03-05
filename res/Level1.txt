@@ -1,4 +1,4 @@
-1 0
+1 1
 Fireboy res/img/red_tux.png
 10 750
 100 112
