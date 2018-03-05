@@ -48,8 +48,6 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
                     //std::cout<<this->GetHalfSize().x*2<<" "<<this->GetHalfSize().y*2<<"; "<<it.second->GetHalfSize().x*2<<" "<<it.second->GetHalfSize().y*2<<"\n";
 
                     isCollide = true;
-                    isJumping = false;
-                    _velocity=0;
                 }
             }
             else if(it.first.find("vBarrier")!=std::string::npos){
@@ -238,6 +236,7 @@ bool Player::checkCollision(VisibleGameObject* other, float e){
         }
         e = std::min(std::max(e,0.0f),1.0f);
         if( intersectX > intersectY) {
+
             if(deltaX >0.0f){
                 move(intersectX * (1.0f -e),0.0f);
                 other->move((-intersectX*e),0.0f);
@@ -250,12 +249,18 @@ bool Player::checkCollision(VisibleGameObject* other, float e){
             }
         }
         else{
+
             if(deltaY >0.0f){
+                if(other->getFileName().find("platform")!=std::string::npos){
+                    isJumping = false;
+                    _velocity=0;
+                }
                 move(0.0f,intersectY * (1.0f -e));
                 other->move(0.0f,(-intersectY*e));
 
             }
             else{
+
                 move(0.0f,-intersectY * (1.0f -e));
                 other->move(0.0f,intersectY*e);
             }

@@ -10,8 +10,8 @@ sf::RenderWindow GameState::_mainWindow;
 
 
 
-unsigned short GameState::port1 {46976};
-unsigned short GameState::port2 {46430};
+unsigned short GameState::port1 {25656};
+unsigned short GameState::port2 {32230};
 
 
 Server GameState::server{GameState::port1, GameState::port2};
