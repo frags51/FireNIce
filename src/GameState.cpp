@@ -465,7 +465,6 @@ void GameState::gameLoop() {
                 gT.setOutlineThickness(6.f);
                 gT.setFillColor(sf::Color::White);
                 gT.setOutlineColor(sf::Color::Black);
-                gT.setFillColor(sf::Color::Black);
                 sf::Font font;
                 std::string fontFileM;
                 if(!GameState::filePath) fontFileM="../res/fonts/Phetsarath_OT.ttf";
