@@ -57,24 +57,27 @@ Plt12 res/img/platform.png
 
 
 Red_door res/img/red_door.png
-1450 30
+1250 30
 120 150
 Blue_door res/img/blue_door.png
-1330 30
+1130 30
 120 150
 Plt13 res/img/platform.png
 1130 180
-440 30
+290 30
 
-vBarrier1 res/img/v_barrier.png
+Plt14 res/img/platform_l.png
 1110 30
 20 180
 
-vbSwitch1 res/img/v_barrier_switch.png
-580 580
-80 20
 
 
-vbSwitch1_o res/img/v_barrier_switch.png
-1260 160
-80 20
+Plt15 res/img/platform.png
+1450 350
+120 30
+
+
+Plt16 res/img/platform.png
+1250 550
+120 30
+
