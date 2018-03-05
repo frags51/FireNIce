@@ -19,7 +19,7 @@ Client GameState::client{};
 
 ObjMan GameState::_gameObjectManager;
 
-bool GameState::filePath {true}; // false for linux, true for OSX
+bool GameState::filePath {false}; // false for linux, true for OSX
 
 bool GameState::isClient;
 
@@ -166,8 +166,15 @@ void GameState::gameLoop() {
                     // Causing re init of enter strings.
                     if (flag && _event.type == sf::Event::TextEntered) {
                         if (_event.text.unicode < 128) {
-                            if (_event.text.unicode != 13 && _event.text.unicode != 10)
+                            if (_event.text.unicode != 13 && _event.text.unicode != 10 && _event.text.unicode!=8)
                                 enter += static_cast<char>(_event.text.unicode);
+                            else if(_event.text.unicode==8){
+                                if(enter.length()>0)
+                                enter = enter.substr(0, enter.length()-1);
+                                dmsg.setString(enter);
+                                _mainWindow.draw(dmsg);
+                                _mainWindow.display();
+                            }
                             else {
                                 std::cout << "Got an enter! after " << enter << std::endl;
                                 if (client.listenSocket.connect(enter, GameState::port1) != sf::Socket::Done) {
