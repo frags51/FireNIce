@@ -96,7 +96,7 @@ public:
      * VBMOVED: A barrier has been moved due to the corresponding switch being pressed.
      * GEMCONSUMED: This "gem" has been consumed.
      */
-    enum stateOfObj {DEF, VBSPRESSED_F, VBSPRESSED_W, VBMOVED, GEMCONSUMED};
+    enum stateOfObj {DEF, VBSPRESSED_F=2, VBSPRESSED_W=4, VBSPRESSED_B=6,VBMOVED=16, GEMCONSUMED=32};
     /*!
      * @brief Stores the state of this object.
      */

@@ -1,37 +1,32 @@
 1 1
-
 Fireboy res/img/red_tux.png
 50 0
 100 112
 Watergirl res/img/blue_tux.png
-1000 0
+925 0
 100 112
-
-
 Plt3 res/img/platform.png
-0 800
-1800 30
+0 850
+1600 50
 Plt4 res/img/platform_r.png
 1570 0
-30 800
+30 850
 Plt5 res/img/platform_l.png
 0 0
-30 800
+30 850
 Plt6 res/img/platform.png
 0 0
 1800 30
-
-
 Plt8 res/img/platform.png
 200 600
 180 30
-Blue_fire res/img/blue_fire.png
+Blue_fire res/img/blue_fire_new.png
 380 600
 140 30
 Plt9 res/img/platform.png
 520 600
 200 30
-Red_fire res/img/red_fire.png
+aRed_fire res/img/red_fire_new.png
 720 600
 170 30
 Plt10 res/img/platform.png
@@ -40,44 +35,36 @@ Plt10 res/img/platform.png
 Plt11 res/img/platform.png
 200 630
 890 5
-
-
-Red_gem1 res/img/red_gem.png
-785 450
-40 40
 Blue_gem1 res/img/blue_gem.png
-430 450
+785 410
 40 40
-
-
+Red_gem1 res/img/red_gem.png
+430 410
+40 40
 Plt12 res/img/platform.png
 0 400
 180 30
-
-
-
 Red_door res/img/red_door.png
-1250 30
+1180 30
 120 150
 Blue_door res/img/blue_door.png
-1130 30
+1060 30
 120 150
 Plt13 res/img/platform.png
-1130 180
+1060 180
 290 30
-
 Plt14 res/img/platform_l.png
-1110 30
+1040 30
 20 180
-
-
-
 Plt15 res/img/platform.png
-1450 350
+1380 410
 120 30
-
-
 Plt16 res/img/platform.png
 1250 550
 120 30
-
+Plt17 res/img/platform.png
+1490 280
+110 30
+Green_fire res/img/green_fire.png
+60 810
+1400 40

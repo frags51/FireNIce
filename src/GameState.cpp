@@ -11,6 +11,7 @@ sf::RenderWindow GameState::_mainWindow;
 unsigned short GameState::port1 {51947};
 unsigned short GameState::port2 {18290};
 
+
 Server GameState::server{GameState::port1, GameState::port2};
 Client GameState::client{};
 
@@ -43,7 +44,7 @@ sf::Sprite sprite;
 void GameState::play() {
     //LoadFromFile(1);
     if(!GameState::filePath) splashName="../res/img/levelbg.png";
-    else splashName="res/img/levelbg";
+    else splashName="res/img/levelbg.png";
     if(!texture.loadFromFile(splashName)){ // Arg: const string: the path to the image file
         std::cerr<<"Failed to load level bg splash img!"<<std::endl;
     }
@@ -278,7 +279,7 @@ void GameState::gameLoop() {
                             if(x==-2) {
                                 float xP;
                                 t>>xP;
-                                watergirl->SetPosition(fireboy->GetPosition().x, telap);
+                                watergirl->SetPosition(watergirl->GetPosition().x, telap);
                             }
                             else if(x==-3){
                                 _state=GameState::GameOver;
@@ -315,6 +316,19 @@ void GameState::gameLoop() {
 
                     if(need_upd){
                         resa.get();
+                    }
+                    else{
+                        sf::Event::KeyEvent data;
+                        data.code = (sf::Keyboard::Num4);
+                        data.alt = false;
+                        data.control = false;
+                        data.shift = false;
+                        data.system = false;
+
+                        sf::Event __event;
+                        __event.type = sf::Event::KeyPressed;
+                        __event.key = data;
+                        watergirl->Update(telap,__event,_gameObjectManager._gameObjects);
                     }
                     /*for(auto v: _objToBeActed){
                         if(v->getFileName()=="Red_gem"){
