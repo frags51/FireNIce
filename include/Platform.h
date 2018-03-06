@@ -11,6 +11,13 @@ public:
     ~Platform();
 
     void Draw(sf::RenderWindow& window);
+    bool checkCollision(VisibleGameObject* other, float e);
+    void Update(float elapsedTime,sf::Event& _event,std::map<std::string, VisibleGameObject*>& _object);
+
+
+
+private:
+    const float vBarrierMoveDist;
 
 
 };

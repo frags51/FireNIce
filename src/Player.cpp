@@ -14,7 +14,7 @@ Player::Player(const std::string &fName, sf::Keyboard::Key _u, sf::Keyboard::Key
         r{_r},
         _xVal {550.f},
         _upVel {550.f},
-        vBarrierMoveDist{105.f}
+        vBarrierMoveDist{150.f}
 
 
 {

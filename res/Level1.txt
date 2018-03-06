@@ -11,8 +11,28 @@ PltMid res/img/platform.png
 PltAbove res/img/platform.png
 40 540
 1400 40
+
+PltCHhta res/img/platform.png
+40 510
+40 30
+PltAboveSwit res/img/platform.png
+160 370
+1400 20
+PltMovable res/img/platform.png
+700 490
+50 50
+vBarrier2 res/img/v_barrier.png
+40 370
+120 20
+vbSwitch2_o res/img/v_barrier_switch.png
+200 520
+80 20
+vbSwitch3_o res/img/v_barrier_switch.png
+300 350
+80 20
+
 PltRCorner res/img/platform.png
-1400 740
+1400 700
 160 140
 RBlue_fire res/img/blue_fire.png
 1000 835

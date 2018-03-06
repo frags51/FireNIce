@@ -10,8 +10,8 @@ sf::RenderWindow GameState::_mainWindow;
 
 
 
-unsigned short GameState::port1 {34656};
-unsigned short GameState::port2 {30230};
+unsigned short GameState::port1 {39956};
+unsigned short GameState::port2 {40230};
 
 
 Server GameState::server{GameState::port1, GameState::port2};
@@ -19,7 +19,7 @@ Client GameState::client{};
 
 ObjMan GameState::_gameObjectManager;
 
-bool GameState::filePath {false}; // false for linux, true for OSX
+bool GameState::filePath {true}; // false for linux, true for OSX
 
 bool GameState::isClient;
 
