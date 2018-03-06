@@ -8,7 +8,7 @@
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
 
-unsigned short GameState::port1 {25657};
+unsigned short GameState::port1 {25658};
 unsigned short GameState::port2 {32230};
 
 Server GameState::server{GameState::port1, GameState::port2};
@@ -278,7 +278,7 @@ void GameState::gameLoop() {
                             if(x==-2) {
                                 float xP;
                                 t>>xP;
-                                watergirl->SetPosition(fireboy->GetPosition().x, telap);
+                                watergirl->SetPosition(watergirl->GetPosition().x, telap);
                             }
                             else if(x==-3){
                                 _state=GameState::GameOver;
@@ -315,6 +315,19 @@ void GameState::gameLoop() {
 
                     if(need_upd){
                         resa.get();
+                    }
+                    else{
+                        sf::Event::KeyEvent data;
+                        data.code = (sf::Keyboard::Num4);
+                        data.alt = false;
+                        data.control = false;
+                        data.shift = false;
+                        data.system = false;
+
+                        sf::Event __event;
+                        __event.type = sf::Event::KeyPressed;
+                        __event.key = data;
+                        watergirl->Update(telap,__event,_gameObjectManager._gameObjects);
                     }
                     /*for(auto v: _objToBeActed){
                         if(v->getFileName()=="Red_gem"){
