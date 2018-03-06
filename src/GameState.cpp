@@ -31,6 +31,7 @@ Player* GameState::watergirl= nullptr;
 std::mutex GameState::race;
 std::vector<VisibleGameObject *> GameState::_objToBeActed;
 
+bool GameState::_startSyncFixFb{false};
 
 unsigned short GameState::redGemsCollected {0};
 unsigned short GameState::blueGemsCollected {0};
@@ -206,6 +207,7 @@ void GameState::gameLoop() {
                                     _winF=false;
                                     _winI=false;
 
+                                    _startSyncFixFb=false;
                                     _state = Playing;
                                     flag = false;
                                     break;
@@ -331,8 +333,10 @@ void GameState::gameLoop() {
                             if(x==-2) {
                                 float xP;
                                 t>>xP;
+
+                                fireboy->_player.setTextureRect(fireboy->animation.uvRect);
                                 fireboy->SetPosition(xP, telap);
-                                fireboy->animation.update(1, 0.001, true);
+
                             }
                             else if(x==-3){
                                 _state=GameState::GameOver;
@@ -362,9 +366,6 @@ void GameState::gameLoop() {
                                                           fireboy->SetPosition(XX,YY);
 
                         }, fireboy, x, press, telap);
-                    }
-                    else{
-                        fireboy->animation.update(1, 0.005f, true);
                     }
 
                     float telap = _gameObjectManager._clock.restart().asSeconds();
