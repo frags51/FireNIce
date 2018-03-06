@@ -14,7 +14,7 @@ Player::Player(const std::string &fName, sf::Keyboard::Key _u, sf::Keyboard::Key
         r{_r},
         _xVal {550.f},
         _upVel {550.f},
-        vBarrierMoveDist{105.f}
+        vBarrierMoveDist{150.f}
 
 
 {
@@ -44,6 +44,14 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
 
             if(it.first.find("Plt")!=std::string::npos){ // Check collision with platforms
                 if(checkCollision(it.second,0.0f)){
+                    //std::cout<<this->GetPosition().x<<" "<<this->GetPosition().y<<"; "<<it.second->GetPosition().x<<" "<<it.second->GetPosition().y<<"\n";
+                    //std::cout<<this->GetHalfSize().x*2<<" "<<this->GetHalfSize().y*2<<"; "<<it.second->GetHalfSize().x*2<<" "<<it.second->GetHalfSize().y*2<<"\n";
+
+                    isCollide = true;
+                }
+            }
+            else if(it.first.find("Movable")!=std::string::npos){ // Check collision with platforms
+                if(checkCollision(it.second,1.0f)){
                     //std::cout<<this->GetPosition().x<<" "<<this->GetPosition().y<<"; "<<it.second->GetPosition().x<<" "<<it.second->GetPosition().y<<"\n";
                     //std::cout<<this->GetHalfSize().x*2<<" "<<this->GetHalfSize().y*2<<"; "<<it.second->GetHalfSize().x*2<<" "<<it.second->GetHalfSize().y*2<<"\n";
 
