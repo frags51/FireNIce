@@ -1,6 +1,6 @@
 # FireNIce
 
-[![Build Status](https://travis-ci.org/IITH-POPL2-Jan2018/concurrency-4.svg?branch=master)](https://travis-ci.org/IITH-POPL2-Jan2018/concurrency-4)
+[![Build Status](https://travis-ci.com/IITH-POPL2-Jan2018/concurrency-4.svg?token=aMq97ESHY3nApNxNtQVx&branch=master)](https://travis-ci.com/IITH-POPL2-Jan2018/concurrency-4)
 
 A game in C++ to learn about concurrency
 
