@@ -5,6 +5,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "VisibleGameObject.h"
+#include "Animation.h"
 /*!
  * @class Platform
  * @brief This class stores any objects that are not "players" for now.
@@ -44,7 +45,7 @@ public:
      * @param _object A container containing other objects that might influence this object's position etc.
      */
     void Update(float elapsedTime,sf::Event& _event,std::map<std::string, VisibleGameObject*>& _object);
-
+    Animation animation;
 
 
 private:

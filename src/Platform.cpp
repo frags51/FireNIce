@@ -10,6 +10,12 @@ Platform::Platform(const std::string &texture, sf::Vector2f size, sf::Vector2f p
     _player.setOutlineColor(sf::Color::Black);
     _player.setOutlineThickness(3.f);
     _player.setOrigin(_player.getSize()/2.f);
+    if(texture.find("blue_fire_new")!=std::string::npos) {
+        animation.create(&playerTexture, sf::Vector2u(3,1),0.3f);
+    }
+    if(texture.find("red_fire_new")!=std::string::npos) {
+        animation.create(&playerTexture, sf::Vector2u(3,1),0.3f);
+    }
 }
 Platform::~Platform() {
 
@@ -20,8 +26,9 @@ void Platform::Draw(sf::RenderWindow &window) {
 
 void Platform::Update(float elapsedTime,sf::Event& _event,std::map<std::string, VisibleGameObject*>& _object)
 {
-
-    for(auto it:_object){
+    animation.update(1,elapsedTime,true);
+    _player.setTextureRect(animation.uvRect);
+    //for(auto it:_object){
         //if(it.first.find("vBarrier")!=std::string::npos){
          //   if(checkCollision(it.second, 0.0f)){}
 
