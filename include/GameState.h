@@ -1,6 +1,3 @@
-/**
- * \brief Saves Game state
- */
 
 #ifndef FIRENICE_GAMESTATE_H
 #define FIRENICE_GAMESTATE_H
@@ -13,22 +10,80 @@
 #include "VisibleGameObject.h"
 #include "Client.h"
 #include "ObjMan.h"
+/**@class Game State
+ * @brief Saves the current state of the game
+ *
+ *      Saves the state similar to a finite state machine transitioning between various states which define
+ *      the snapshot of game at any instant. Some of the states include game in Playing State , At Main Menu or
+ *      the server waiting for its client.
+ *
+ *      Takes the responsibility of setting up the server and keeping it's state in sync with it's client.
+ *
+ *      All the members of the class are static as the class is not instantiated and require to set up with an
+ *      intialiser list.
+ *
+ *
+ *
+ *
+
+
+
+
+    */
 
 class GameState{
 public:
-    //! \brief The way paths are written: false for linux, true for OSX
+    /** @brief The way paths are written: false for linux, true for OSX
+
+                Filepath in Ubuntu requires going up a directory for loading resources (img or fonts) while
+                OSX doesn't.
+     */
     static bool filePath;
-    //! \brief Horizontal Resolution
+
+    /** @brief Horizontal Resolution
+     *
+     *          Sets up the horizontal length of the main rendering window , in the case of this game it is
+     *          1600px.
+     */
     static const unsigned short _resX {1600};
-    //! \brief Vertical Resolution
+    /** @brief Vertical Resolution
+     *
+     *          Sets up the vertical length of the main rendering window , in the case of this game it is
+     *          900px.
+     */
     static const unsigned short _resY {900};
 
-    //! \brief Start Playing the game!
+    /** @brief Start Playing the game!
+
+             * Sets the game running up right on and loads all the required resources (fonts or images) .
+             * Renders the main window and pushes the game to the Splash flashing state and sets up the main
+             * Game Loop in action
+     */
     static void play();
+
+    /** @brief Has the task of loading the resources from the Level<num>.text file which sets up the required
+     *          resources for setting up the level. Reserves memory in heap for all the GameObjects and adds them into
+     *          a map as a common storage entity.
+     * @param level
+     */
     static void LoadFromFile(unsigned int level);
 
-    //! \brief The set of possible states of the game
-    enum state {Not_init ,LevelCheck , AtSplash, AtMenu, WaitForClient, WaitForServer, Playing, Exiting,GameOver,GameWon}; // More maybe added later.
+
+     /**@enum State
+      *     @brief The following are the States of the Game.
+     */
+
+    enum state {Not_init , /**< Game is not init */
+                LevelCheck ,/**< Level Selection Menu */
+                AtSplash, /**< Splash state of Game*/
+                AtMenu, /**< The main menu of game*/
+                WaitForClient, /**< Server waiting state for Client */
+                WaitForServer, /**< Client waiting for Server */
+                Playing, /**< The right on playing state*/
+                Exiting, /**< Windowexits */
+                GameOver, /**< Shows the defeat of player  */
+                GameWon}; /**< Shows the win of player */
+                // More maybe added later.
     static state _state;
     static Server server;
     static Client client;
