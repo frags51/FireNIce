@@ -41,6 +41,7 @@ public:
      * @brief TcpSocket used by server to receive info from the client.
      */
     sf::TcpSocket listenSocket;
+
     /*!
      * @brief This listens to connections at _port1.
      */

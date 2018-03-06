@@ -24,9 +24,6 @@ public:
      * @brief TcpSocket used by client to receive info from the server.
      */
     sf::TcpSocket listenSocket;
-    /*!
-     * @brief A packet to store received data -
-     */
 };
 
 
