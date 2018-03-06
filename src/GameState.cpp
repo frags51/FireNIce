@@ -524,7 +524,7 @@ void GameState::gameLoop() {
                 _mainWindow.draw(gT);
                 _mainWindow.display();
                 sf::Event event;
-                while(!_mainWindow.pollEvent(event) || event.type!=sf::Event::KeyPressed); 
+                while(!_mainWindow.pollEvent(event) || event.type!=sf::Event::KeyPressed);
                 _state = GameState::state ::AtMenu;
                 if(!isClient) {
                     _state=GameState::state::AtMenu;server.sendSocket.disconnect();

@@ -21,8 +21,8 @@ Player::Player(const std::string &fName, sf::Keyboard::Key _u, sf::Keyboard::Key
     Load(fName, GameState::_resX/16,GameState::_resY/8);
     animation.create(&playerTexture,sf::Vector2u(3,9),0.3f);
     isJumping=false;
-    _player.setOutlineColor(sf::Color::Black);
-    _player.setOutlineThickness(3.f);
+    //_player.setOutlineColor(sf::Color::Black);
+    //_player.setOutlineThickness(3.f);
     _player.setOrigin(_player.getSize()/2.f);
 }
 
