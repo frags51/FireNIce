@@ -10,24 +10,47 @@
 #include <SFML/Network.hpp>
 #include <thread>
 #include <future>
-
+/*!
+ * @class Server
+ * @brief Contains information regarding the network connection with another "Client"
+ */
 class Server {
 public:
+    /*!
+     * @brief The constructor
+     * @param _port1 The port used by this to send info to the client.
+     * @param _port2 The port used by this to receive info from the client.
+     */
     Server(unsigned short _port1, unsigned short _port2);
+    /*!
+     * @brief Listen to and accept connections from the client at _port1.
+     * @param res Store the success/failure of this function in this location.
+     */
     void waitForClientSendSocket(bool *res);
+    /*!
+     * @brief Listen to and accept connections from the client at _port2.
+     * @param res Store the success/failure of this function in this location.
+     */
     void waitForClientListenSocket(bool *res);
     //~Server();
+    /*!
+     * @brief TcpSocket used by server to send info to the client.
+     */
     sf::TcpSocket sendSocket;
+    /*!
+     * @brief TcpSocket used by server to receive info from the client.
+     */
     sf::TcpSocket listenSocket;
-    sf::Packet recd;
-    std::thread worker;
-    void send(sf::Vector2f v);
-    sf::Socket::Status sdrive(sf::Vector2f v);
-    void checkSent();
+
+    /*!
+     * @brief This listens to connections at _port1.
+     */
     sf::TcpListener listener;
+    /*!
+     * @brief This listens to connections at _port2.
+     */
     sf::TcpListener listener2;
 private:
-    std::future<sf::Socket::Status> sentStatus;
     //! \brief Port for sendSocket.
     unsigned short port1;
     //! \brief Port for listenSocket.
