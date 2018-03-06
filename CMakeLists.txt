@@ -4,7 +4,6 @@ project(FireNIce)
 set(CMAKE_CXX_STANDARD 11)
 
 include_directories(include)
-link_directories(lib)
 
 set(SOURCE_FILES
         main.cpp

@@ -22,11 +22,11 @@ void Platform::Update(float elapsedTime,sf::Event& _event,std::map<std::string, 
 {
 
     for(auto it:_object){
-        if(it.first.find("vBarrier")!=std::string::npos){
-            if(checkCollision(it.second, 1.0f)){
-            }
-        }
-        else if(it.first.find("vbSwitch")!=std::string::npos){
+        //if(it.first.find("vBarrier")!=std::string::npos){
+         //   if(checkCollision(it.second, 0.0f)){}
+
+        //}
+        /*else if(it.first.find("vbSwitch")!=std::string::npos){
 
             if(checkCollision(it.second, 1.0f)){
                 auto num = it.first.substr(8,1);
@@ -54,7 +54,7 @@ void Platform::Update(float elapsedTime,sf::Event& _event,std::map<std::string, 
                 GameState::race.unlock();
             } // Didnt collide, but earlier pressed the switch
 
-        }
+        }*/
 
 
 
