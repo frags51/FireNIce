@@ -4,6 +4,8 @@ project(FireNIce)
 set(CMAKE_CXX_STANDARD 11)
 
 include_directories(include)
+link_directories(lib)
+
 set(SOURCE_FILES
         main.cpp
         include/GameState.h src/GameState.cpp
@@ -13,7 +15,9 @@ set(SOURCE_FILES
         src/Player.cpp include/Player.h 
         src/Animation.cpp include/Animation.h
         src/VisibleGameObject.cpp include/VisibleGameObject.h 
-        src/Client.cpp include/Client.h include/ObjMan.h src/ObjMan.cpp src/Platform.cpp include/Platform.h
+        src/Client.cpp include/Client.h
+        include/ObjMan.h src/ObjMan.cpp
+        src/Platform.cpp include/Platform.h
         include/LevelMenu.h src/LevelMenu.cpp)
 
 add_executable(FireNIce ${SOURCE_FILES})
