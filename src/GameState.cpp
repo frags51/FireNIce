@@ -36,8 +36,20 @@ unsigned short GameState::maxBlueGems {0};
 bool GameState::_winF {false};
 bool GameState::_winI {false};
 
+sf::Texture texture;
+std::string splashName;
+sf::Sprite sprite;
+
 void GameState::play() {
-    LoadFromFile(1);
+    //LoadFromFile(1);
+    if(!GameState::filePath) splashName="../res/img/levelbg.png";
+    else splashName="res/img/levelbg";
+    if(!texture.loadFromFile(splashName)){ // Arg: const string: the path to the image file
+        std::cerr<<"Failed to load level bg splash img!"<<std::endl;
+    }
+    sprite.setTexture(texture);
+    sprite.setScale(GameState::_resX/sprite.getGlobalBounds().width, GameState::_resY/sprite.getGlobalBounds().height);
+
     static_assert(_resX <= 1920 && _resY <= 1080, "Invalid Screen Resolution!");
     if(_state!=Not_init) return;
     _mainWindow.create(sf::VideoMode(_resX, _resY, 32), "Fire & Ice");
@@ -221,12 +233,14 @@ void GameState::gameLoop() {
             } // Wait for server
                 break;
             case GameState::state::Playing: {
+                _mainWindow.clear(sf::Color::White);
+                _mainWindow.draw(sprite); // Draw level bg.
 
                 if(!isClient){ // Server
                     _gameObjectManager.remove("Watergirl");
 
                     server.sendSocket.setBlocking(true);
-                    _mainWindow.clear(sf::Color{255, 0, 0, 150});
+                    //_mainWindow.clear(sf::Color{255, 0, 0, 150});
 
                     float telap = _gameObjectManager._clock.restart().asSeconds();
                     if (_event.type == sf::Event::Closed) {
@@ -387,7 +401,7 @@ void GameState::gameLoop() {
                         sf::Socket::Status st= client.sendSocket.send(tDash);
                         if(st!=sf::Socket::Done) {std::cout<<"Couldnt send packet(1) to Server!"<<std::endl; }
                     }
-                    _mainWindow.clear(sf::Color{255, 0, 0, 150});
+                    //_mainWindow.clear(sf::Color{255, 0, 0, 150});
                     _gameObjectManager.updateAll(_event, telap);
                     _gameObjectManager.drawAll(_mainWindow);
 
@@ -438,6 +452,7 @@ void GameState::gameLoop() {
                 for(int i=0;i<500;i++){
                     _mainWindow.pollEvent(_event);
                     _mainWindow.clear(sf::Color::Red);
+                    _mainWindow.draw(sprite); // Level Bg
                     float telap = _gameObjectManager._clock.restart().asSeconds();
                     fireboy->animation.update(row, telap, toRight);
                     fireboy->_player.setTextureRect(fireboy->animation.uvRect);
@@ -495,6 +510,7 @@ void GameState::gameLoop() {
                 for(int i=0;i<600;i++){
                     _mainWindow.pollEvent(_event);
                     _mainWindow.clear(sf::Color::Red);
+                    _mainWindow.draw(sprite); // Level Bg
                     float telap = _gameObjectManager._clock.restart().asSeconds();
                     fireboy->animation.update(row, telap, toRight);
                     fireboy->_player.setTextureRect(fireboy->animation.uvRect);
@@ -508,7 +524,7 @@ void GameState::gameLoop() {
                 _mainWindow.draw(gT);
                 _mainWindow.display();
                 sf::Event event;
-                while(!_mainWindow.pollEvent(event));
+                while(!_mainWindow.pollEvent(event) || event.type!=sf::Event::KeyPressed); 
                 _state = GameState::state ::AtMenu;
                 if(!isClient) {
                     _state=GameState::state::AtMenu;server.sendSocket.disconnect();
