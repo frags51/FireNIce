@@ -9,6 +9,7 @@
 
 class Splash{
 public:
+	/**loads and renders Splash Window and splash sprite*/
     int show(sf::RenderWindow & renderWindow);
 };
 
