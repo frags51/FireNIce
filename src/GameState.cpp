@@ -8,11 +8,8 @@
 GameState::state GameState::_state = Not_init; // Need to initialize these
 sf::RenderWindow GameState::_mainWindow;
 
-
-
-unsigned short GameState::port1 {44356};
-unsigned short GameState::port2 {34430};
-
+unsigned short GameState::port1 {25657};
+unsigned short GameState::port2 {32230};
 
 Server GameState::server{GameState::port1, GameState::port2};
 Client GameState::client{};
@@ -30,7 +27,6 @@ Player* GameState::watergirl= nullptr;
 
 std::mutex GameState::race;
 std::vector<VisibleGameObject *> GameState::_objToBeActed;
-
 
 unsigned short GameState::redGemsCollected {0};
 unsigned short GameState::blueGemsCollected {0};
@@ -331,7 +327,10 @@ void GameState::gameLoop() {
                             if(x==-2) {
                                 float xP;
                                 t>>xP;
+
+                                fireboy->_player.setTextureRect(fireboy->animation.uvRect);
                                 fireboy->SetPosition(xP, telap);
+
                             }
                             else if(x==-3){
                                 _state=GameState::GameOver;
