@@ -49,6 +49,7 @@ script:
     #- sudo ln -s /usr/bin/g++-6 /usr/local/bin/g++
     - gcc -v && g++ -v && cmake --version
     # Build it now
+    - cd ..
     - cmake CMakeLists.txt
     - make
     
