@@ -10,7 +10,10 @@
 #include <SFML/Network.hpp>
 #include <thread>
 #include <future>
-
+/*!
+ * @class Server
+ * @brief
+ */
 class Server {
 public:
     Server(unsigned short _port1, unsigned short _port2);
