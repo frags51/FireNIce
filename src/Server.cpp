@@ -1,7 +1,7 @@
 #include "Server.h"
 #include <iostream>
 
-Server::Server(unsigned short _port1, unsigned short _port2): port1{_port1}, port2{_port2} {std::thread worker;};
+Server::Server(unsigned short _port1, unsigned short _port2): port1{_port1}, port2{_port2} {};
 
 void Server::waitForClientSendSocket(bool *res) {
     if(listener.listen(this->port1)!=sf::Socket::Done){
@@ -24,18 +24,4 @@ void Server::waitForClientListenSocket(bool *res) {
     }
     //listener2.close();
     *res=true;
-}
-
-void Server::send(sf::Vector2f v) {
-    worker=std::thread(&Server::sdrive, this, v);
-}
-
-void Server::checkSent() {
-    if(worker.joinable()) worker.join();
-}
-
-sf::Socket::Status Server::sdrive(sf::Vector2f v) {
-    sf::Packet p;
-    p << v.x<<v.x;
-    return this->sendSocket.send(p);
 }

@@ -19,15 +19,9 @@ public:
     //~Server();
     sf::TcpSocket sendSocket;
     sf::TcpSocket listenSocket;
-    sf::Packet recd;
-    std::thread worker;
-    void send(sf::Vector2f v);
-    sf::Socket::Status sdrive(sf::Vector2f v);
-    void checkSent();
     sf::TcpListener listener;
     sf::TcpListener listener2;
 private:
-    std::future<sf::Socket::Status> sentStatus;
     //! \brief Port for sendSocket.
     unsigned short port1;
     //! \brief Port for listenSocket.
