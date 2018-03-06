@@ -31,8 +31,6 @@ Player* GameState::watergirl= nullptr;
 std::mutex GameState::race;
 std::vector<VisibleGameObject *> GameState::_objToBeActed;
 
-bool GameState::_startSyncFixFb{false};
-
 unsigned short GameState::redGemsCollected {0};
 unsigned short GameState::blueGemsCollected {0};
 unsigned short GameState::maxRedGems {0};
@@ -207,7 +205,6 @@ void GameState::gameLoop() {
                                     _winF=false;
                                     _winI=false;
 
-                                    _startSyncFixFb=false;
                                     _state = Playing;
                                     flag = false;
                                     break;

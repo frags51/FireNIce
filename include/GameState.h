@@ -50,8 +50,6 @@ public:
     static bool _winI;
     static bool _winF;
 
-    static bool _startSyncFixFb;
-
 private:
 
     //! \brief Check if the game is in Exiting state.
