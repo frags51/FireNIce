@@ -26,8 +26,10 @@ void Platform::Draw(sf::RenderWindow &window) {
 
 void Platform::Update(float elapsedTime,sf::Event& _event,std::map<std::string, VisibleGameObject*>& _object)
 {
-    animation.update(1,elapsedTime,true);
-    _player.setTextureRect(animation.uvRect);
+    if (_filename.find("fire_new")!=std::string::npos) {
+        animation.update(0,elapsedTime,true);
+        _player.setTextureRect(animation.uvRect);
+    }
     //for(auto it:_object){
         //if(it.first.find("vBarrier")!=std::string::npos){
          //   if(checkCollision(it.second, 0.0f)){}
@@ -69,7 +71,6 @@ void Platform::Update(float elapsedTime,sf::Event& _event,std::map<std::string, 
 
     } // for iterate over ObjMan
 
-}
 
 bool Platform::checkCollision(VisibleGameObject* other, float e){
 

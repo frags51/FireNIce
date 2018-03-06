@@ -34,10 +34,10 @@ vbSwitch3_o res/img/v_barrier_switch.png
 PltRCorner res/img/platform.png
 1400 700
 160 140
-RBlue_fire res/img/blue_fire.png
+RBlue_fire res/img/blue_fire_new.png
 1000 835
 180 40
-Red_fire res/img/red_fire.png
+Red_fire res/img/red_fire_new.png
 600 835
 180 40
 PltLeft res/img/platform_l.png
