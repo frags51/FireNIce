@@ -73,7 +73,7 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
                     if(it.second->_stateOfObj==DEF){
                         // Assuming corresponding vBarrier is always found!
                         VisibleGameObject* bar = _object.find("vBarrier"+num)->second;
-                        bar->SetPosition(bar->GetPosition().x, bar->GetPosition().y-vBarrierMoveDist);
+                        if(bar->_stateOfObj!=VBMOVED) bar->SetPosition(bar->GetPosition().x, bar->GetPosition().y-vBarrierMoveDist);
                         bar->_stateOfObj=VBMOVED;
                         it.second->_stateOfObj=isThisFireboy? VBSPRESSED_F:VBSPRESSED_W;
                         GameState::_objToBeActed.push_back(it.second);
@@ -88,7 +88,7 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
                     if(isThisFireboy && it.second->_stateOfObj==VBSPRESSED_F){
                         auto num = it.first.substr(8,1);
                         VisibleGameObject* bar = _object.find("vBarrier"+num)->second;
-                        bar->SetPosition(bar->GetPosition().x, bar->GetPosition().y+vBarrierMoveDist);
+                        if(bar->_stateOfObj==VBMOVED)bar->SetPosition(bar->GetPosition().x, bar->GetPosition().y+vBarrierMoveDist);
                         bar->_stateOfObj=DEF;
                         it.second->_stateOfObj=DEF;
                         GameState::_objToBeActed.erase(std::find(GameState::_objToBeActed.begin(), GameState::_objToBeActed.end(), it.second));
@@ -96,7 +96,7 @@ void Player::Update(float elapsedTime,sf::Event& _event,std::map<std::string, Vi
                     else if(!isThisFireboy && it.second->_stateOfObj==VBSPRESSED_W){
                         auto num = it.first.substr(8,1);
                         VisibleGameObject* bar = _object.find("vBarrier"+num)->second;
-                        bar->SetPosition(bar->GetPosition().x, bar->GetPosition().y+vBarrierMoveDist);
+                        if(bar->_stateOfObj==VBMOVED)bar->SetPosition(bar->GetPosition().x, bar->GetPosition().y+vBarrierMoveDist);
                         bar->_stateOfObj=DEF;
                         it.second->_stateOfObj=DEF;
                         GameState::_objToBeActed.erase(std::find(GameState::_objToBeActed.begin(), GameState::_objToBeActed.end(), it.second));
