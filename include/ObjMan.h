@@ -75,7 +75,7 @@ public:
 
 private:
     /*!
-     * @brief A functor for deallocating the memory given to each VisibleGameObject. 
+     * @brief A functor for deallocating the memory given to each VisibleGameObject.
      */
     struct GameObjDealloc{
         void operator()(const std::pair<std::string, VisibleGameObject*> &a) const{
