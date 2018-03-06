@@ -17,21 +17,36 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
-            - gcc-6
-            - g++-6
+            - libx11-dev
+            - freeglut3-dev
+            - libjpeg-dev
+            - libfreetype6-dev
+            - libxrandr-dev
+            - libglew-dev
+            - libsndfile1-dev
+            - libopenal-dev
+            - libudev-dev
             - cmake
 
       env:
-        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
+        - MATRIX_EVAL="CC=gcc && CXX=g++"
 
 before_install:
     #- sudo apt-get -qq update
-    - sudo apt-get install -y libsfml-dev
+    #- sudo apt-get install -y libsfml-dev
+    - sudo apt-get install libx11-dev freeglut3-dev libjpeg-dev libfreetype6-dev libxrandr-dev libglew-dev libsndfile1-dev libopenal-dev libudev-dev
+    - mkdir sf
+    - cd sf
+    - git clone https://github.com/SFML/SFML.git
+    - cd SFML
+    - cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug -D BUILD_SHARED_LIBS=TRUE .
+    - make
+    - sudo make install
     - eval "${MATRIX_EVAL}"
 
 script:
-    - sudo ln -s /usr/bin/gcc-6 /usr/local/bin/gcc
-    - sudo ln -s /usr/bin/g++-6 /usr/local/bin/g++
+    #- sudo ln -s /usr/bin/gcc-6 /usr/local/bin/gcc
+    #- sudo ln -s /usr/bin/g++-6 /usr/local/bin/g++
     - gcc -v && g++ -v && cmake --version
     # Build it now
     - cmake CMakeLists.txt
