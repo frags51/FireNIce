@@ -11,7 +11,6 @@ PltMid res/img/platform.png
 PltAbove res/img/platform.png
 40 540
 1400 20
-
 PltCHhta res/img/platform.png
 40 510
 40 30
@@ -24,13 +23,6 @@ Movable res/img/platform.png
 vBarrier2 res/img/v_barrier.png
 40 370
 120 20
-vbSwitch2_o res/img/v_barrier_switch.png
-200 520
-80 20
-vbSwitch3_o res/img/v_barrier_switch.png
-300 350
-80 20
-
 PltRCorner res/img/platform.png
 1400 700
 160 140
@@ -49,12 +41,6 @@ PltRight res/img/platform_r.png
 PltBase res/img/platform.png
 0 840
 1600 60
-vBarrier1 res/img/v_barrier.png
-920 800
-20 100
-vbSwitch1_o res/img/v_barrier_switch.png
-400 830
-80 20
 Red_gem1 res/img/red_gem.png
 680 720
 40 40
