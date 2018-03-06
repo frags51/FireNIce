@@ -22,12 +22,8 @@
  *      All the members of the class are static as the class is not instantiated and require to set up with an
  *      intialiser list.
  *
- *
- *
- *
-
-
-
+ *      Pushes the state to WaitforClient if client calls for joining and to WaitforServer if process wishes to
+ *      create a server.
 
     */
 
@@ -84,44 +80,123 @@ public:
                 GameOver, /**< Shows the defeat of player  */
                 GameWon}; /**< Shows the win of player */
                 // More maybe added later.
+
+    /** @brief Stores the current state of game.
+     *
+     */
     static state _state;
+
+    /** @brief Object representing the server class initialised in initiation list with the listening and sending ports.
+     *
+     */
     static Server server;
+    /** @brief Oject representing the client class initialised in initiation list with the listening and sending ports.
+     *
+     */
     static Client client;
+    /**
+     * @brief A boolean which checks if the running code is exectued from client or server side.
+     */
     static bool isClient;
 
+    /**
+     * @brief Represents sending port for server and listening for client.
+     */
     static unsigned short port1;
+    /**
+    * @brief Represents listening port for server and sending for client.
+    */
     static unsigned short port2;
 
+    /**
+     * @brief Integer variable to denote the state of current level.
+     */
     static unsigned short _curLevel;
 
+    /**
+     * @brief Race - A mutex for keeping the state of switch.
+     *      In consistency.Adding and removing the switch into
+     *      _objToBeActed container which has to be a critical section , to avoid multiple additions/removals.
+     */
     static std::mutex race;
+    /**
+     * @brief Contains the objects (switch) state , checks whether they are activated or not which leads to further change other objects.
+     *
+     */
     static std::vector<VisibleGameObject *> _objToBeActed;
 
+    /**
+     *  @brief Contains the number of red gems collected by the fireboy .
+     */
     static unsigned short redGemsCollected;
+    /**
+     * @brief Contains the number of blue gems collected by the watergirl .
+     */
     static unsigned short blueGemsCollected;
+    /**
+     * @brief Game completes if maxRedGems is equal to the Red gems collected.
+     */
     static unsigned short maxRedGems;
+    /**
+     * @brief Game completes if maxBlueGems is equal to the Blue gems collected.
+     */
     static unsigned short maxBlueGems;
 
+    /**
+     * @brief Boolean checks whether Ice door is opened or not.
+     */
     static bool _winI;
+    /**
+     * @brief Boolean checks whether Fire door is opened or not.
+     */
     static bool _winF;
 
 private:
 
     //! \brief Check if the game is in Exiting state.
     static bool isExiting();
+
+    /**
+     * @brief The big game loop which keeps the game going, checking for events.
+     */
     static void gameLoop();
 
     //! \brief Init and show a splash screen.
     static void showSplashScreen();
+    //! \brief Shows the Main menu , option to create or join server after flash screen.
     static void showMainMenu();
+    //! \brief Shows the Level Screen , for selecting the level.
     static void showLevelScreen();
     //! \brief The current state of the game
 
 private:
+    /**
+     * @brief Player from the server.
+     *
+     *      A basic entity of the game , is of type Player and has the task of collecting all the red gems
+     *      and reach the red door without striking green fire or water.
+     */
     static Player *fireboy;
+    /**
+     * @brief Player from the client.
+     *
+     *      A basic entity of the game , is of type Player and has the task of collecting all the blue gems
+     *      and reach the blue door without striking green fire or fire.
+     */
     static Player *watergirl;
+    /**
+     * @brief Holds all the objects as a map.
+     *
+     *      A class which has the responsibility of keeping all the game objects in a container , a map in this case
+     *      iteration over which is used to update every object.
+     */
     static ObjMan _gameObjectManager;
 
+    /**
+     * @brief The main window.
+     *
+     *      The window over which the game presides.
+     */
     static sf::RenderWindow _mainWindow;
 
 };
