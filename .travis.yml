@@ -50,6 +50,7 @@ script:
     - gcc -v && g++ -v && cmake --version
     # Build it now
     - cd ..
+    - cd ..
     - cmake CMakeLists.txt
     - make
     
