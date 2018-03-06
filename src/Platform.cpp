@@ -11,10 +11,10 @@ Platform::Platform(const std::string &texture, sf::Vector2f size, sf::Vector2f p
     _player.setOutlineThickness(3.f);
     _player.setOrigin(_player.getSize()/2.f);
     if(texture.find("blue_fire_new")!=std::string::npos) {
-        animation.create(&playerTexture, sf::Vector2u(3,2),0.3f);
+        animation.create(&playerTexture, sf::Vector2u(3,1),0.3f);
     }
     if(texture.find("red_fire_new")!=std::string::npos) {
-        animation.create(&playerTexture, sf::Vector2u(3,3),0.3f);
+        animation.create(&playerTexture, sf::Vector2u(3,1),0.3f);
     }
 }
 Platform::~Platform() {
