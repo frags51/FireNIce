@@ -10,7 +10,7 @@ sf::RenderWindow GameState::_mainWindow;
 
 
 
-unsigned short GameState::port1 {25656};
+unsigned short GameState::port1 {25657};
 unsigned short GameState::port2 {32230};
 
 
@@ -332,6 +332,7 @@ void GameState::gameLoop() {
                                 float xP;
                                 t>>xP;
                                 fireboy->SetPosition(xP, telap);
+                                fireboy->animation.update(1, 0.001, true);
                             }
                             else if(x==-3){
                                 _state=GameState::GameOver;
@@ -361,6 +362,9 @@ void GameState::gameLoop() {
                                                           fireboy->SetPosition(XX,YY);
 
                         }, fireboy, x, press, telap);
+                    }
+                    else{
+                        fireboy->animation.update(1, 0.005f, true);
                     }
 
                     float telap = _gameObjectManager._clock.restart().asSeconds();
