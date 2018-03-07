@@ -1,0 +1,115 @@
+\section{Server Class Reference}
+\label{classServer}\index{Server@{Server}}
+
+
+A server over T\+CP to enable networking.  
+
+
+
+
+{\ttfamily \#include $<$Server.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Server} (unsigned short \+\_\+port1, unsigned short \+\_\+port2)
+\begin{DoxyCompactList}\small\item\em The constructor. \end{DoxyCompactList}\item 
+void {\bf wait\+For\+Client\+Send\+Socket} (bool $\ast$res)
+\begin{DoxyCompactList}\small\item\em Listen to and accept connections from the client at \+\_\+port1. \end{DoxyCompactList}\item 
+void {\bf wait\+For\+Client\+Listen\+Socket} (bool $\ast$res)
+\begin{DoxyCompactList}\small\item\em Listen to and accept connections from the client at \+\_\+port2. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+sf\+::\+Tcp\+Socket {\bf send\+Socket}\label{classServer_a7105cc8419a6e5b9f4ef920bbbcef602}
+
+\begin{DoxyCompactList}\small\item\em Tcp\+Socket used by server to send info to the client. \end{DoxyCompactList}\item 
+sf\+::\+Tcp\+Socket {\bf listen\+Socket}\label{classServer_a936d5843a7c2608fc578ba5314547468}
+
+\begin{DoxyCompactList}\small\item\em Tcp\+Socket used by server to receive info from the client. \end{DoxyCompactList}\item 
+sf\+::\+Tcp\+Listener {\bf listener}\label{classServer_ab9887f2575ed797c9ac0dd43004a6fc8}
+
+\begin{DoxyCompactList}\small\item\em This listens to connections at \+\_\+port1. \end{DoxyCompactList}\item 
+sf\+::\+Tcp\+Listener {\bf listener2}\label{classServer_a54bb5c13f9d06d80d438b3ad484b1729}
+
+\begin{DoxyCompactList}\small\item\em This listens to connections at \+\_\+port2. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned short {\bf port1}\label{classServer_a47b2c62bc2a6801bc0ce543cb9b29e15}
+
+\begin{DoxyCompactList}\small\item\em Port for send\+Socket. \end{DoxyCompactList}\item 
+unsigned short {\bf port2}\label{classServer_a1377fadd5460fb552d35e6b53d27d95d}
+
+\begin{DoxyCompactList}\small\item\em Port for listen\+Socket. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A server over T\+CP to enable networking. 
+
+Contains information regarding the network connection with another \char`\"{}\+Client\char`\"{} 
+
+Definition at line 17 of file Server.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Server@{Server}!Server@{Server}}
+\index{Server@{Server}!Server@{Server}}
+\subsubsection[{Server(unsigned short \+\_\+port1, unsigned short \+\_\+port2)}]{\setlength{\rightskip}{0pt plus 5cm}Server\+::\+Server (
+\begin{DoxyParamCaption}
+\item[{unsigned short}]{\+\_\+port1, }
+\item[{unsigned short}]{\+\_\+port2}
+\end{DoxyParamCaption}
+)}\label{classServer_acc86b5037757b339c0ac376a9e67a41d}
+
+
+The constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+port1} & The port used by this to send info to the client. \\
+\hline
+{\em \+\_\+port2} & The port used by this to receive info from the client. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{Server@{Server}!wait\+For\+Client\+Listen\+Socket@{wait\+For\+Client\+Listen\+Socket}}
+\index{wait\+For\+Client\+Listen\+Socket@{wait\+For\+Client\+Listen\+Socket}!Server@{Server}}
+\subsubsection[{wait\+For\+Client\+Listen\+Socket(bool $\ast$res)}]{\setlength{\rightskip}{0pt plus 5cm}void Server\+::wait\+For\+Client\+Listen\+Socket (
+\begin{DoxyParamCaption}
+\item[{bool $\ast$}]{res}
+\end{DoxyParamCaption}
+)}\label{classServer_a52a661ae149028bfbc2d3083ba5ba215}
+
+
+Listen to and accept connections from the client at \+\_\+port2. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em res} & Store the success/failure of this function in this location. \\
+\hline
+\end{DoxyParams}
+\index{Server@{Server}!wait\+For\+Client\+Send\+Socket@{wait\+For\+Client\+Send\+Socket}}
+\index{wait\+For\+Client\+Send\+Socket@{wait\+For\+Client\+Send\+Socket}!Server@{Server}}
+\subsubsection[{wait\+For\+Client\+Send\+Socket(bool $\ast$res)}]{\setlength{\rightskip}{0pt plus 5cm}void Server\+::wait\+For\+Client\+Send\+Socket (
+\begin{DoxyParamCaption}
+\item[{bool $\ast$}]{res}
+\end{DoxyParamCaption}
+)}\label{classServer_a371c61f93ae66dac9e90cca9594ef323}
+
+
+Listen to and accept connections from the client at \+\_\+port1. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em res} & Store the success/failure of this function in this location. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Server.\+h\end{DoxyCompactItemize}

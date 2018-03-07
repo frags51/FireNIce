@@ -1,0 +1,148 @@
+\section{Platform Class Reference}
+\label{classPlatform}\index{Platform@{Platform}}
+
+
+This class stores any objects that are not \char`\"{}players\char`\"{} for now. New classes for each object can be added later. Objects are differentiated by their \char`\"{}texture filename\char`\"{}.  
+
+
+
+
+{\ttfamily \#include $<$Platform.\+h$>$}
+
+Inheritance diagram for Platform\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classPlatform}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Platform} (const std\+::string \&f\+Name, sf\+::\+Vector2f size, sf\+::\+Vector2f position)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+{\bf $\sim$\+Platform} ()\label{classPlatform_a13b5e4ef946b8a2fe38d22014145ab68}
+
+\begin{DoxyCompactList}\small\item\em The destructor. \end{DoxyCompactList}\item 
+void {\bf Draw} (sf\+::\+Render\+Window \&window)
+\begin{DoxyCompactList}\small\item\em Draw this object on the window. \end{DoxyCompactList}\item 
+bool {\bf check\+Collision} ({\bf Visible\+Game\+Object} $\ast$other, float e)
+\item 
+void {\bf Update} (float elapsed\+Time, sf\+::\+Event \&\+\_\+event, std\+::map$<$ std\+::string, {\bf Visible\+Game\+Object} $\ast$ $>$ \&\+\_\+object)
+\begin{DoxyCompactList}\small\item\em Update this object according to the new event recorded. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Animation} {\bfseries animation}\label{classPlatform_a604c47591a851175dba66ee5309365f3}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const float {\bfseries v\+Barrier\+Move\+Dist}\label{classPlatform_ab88822aaf8ec1abe72e7b3279af6d7c2}
+
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+This class stores any objects that are not \char`\"{}players\char`\"{} for now. New classes for each object can be added later. Objects are differentiated by their \char`\"{}texture filename\char`\"{}. 
+
+Definition at line 15 of file Platform.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Platform@{Platform}!Platform@{Platform}}
+\index{Platform@{Platform}!Platform@{Platform}}
+\subsubsection[{Platform(const std\+::string \&f\+Name, sf\+::\+Vector2f size, sf\+::\+Vector2f position)}]{\setlength{\rightskip}{0pt plus 5cm}Platform\+::\+Platform (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{f\+Name, }
+\item[{sf\+::\+Vector2f}]{size, }
+\item[{sf\+::\+Vector2f}]{position}
+\end{DoxyParamCaption}
+)}\label{classPlatform_a599a6c86435dd0571b69a444bb5529d8}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f\+Name} & The texture filename. \\
+\hline
+{\em size} & The size vector. \\
+\hline
+{\em position} & The position vector. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{Platform@{Platform}!check\+Collision@{check\+Collision}}
+\index{check\+Collision@{check\+Collision}!Platform@{Platform}}
+\subsubsection[{check\+Collision(\+Visible\+Game\+Object $\ast$other, float e)}]{\setlength{\rightskip}{0pt plus 5cm}bool Platform\+::check\+Collision (
+\begin{DoxyParamCaption}
+\item[{{\bf Visible\+Game\+Object} $\ast$}]{other, }
+\item[{float}]{e}
+\end{DoxyParamCaption}
+)}\label{classPlatform_a69a4876867d533deea05444d6a1db170}
+Check collision of this object with other objects. Currently does nothing. 
+\begin{DoxyParams}{Parameters}
+{\em other} & The object to check collision with. \\
+\hline
+{\em e} & \char`\"{}\+Elasticity\char`\"{} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if collided, false if not. 
+\end{DoxyReturn}
+\index{Platform@{Platform}!Draw@{Draw}}
+\index{Draw@{Draw}!Platform@{Platform}}
+\subsubsection[{Draw(sf\+::\+Render\+Window \&window)}]{\setlength{\rightskip}{0pt plus 5cm}void Platform\+::\+Draw (
+\begin{DoxyParamCaption}
+\item[{sf\+::\+Render\+Window \&}]{window}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classPlatform_a7b26c99c06289de6a4199377104fc262}
+
+
+Draw this object on the window. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em window} & The window to draw this object on. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from {\bf Visible\+Game\+Object} \doxyref{}{p.}{classVisibleGameObject_a36c4fb68290282364bb198b9b5c4cd07}.
+
+\index{Platform@{Platform}!Update@{Update}}
+\index{Update@{Update}!Platform@{Platform}}
+\subsubsection[{Update(float elapsed\+Time, sf\+::\+Event \&\+\_\+event, std\+::map$<$ std\+::string, Visible\+Game\+Object $\ast$ $>$ \&\+\_\+object)}]{\setlength{\rightskip}{0pt plus 5cm}void Platform\+::\+Update (
+\begin{DoxyParamCaption}
+\item[{float}]{elapsed\+Time, }
+\item[{sf\+::\+Event \&}]{\+\_\+event, }
+\item[{std\+::map$<$ std\+::string, {\bf Visible\+Game\+Object} $\ast$ $>$ \&}]{\+\_\+object}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classPlatform_aaf13682e0f809e4e0faf4a545501a9b5}
+
+
+Update this object according to the new event recorded. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em elapsed\+Time} & Time since last update. \\
+\hline
+{\em \+\_\+event} & The event that triggered this update. \\
+\hline
+{\em \+\_\+object} & A container containing other objects that might influence this object\textquotesingle{}s position etc. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from {\bf Visible\+Game\+Object} \doxyref{}{p.}{classVisibleGameObject_a2760784b238d38161f5b0bbfa46ba427}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Platform.\+h\end{DoxyCompactItemize}

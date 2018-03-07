@@ -1,0 +1,277 @@
+\section{Game\+State Class Reference}
+\label{classGameState}\index{Game\+State@{Game\+State}}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf state} \{ \\*
+{\bf Not\+\_\+init}, 
+{\bf Level\+Check}, 
+{\bf At\+Splash}, 
+{\bf At\+Menu}, 
+\\*
+{\bf Wait\+For\+Client}, 
+{\bf Wait\+For\+Server}, 
+{\bf Playing}, 
+{\bf Exiting}, 
+\\*
+{\bf Game\+Over}, 
+{\bfseries Game\+Won}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void {\bf play} ()
+\begin{DoxyCompactList}\small\item\em Start Playing the game! \end{DoxyCompactList}\item 
+static void {\bf Load\+From\+File} (unsigned int level)
+\begin{DoxyCompactList}\small\item\em Has the task of loading the resources from the Level$<$num$>$.\+text file which sets up the required resources for setting up the level. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static bool {\bf file\+Path}
+\begin{DoxyCompactList}\small\item\em The way paths are written\+: false for linux, true for O\+SX. \end{DoxyCompactList}\item 
+static const unsigned short {\bf \+\_\+resX} \{1600\}
+\begin{DoxyCompactList}\small\item\em Horizontal Resolution. \end{DoxyCompactList}\item 
+static const unsigned short {\bf \+\_\+resY} \{900\}
+\begin{DoxyCompactList}\small\item\em Vertical Resolution. \end{DoxyCompactList}\item 
+static {\bf state} {\bf \+\_\+state}\label{classGameState_afcf1225baf36dc7131c39e8c1b33e2df}
+
+\begin{DoxyCompactList}\small\item\em Stores the current state of game. \end{DoxyCompactList}\item 
+static {\bf Server} {\bf server}\label{classGameState_a5dca528501718f1ed4fa892b71db265a}
+
+\begin{DoxyCompactList}\small\item\em Object representing the server class initialised in initiation list with the listening and sending ports. \end{DoxyCompactList}\item 
+static {\bf Client} {\bf client}\label{classGameState_a7e631641790c7234bfd4555d6e29ced4}
+
+\begin{DoxyCompactList}\small\item\em Oject representing the client class initialised in initiation list with the listening and sending ports. \end{DoxyCompactList}\item 
+static bool {\bf is\+Client}\label{classGameState_ad2e7616dfd52a11dce956bee24a1fc24}
+
+\begin{DoxyCompactList}\small\item\em A boolean which checks if the running code is exectued from client or server side. \end{DoxyCompactList}\item 
+static unsigned short {\bf port1}\label{classGameState_a70fed938c1374c60303395ab7e5144c3}
+
+\begin{DoxyCompactList}\small\item\em Represents sending port for server and listening for client. \end{DoxyCompactList}\item 
+static unsigned short {\bf port2}\label{classGameState_aac02f0e00bdc1b7bc3977f7108d9c44b}
+
+\begin{DoxyCompactList}\small\item\em Represents listening port for server and sending for client. \end{DoxyCompactList}\item 
+static unsigned short {\bf \+\_\+cur\+Level}\label{classGameState_a0a00e7afe1ead236555bf58eae2b1e79}
+
+\begin{DoxyCompactList}\small\item\em Integer variable to denote the state of current level. \end{DoxyCompactList}\item 
+static std\+::mutex {\bf race}
+\begin{DoxyCompactList}\small\item\em Race -\/ A mutex for keeping the state of switch. \end{DoxyCompactList}\item 
+static std\+::vector$<$ {\bf Visible\+Game\+Object} $\ast$ $>$ {\bf \+\_\+obj\+To\+Be\+Acted}\label{classGameState_a987cc8791aabb50c45436ef811981b44}
+
+\begin{DoxyCompactList}\small\item\em Contains the objects (switch) state , checks whether they are activated or not which leads to further change other objects. \end{DoxyCompactList}\item 
+static unsigned short {\bf red\+Gems\+Collected}\label{classGameState_ae3f0b95917fbf8cf959d16b8c467617f}
+
+\begin{DoxyCompactList}\small\item\em Contains the number of red gems collected by the fireboy . \end{DoxyCompactList}\item 
+static unsigned short {\bf blue\+Gems\+Collected}\label{classGameState_ad7ff58b7e5663432ec3251a3850e89c7}
+
+\begin{DoxyCompactList}\small\item\em Contains the number of blue gems collected by the watergirl . \end{DoxyCompactList}\item 
+static unsigned short {\bf max\+Red\+Gems}\label{classGameState_a8b9ef12593d42d0ca118fce41e461901}
+
+\begin{DoxyCompactList}\small\item\em \doxyref{Game}{p.}{classGame} completes if max\+Red\+Gems is equal to the Red gems collected. \end{DoxyCompactList}\item 
+static unsigned short {\bf max\+Blue\+Gems}\label{classGameState_a20e403812b2dba7afc9e1ef5ee78e0b0}
+
+\begin{DoxyCompactList}\small\item\em \doxyref{Game}{p.}{classGame} completes if max\+Blue\+Gems is equal to the Blue gems collected. \end{DoxyCompactList}\item 
+static bool {\bf \+\_\+winI}\label{classGameState_ac1f9dd3ed1dd581f4e6af69fec6e497d}
+
+\begin{DoxyCompactList}\small\item\em Boolean checks whether Ice door is opened or not. \end{DoxyCompactList}\item 
+static bool {\bf \+\_\+winF}\label{classGameState_ac6ff35654e9d1b318dd9053619501764}
+
+\begin{DoxyCompactList}\small\item\em Boolean checks whether Fire door is opened or not. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool {\bf is\+Exiting} ()\label{classGameState_a9512f495df14d5351178e8a6ba291343}
+
+\begin{DoxyCompactList}\small\item\em Check if the game is in Exiting state. \end{DoxyCompactList}\item 
+static void {\bf game\+Loop} ()\label{classGameState_a0430d274df28d8c32cbf193156073c38}
+
+\begin{DoxyCompactList}\small\item\em The big game loop which keeps the game going, checking for events. \end{DoxyCompactList}\item 
+static void {\bf show\+Splash\+Screen} ()\label{classGameState_a265220f00d5a1ea797d2e23e3ba2a9a9}
+
+\begin{DoxyCompactList}\small\item\em Init and show a splash screen. \end{DoxyCompactList}\item 
+static void {\bf show\+Main\+Menu} ()\label{classGameState_ada212938e5b2116507f13cfb5ff4d406}
+
+\begin{DoxyCompactList}\small\item\em Shows the Main menu , option to create or join server after flash screen. \end{DoxyCompactList}\item 
+static void {\bf show\+Level\+Screen} ()\label{classGameState_a9acf57cfc15e7c3f2e347a5d06d08ac6}
+
+\begin{DoxyCompactList}\small\item\em Shows the Level Screen , for selecting the level. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static {\bf Player} $\ast$ {\bf fireboy}
+\begin{DoxyCompactList}\small\item\em The current state of the game. \end{DoxyCompactList}\item 
+static {\bf Player} $\ast$ {\bf watergirl}
+\begin{DoxyCompactList}\small\item\em \doxyref{Player}{p.}{classPlayer} from the client. \end{DoxyCompactList}\item 
+static {\bf Obj\+Man} {\bf \+\_\+game\+Object\+Manager}
+\begin{DoxyCompactList}\small\item\em Holds all the objects as a map. \end{DoxyCompactList}\item 
+static sf\+::\+Render\+Window {\bf \+\_\+main\+Window}
+\begin{DoxyCompactList}\small\item\em The main window. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 30 of file Game\+State.\+h.
+
+
+
+\subsection{Member Enumeration Documentation}
+\index{Game\+State@{Game\+State}!state@{state}}
+\index{state@{state}!Game\+State@{Game\+State}}
+\subsubsection[{state}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Game\+State\+::state}}\label{classGameState_a097555f82a7b1dc23fee373b6a61cfd4}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Not\+\_\+init@{Not\+\_\+init}!Game\+State@{Game\+State}}\index{Game\+State@{Game\+State}!Not\+\_\+init@{Not\+\_\+init}}\item[{\em 
+Not\+\_\+init\label{classGameState_a097555f82a7b1dc23fee373b6a61cfd4a99098609fb37f1e88dd4d98a4f9bb5d7}
+}]\doxyref{Game}{p.}{classGame} is not init. \index{Level\+Check@{Level\+Check}!Game\+State@{Game\+State}}\index{Game\+State@{Game\+State}!Level\+Check@{Level\+Check}}\item[{\em 
+Level\+Check\label{classGameState_a097555f82a7b1dc23fee373b6a61cfd4a0059fdbafc3ababdc9cfa7eecba159c2}
+}]Level Selection Menu. \index{At\+Splash@{At\+Splash}!Game\+State@{Game\+State}}\index{Game\+State@{Game\+State}!At\+Splash@{At\+Splash}}\item[{\em 
+At\+Splash\label{classGameState_a097555f82a7b1dc23fee373b6a61cfd4aaa8e7a1b7d5956e0fb1ce7806fffe6fb}
+}]\doxyref{Splash}{p.}{classSplash} state of \doxyref{Game}{p.}{classGame}. \index{At\+Menu@{At\+Menu}!Game\+State@{Game\+State}}\index{Game\+State@{Game\+State}!At\+Menu@{At\+Menu}}\item[{\em 
+At\+Menu\label{classGameState_a097555f82a7b1dc23fee373b6a61cfd4adb178a8bdb06194fd46a2c85fe7caa41}
+}]The main menu of game. \index{Wait\+For\+Client@{Wait\+For\+Client}!Game\+State@{Game\+State}}\index{Game\+State@{Game\+State}!Wait\+For\+Client@{Wait\+For\+Client}}\item[{\em 
+Wait\+For\+Client\label{classGameState_a097555f82a7b1dc23fee373b6a61cfd4ae2ddbefa150f2b70bfc9fc64e0e46f40}
+}]\doxyref{Server}{p.}{classServer} waiting state for \doxyref{Client}{p.}{classClient}. \index{Wait\+For\+Server@{Wait\+For\+Server}!Game\+State@{Game\+State}}\index{Game\+State@{Game\+State}!Wait\+For\+Server@{Wait\+For\+Server}}\item[{\em 
+Wait\+For\+Server\label{classGameState_a097555f82a7b1dc23fee373b6a61cfd4a0bcbdd45b3b7fe99e26666ca9587f848}
+}]\doxyref{Client}{p.}{classClient} waiting for \doxyref{Server}{p.}{classServer}. \index{Playing@{Playing}!Game\+State@{Game\+State}}\index{Game\+State@{Game\+State}!Playing@{Playing}}\item[{\em 
+Playing\label{classGameState_a097555f82a7b1dc23fee373b6a61cfd4a0c7c919903ffb50f3d56b0ef11fb5532}
+}]The right on playing state. \index{Exiting@{Exiting}!Game\+State@{Game\+State}}\index{Game\+State@{Game\+State}!Exiting@{Exiting}}\item[{\em 
+Exiting\label{classGameState_a097555f82a7b1dc23fee373b6a61cfd4a68fe39f597c784cd2e6e2626bcbb897f}
+}]Windowexits. \index{Game\+Over@{Game\+Over}!Game\+State@{Game\+State}}\index{Game\+State@{Game\+State}!Game\+Over@{Game\+Over}}\item[{\em 
+Game\+Over\label{classGameState_a097555f82a7b1dc23fee373b6a61cfd4a822b1b51894f1d852fb6890e2220a574}
+}]Shows the defeat of player. \end{description}
+\end{Desc}
+
+
+Definition at line 72 of file Game\+State.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Game\+State@{Game\+State}!Load\+From\+File@{Load\+From\+File}}
+\index{Load\+From\+File@{Load\+From\+File}!Game\+State@{Game\+State}}
+\subsubsection[{Load\+From\+File(unsigned int level)}]{\setlength{\rightskip}{0pt plus 5cm}static void Game\+State\+::\+Load\+From\+File (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{level}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classGameState_a99bb89bb694d8e686a24c30557c1ad2a}
+
+
+Has the task of loading the resources from the Level$<$num$>$.\+text file which sets up the required resources for setting up the level. 
+
+Reserves memory in heap for all the Game\+Objects and adds them into a map as a common storage entity. 
+\begin{DoxyParams}{Parameters}
+{\em level} & \\
+\hline
+\end{DoxyParams}
+\index{Game\+State@{Game\+State}!play@{play}}
+\index{play@{play}!Game\+State@{Game\+State}}
+\subsubsection[{play()}]{\setlength{\rightskip}{0pt plus 5cm}static void Game\+State\+::play (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{classGameState_a475c2829f28c61363c540316a591d372}
+
+
+Start Playing the game! 
+
+Sets the game running up right on and loads all the required resources (fonts or images) . Renders the main window and pushes the game to the \doxyref{Splash}{p.}{classSplash} flashing state and sets up the main \doxyref{Game}{p.}{classGame} Loop in action 
+
+\subsection{Field Documentation}
+\index{Game\+State@{Game\+State}!\+\_\+game\+Object\+Manager@{\+\_\+game\+Object\+Manager}}
+\index{\+\_\+game\+Object\+Manager@{\+\_\+game\+Object\+Manager}!Game\+State@{Game\+State}}
+\subsubsection[{\+\_\+game\+Object\+Manager}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Obj\+Man} Game\+State\+::\+\_\+game\+Object\+Manager\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{classGameState_a31259a9b548fd1d5dbe02da361a94b4c}
+
+
+Holds all the objects as a map. 
+
+A class which has the responsibility of keeping all the game objects in a container , a map in this case iteration over which is used to update every object. 
+
+Definition at line 193 of file Game\+State.\+h.
+
+\index{Game\+State@{Game\+State}!\+\_\+main\+Window@{\+\_\+main\+Window}}
+\index{\+\_\+main\+Window@{\+\_\+main\+Window}!Game\+State@{Game\+State}}
+\subsubsection[{\+\_\+main\+Window}]{\setlength{\rightskip}{0pt plus 5cm}sf\+::\+Render\+Window Game\+State\+::\+\_\+main\+Window\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{classGameState_a4dc808a9fc65b77d1a6143019a40275b}
+
+
+The main window. 
+
+The window over which the game presides. 
+
+Definition at line 200 of file Game\+State.\+h.
+
+\index{Game\+State@{Game\+State}!\+\_\+resX@{\+\_\+resX}}
+\index{\+\_\+resX@{\+\_\+resX}!Game\+State@{Game\+State}}
+\subsubsection[{\+\_\+resX}]{\setlength{\rightskip}{0pt plus 5cm}const unsigned short Game\+State\+::\+\_\+resX \{1600\}\hspace{0.3cm}{\ttfamily [static]}}\label{classGameState_a12265b5b0c9a370ece74cdc49b061124}
+
+
+Horizontal Resolution. 
+
+Sets up the horizontal length of the main rendering window , in the case of this game it is 1600px. 
+
+Definition at line 44 of file Game\+State.\+h.
+
+\index{Game\+State@{Game\+State}!\+\_\+resY@{\+\_\+resY}}
+\index{\+\_\+resY@{\+\_\+resY}!Game\+State@{Game\+State}}
+\subsubsection[{\+\_\+resY}]{\setlength{\rightskip}{0pt plus 5cm}const unsigned short Game\+State\+::\+\_\+resY \{900\}\hspace{0.3cm}{\ttfamily [static]}}\label{classGameState_a6c31ed9638b3abba0fc19218046048e7}
+
+
+Vertical Resolution. 
+
+Sets up the vertical length of the main rendering window , in the case of this game it is 900px. 
+
+Definition at line 50 of file Game\+State.\+h.
+
+\index{Game\+State@{Game\+State}!file\+Path@{file\+Path}}
+\index{file\+Path@{file\+Path}!Game\+State@{Game\+State}}
+\subsubsection[{file\+Path}]{\setlength{\rightskip}{0pt plus 5cm}bool Game\+State\+::file\+Path\hspace{0.3cm}{\ttfamily [static]}}\label{classGameState_a9768e90ac5f08afda9b956a6853f802c}
+
+
+The way paths are written\+: false for linux, true for O\+SX. 
+
+Filepath in Ubuntu requires going up a directory for loading resources (img or fonts) while O\+SX doesn\textquotesingle{}t. 
+
+Definition at line 37 of file Game\+State.\+h.
+
+\index{Game\+State@{Game\+State}!fireboy@{fireboy}}
+\index{fireboy@{fireboy}!Game\+State@{Game\+State}}
+\subsubsection[{fireboy}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Player}$\ast$ Game\+State\+::fireboy\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{classGameState_a76cacbc778359d7e24e872ea24950db1}
+
+
+The current state of the game. 
+
+\doxyref{Player}{p.}{classPlayer} from the server. \begin{DoxyVerb} A basic entity of the game , is of type Player and has the task of collecting all the red gems
+ and reach the red door without striking green fire or water.\end{DoxyVerb}
+ 
+
+Definition at line 179 of file Game\+State.\+h.
+
+\index{Game\+State@{Game\+State}!race@{race}}
+\index{race@{race}!Game\+State@{Game\+State}}
+\subsubsection[{race}]{\setlength{\rightskip}{0pt plus 5cm}std\+::mutex Game\+State\+::race\hspace{0.3cm}{\ttfamily [static]}}\label{classGameState_a5d00a9fb9eb7f39ce5cde7e2ac3e0c24}
+
+
+Race -\/ A mutex for keeping the state of switch. 
+
+In consistency.\+Adding and removing the switch into \+\_\+obj\+To\+Be\+Acted container which has to be a critical section , to avoid multiple additions/removals. 
+
+Definition at line 121 of file Game\+State.\+h.
+
+\index{Game\+State@{Game\+State}!watergirl@{watergirl}}
+\index{watergirl@{watergirl}!Game\+State@{Game\+State}}
+\subsubsection[{watergirl}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Player}$\ast$ Game\+State\+::watergirl\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\label{classGameState_a73e59fabc4036b3dabbcee1a52f805f4}
+
+
+\doxyref{Player}{p.}{classPlayer} from the client. 
+
+A basic entity of the game , is of type \doxyref{Player}{p.}{classPlayer} and has the task of collecting all the blue gems and reach the blue door without striking green fire or fire. 
+
+Definition at line 186 of file Game\+State.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Game\+State.\+h\end{DoxyCompactItemize}

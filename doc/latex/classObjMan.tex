@@ -1,0 +1,203 @@
+\section{Obj\+Man Class Reference}
+\label{classObjMan}\index{Obj\+Man@{Obj\+Man}}
+
+
+A drawable object manager.  
+
+
+
+
+{\ttfamily \#include $<$Obj\+Man.\+h$>$}
+
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf Game\+Obj\+Dealloc}
+\begin{DoxyCompactList}\small\item\em A functor for deallocating the memory given to each \doxyref{Visible\+Game\+Object}{p.}{classVisibleGameObject}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Obj\+Man} ()
+\begin{DoxyCompactList}\small\item\em The constructor. \end{DoxyCompactList}\item 
+{\bf $\sim$\+Obj\+Man} ()
+\begin{DoxyCompactList}\small\item\em The destructor. \end{DoxyCompactList}\item 
+void {\bf add} (std\+::string name, {\bf Visible\+Game\+Object} $\ast$game\+Object)
+\begin{DoxyCompactList}\small\item\em Insert a new \doxyref{Visible\+Game\+Object}{p.}{classVisibleGameObject} to this manager. \end{DoxyCompactList}\item 
+void {\bf remove} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em Remove the object specified by name from the manager (does not free/delete). \end{DoxyCompactList}\item 
+void {\bf remove\+And\+Delete} (std\+::string name)
+\item 
+void {\bf update\+All} (sf\+::\+Event \&\+\_\+event, float elapsed\+Time)
+\begin{DoxyCompactList}\small\item\em Call\textquotesingle{}s the update function for each \doxyref{Visible\+Game\+Object}{p.}{classVisibleGameObject} in this manager. \end{DoxyCompactList}\item 
+int {\bf get\+Obj\+Count} () const 
+\begin{DoxyCompactList}\small\item\em The number of objects in this manager. \end{DoxyCompactList}\item 
+{\bf Visible\+Game\+Object} $\ast$ {\bf get} (std\+::string name) const 
+\begin{DoxyCompactList}\small\item\em Get a Visble\+Game\+Object. \end{DoxyCompactList}\item 
+void {\bf draw\+All} (sf\+::\+Render\+Window \&render\+Window)
+\begin{DoxyCompactList}\small\item\em Calls the Draw function on each \doxyref{Visible\+Game\+Object}{p.}{classVisibleGameObject}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+sf\+::\+Clock {\bf \+\_\+clock}\label{classObjMan_a901ac4cd6ba64efc6bfe8721cf3f2661}
+
+\begin{DoxyCompactList}\small\item\em A clock keeping time since the last time update was called. \end{DoxyCompactList}\item 
+std\+::map$<$ std\+::string, {\bf Visible\+Game\+Object} $\ast$ $>$ {\bf \+\_\+game\+Objects}\label{classObjMan_a3e83b0d75d4ea3b98c812bf38cb00635}
+
+\begin{DoxyCompactList}\small\item\em A map storing all the Visible\+Game\+Objects by name. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A drawable object manager. 
+
+Stores, manages and modifies all the drawable (Visible\+Game\+Objects) objects. 
+
+Definition at line 14 of file Obj\+Man.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Obj\+Man@{Obj\+Man}!Obj\+Man@{Obj\+Man}}
+\index{Obj\+Man@{Obj\+Man}!Obj\+Man@{Obj\+Man}}
+\subsubsection[{Obj\+Man()}]{\setlength{\rightskip}{0pt plus 5cm}Obj\+Man\+::\+Obj\+Man (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classObjMan_ab7ee02c2b1730767497070d98eb49ae1}
+
+
+The constructor. 
+
+Starts the clock. \index{Obj\+Man@{Obj\+Man}!````~Obj\+Man@{$\sim$\+Obj\+Man}}
+\index{````~Obj\+Man@{$\sim$\+Obj\+Man}!Obj\+Man@{Obj\+Man}}
+\subsubsection[{$\sim$\+Obj\+Man()}]{\setlength{\rightskip}{0pt plus 5cm}Obj\+Man\+::$\sim$\+Obj\+Man (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classObjMan_afd80fb59f717f61148e748f9d2d76c0e}
+
+
+The destructor. 
+
+Deletes all the member \doxyref{Visible\+Game\+Object(s)}{p.}{classVisibleGameObject} 
+
+\subsection{Member Function Documentation}
+\index{Obj\+Man@{Obj\+Man}!add@{add}}
+\index{add@{add}!Obj\+Man@{Obj\+Man}}
+\subsubsection[{add(std\+::string name, Visible\+Game\+Object $\ast$game\+Object)}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\+Man\+::add (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name, }
+\item[{{\bf Visible\+Game\+Object} $\ast$}]{game\+Object}
+\end{DoxyParamCaption}
+)}\label{classObjMan_a9491e5af872bb69908b8203ec0a04e02}
+
+
+Insert a new \doxyref{Visible\+Game\+Object}{p.}{classVisibleGameObject} to this manager. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name by which this new object will be identified. \\
+\hline
+{\em game\+Object} & A pointer to this new \doxyref{Visible\+Game\+Object}{p.}{classVisibleGameObject} \\
+\hline
+\end{DoxyParams}
+\index{Obj\+Man@{Obj\+Man}!draw\+All@{draw\+All}}
+\index{draw\+All@{draw\+All}!Obj\+Man@{Obj\+Man}}
+\subsubsection[{draw\+All(sf\+::\+Render\+Window \&render\+Window)}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\+Man\+::draw\+All (
+\begin{DoxyParamCaption}
+\item[{sf\+::\+Render\+Window \&}]{render\+Window}
+\end{DoxyParamCaption}
+)}\label{classObjMan_ac3f0a09696be7d8adeffd74ae9257209}
+
+
+Calls the Draw function on each \doxyref{Visible\+Game\+Object}{p.}{classVisibleGameObject}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em render\+Window} & The window to draw the objects on. \\
+\hline
+\end{DoxyParams}
+\index{Obj\+Man@{Obj\+Man}!get@{get}}
+\index{get@{get}!Obj\+Man@{Obj\+Man}}
+\subsubsection[{get(std\+::string name) const }]{\setlength{\rightskip}{0pt plus 5cm}{\bf Visible\+Game\+Object}$\ast$ Obj\+Man\+::get (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+) const}\label{classObjMan_a9ba6ebd701a37d0e4cf6a83296117922}
+
+
+Get a Visble\+Game\+Object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the object to get \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the corresponding \doxyref{Visible\+Game\+Object}{p.}{classVisibleGameObject} 
+\end{DoxyReturn}
+\index{Obj\+Man@{Obj\+Man}!get\+Obj\+Count@{get\+Obj\+Count}}
+\index{get\+Obj\+Count@{get\+Obj\+Count}!Obj\+Man@{Obj\+Man}}
+\subsubsection[{get\+Obj\+Count() const }]{\setlength{\rightskip}{0pt plus 5cm}int Obj\+Man\+::get\+Obj\+Count (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{classObjMan_a09aab2f5af96229803f3bb2d5e8905cd}
+
+
+The number of objects in this manager. 
+
+\begin{DoxyReturn}{Returns}
+The number of objects in this manager. 
+\end{DoxyReturn}
+\index{Obj\+Man@{Obj\+Man}!remove@{remove}}
+\index{remove@{remove}!Obj\+Man@{Obj\+Man}}
+\subsubsection[{remove(std\+::string name)}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\+Man\+::remove (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)}\label{classObjMan_ad08a7b64a5251f8eb18c82733c50ff7c}
+
+
+Remove the object specified by name from the manager (does not free/delete). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the object to be removed. \\
+\hline
+\end{DoxyParams}
+\index{Obj\+Man@{Obj\+Man}!remove\+And\+Delete@{remove\+And\+Delete}}
+\index{remove\+And\+Delete@{remove\+And\+Delete}!Obj\+Man@{Obj\+Man}}
+\subsubsection[{remove\+And\+Delete(std\+::string name)}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\+Man\+::remove\+And\+Delete (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)}\label{classObjMan_a992eba683f0ebedc85e7ae2424af5355}
+Remove, and delete(free) the object specified by name. 
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the object to be removed. \\
+\hline
+\end{DoxyParams}
+\index{Obj\+Man@{Obj\+Man}!update\+All@{update\+All}}
+\index{update\+All@{update\+All}!Obj\+Man@{Obj\+Man}}
+\subsubsection[{update\+All(sf\+::\+Event \&\+\_\+event, float elapsed\+Time)}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\+Man\+::update\+All (
+\begin{DoxyParamCaption}
+\item[{sf\+::\+Event \&}]{\+\_\+event, }
+\item[{float}]{elapsed\+Time}
+\end{DoxyParamCaption}
+)}\label{classObjMan_a129ed73069c13baff7efa94780664216}
+
+
+Call\textquotesingle{}s the update function for each \doxyref{Visible\+Game\+Object}{p.}{classVisibleGameObject} in this manager. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+event} & The event to given for the update. \\
+\hline
+{\em elapsed\+Time} & The time elaopsed since the last update. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Obj\+Man.\+h\end{DoxyCompactItemize}
