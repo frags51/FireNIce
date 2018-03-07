@@ -1,0 +1,279 @@
+\section{Visible\+Game\+Object Class Reference}
+\label{classVisibleGameObject}\index{Visible\+Game\+Object@{Visible\+Game\+Object}}
+
+
+This class is used to define an object that is to be drawn on the screen.  
+
+
+
+
+{\ttfamily \#include $<$Visible\+Game\+Object.\+h$>$}
+
+Inheritance diagram for Visible\+Game\+Object\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classVisibleGameObject}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bfseries state\+Of\+Obj} \{ \\*
+{\bfseries D\+EF}, 
+{\bfseries V\+B\+S\+P\+R\+E\+S\+S\+E\+D\+\_\+F}, 
+{\bfseries V\+B\+S\+P\+R\+E\+S\+S\+E\+D\+\_\+W}, 
+{\bfseries V\+B\+M\+O\+V\+ED}, 
+\\*
+{\bfseries G\+E\+M\+C\+O\+N\+S\+U\+M\+ED}
+ \}\label{classVisibleGameObject_aeea1504090be269d46ca97837a212211}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Visible\+Game\+Object} ()
+\begin{DoxyCompactList}\small\item\em The Constructor. \end{DoxyCompactList}\item 
+virtual void {\bf Load} (std\+::string filename, float x, float y)
+\begin{DoxyCompactList}\small\item\em Load the texture corresponding to the filename. \end{DoxyCompactList}\item 
+virtual void {\bf Draw} (sf\+::\+Render\+Window \&window)
+\begin{DoxyCompactList}\small\item\em Draw this object on the window. \end{DoxyCompactList}\item 
+virtual void {\bf Set\+Position} (float x, float y)
+\begin{DoxyCompactList}\small\item\em Set\textquotesingle{}s this object\textquotesingle{}s position, relative to the origin. \end{DoxyCompactList}\item 
+virtual void {\bf Update} (float elapsed\+Time, sf\+::\+Event \&event, std\+::map$<$ std\+::string, {\bf Visible\+Game\+Object} $\ast$ $>$ \&\+\_\+object)
+\begin{DoxyCompactList}\small\item\em Updates the objects position and texture of the object. \end{DoxyCompactList}\item 
+virtual sf\+::\+Vector2f {\bf Get\+Position} () const 
+\begin{DoxyCompactList}\small\item\em Get the position of this object. \end{DoxyCompactList}\item 
+virtual bool {\bf Is\+Loaded} () const 
+\begin{DoxyCompactList}\small\item\em Check the value of \+\_\+is\+Loaded. \end{DoxyCompactList}\item 
+virtual sf\+::\+Vector2f {\bf Get\+Half\+Size} ()
+\begin{DoxyCompactList}\small\item\em The size vector of the object, divided by 2. \end{DoxyCompactList}\item 
+virtual void {\bf move} (float dx, float dy)
+\item 
+virtual std\+::string {\bf get\+File\+Name} () const 
+\begin{DoxyCompactList}\small\item\em Get the file-\/name of the texture for this object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+sf\+::\+Rectangle\+Shape {\bf \+\_\+player}\label{classVisibleGameObject_ac9969444fbf1d4dead1bd42ac3b296ef}
+
+\begin{DoxyCompactList}\small\item\em A rectangle shape that is drawable and holds the objects information. \end{DoxyCompactList}\item 
+std\+::string {\bf \+\_\+filename}\label{classVisibleGameObject_aa2d1ee273f70eb3994cb411e55b588b9}
+
+\begin{DoxyCompactList}\small\item\em A variable storing the texture\textquotesingle{}s filepath. \end{DoxyCompactList}\item 
+state\+Of\+Obj {\bf \+\_\+state\+Of\+Obj}\label{classVisibleGameObject_aba42aaa13e5798b265ce32e0d9192115}
+
+\begin{DoxyCompactList}\small\item\em Stores the state of this object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+sf\+::\+Texture {\bf player\+Texture}\label{classVisibleGameObject_a9d40b5879eb9b5e2a85be633d022e680}
+
+\begin{DoxyCompactList}\small\item\em Stores the player\textquotesingle{}s texture. \end{DoxyCompactList}\item 
+bool {\bf \+\_\+is\+Loaded}\label{classVisibleGameObject_a0276aacb6b6d2c91d2a24a10281d0192}
+
+\begin{DoxyCompactList}\small\item\em Stores whether the texture file was loaded properly. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class is used to define an object that is to be drawn on the screen. 
+
+All the \doxyref{Game}{p.}{classGame}\textquotesingle{}s Drawable objects must inherit from this class. Currently, most of the type of object checking is done from the object\textquotesingle{}s texture filename. 
+
+Definition at line 13 of file Visible\+Game\+Object.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Visible\+Game\+Object@{Visible\+Game\+Object}!Visible\+Game\+Object@{Visible\+Game\+Object}}
+\index{Visible\+Game\+Object@{Visible\+Game\+Object}!Visible\+Game\+Object@{Visible\+Game\+Object}}
+\subsubsection[{Visible\+Game\+Object()}]{\setlength{\rightskip}{0pt plus 5cm}Visible\+Game\+Object\+::\+Visible\+Game\+Object (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classVisibleGameObject_aa3fcdc2bcf67a8b37398cea587f49df0}
+
+
+The Constructor. 
+
+Initializes the variabls is\+Loaded and \+\_\+state\+Of\+Obj. 
+
+\subsection{Member Function Documentation}
+\index{Visible\+Game\+Object@{Visible\+Game\+Object}!Draw@{Draw}}
+\index{Draw@{Draw}!Visible\+Game\+Object@{Visible\+Game\+Object}}
+\subsubsection[{Draw(sf\+::\+Render\+Window \&window)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Visible\+Game\+Object\+::\+Draw (
+\begin{DoxyParamCaption}
+\item[{sf\+::\+Render\+Window \&}]{window}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classVisibleGameObject_a36c4fb68290282364bb198b9b5c4cd07}
+
+
+Draw this object on the window. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em window} & The window to draw this object on. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in {\bf Platform} \doxyref{}{p.}{classPlatform_a7b26c99c06289de6a4199377104fc262}.
+
+\index{Visible\+Game\+Object@{Visible\+Game\+Object}!get\+File\+Name@{get\+File\+Name}}
+\index{get\+File\+Name@{get\+File\+Name}!Visible\+Game\+Object@{Visible\+Game\+Object}}
+\subsubsection[{get\+File\+Name() const }]{\setlength{\rightskip}{0pt plus 5cm}virtual std\+::string Visible\+Game\+Object\+::get\+File\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{classVisibleGameObject_a5d42ab296f524880889d7b70811bcf15}
+
+
+Get the file-\/name of the texture for this object. 
+
+\begin{DoxyReturn}{Returns}
+A string containing the filepath (relative to the source directory) 
+\end{DoxyReturn}
+\index{Visible\+Game\+Object@{Visible\+Game\+Object}!Get\+Half\+Size@{Get\+Half\+Size}}
+\index{Get\+Half\+Size@{Get\+Half\+Size}!Visible\+Game\+Object@{Visible\+Game\+Object}}
+\subsubsection[{Get\+Half\+Size()}]{\setlength{\rightskip}{0pt plus 5cm}virtual sf\+::\+Vector2f Visible\+Game\+Object\+::\+Get\+Half\+Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classVisibleGameObject_a656a7f68be590c95888cacef26e7465e}
+
+
+The size vector of the object, divided by 2. 
+
+\begin{DoxyReturn}{Returns}
+A vector\+: (size.\+x/2, size.\+y/2) 
+\end{DoxyReturn}
+
+
+Definition at line 68 of file Visible\+Game\+Object.\+h.
+
+
+
+References \+\_\+player.
+
+\index{Visible\+Game\+Object@{Visible\+Game\+Object}!Get\+Position@{Get\+Position}}
+\index{Get\+Position@{Get\+Position}!Visible\+Game\+Object@{Visible\+Game\+Object}}
+\subsubsection[{Get\+Position() const }]{\setlength{\rightskip}{0pt plus 5cm}virtual sf\+::\+Vector2f Visible\+Game\+Object\+::\+Get\+Position (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{classVisibleGameObject_a5c8b63273d977475d2dc1f337d2e52d0}
+
+
+Get the position of this object. 
+
+\begin{DoxyReturn}{Returns}
+A float vector representing this object\textquotesingle{}s position. 
+\end{DoxyReturn}
+\index{Visible\+Game\+Object@{Visible\+Game\+Object}!Is\+Loaded@{Is\+Loaded}}
+\index{Is\+Loaded@{Is\+Loaded}!Visible\+Game\+Object@{Visible\+Game\+Object}}
+\subsubsection[{Is\+Loaded() const }]{\setlength{\rightskip}{0pt plus 5cm}virtual bool Visible\+Game\+Object\+::\+Is\+Loaded (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{classVisibleGameObject_a025faedc39b9292a9a8a9a1c5763f3a9}
+
+
+Check the value of \+\_\+is\+Loaded. 
+
+\begin{DoxyReturn}{Returns}
+true if the texture file has been loaded properly, false otherwise 
+\end{DoxyReturn}
+\index{Visible\+Game\+Object@{Visible\+Game\+Object}!Load@{Load}}
+\index{Load@{Load}!Visible\+Game\+Object@{Visible\+Game\+Object}}
+\subsubsection[{Load(std\+::string filename, float x, float y)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Visible\+Game\+Object\+::\+Load (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{filename, }
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classVisibleGameObject_a1977aa9f59f00a2e4bdd9b494d0b7899}
+
+
+Load the texture corresponding to the filename. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & The location of this object\textquotesingle{}s texture file. \\
+\hline
+{\em x} & The x size (width) of the this object \\
+\hline
+{\em y} & The y size (height) of this object \\
+\hline
+\end{DoxyParams}
+\index{Visible\+Game\+Object@{Visible\+Game\+Object}!move@{move}}
+\index{move@{move}!Visible\+Game\+Object@{Visible\+Game\+Object}}
+\subsubsection[{move(float dx, float dy)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Visible\+Game\+Object\+::move (
+\begin{DoxyParamCaption}
+\item[{float}]{dx, }
+\item[{float}]{dy}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\label{classVisibleGameObject_a7e39ff4808f601732abe7eb638fdfc83}
+Moves the player by the corresponding offsets. 
+\begin{DoxyParams}{Parameters}
+{\em dx} & The displacement in X direction. \\
+\hline
+{\em dy} & The displacement in Y direction. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 74 of file Visible\+Game\+Object.\+h.
+
+
+
+References \+\_\+player.
+
+\index{Visible\+Game\+Object@{Visible\+Game\+Object}!Set\+Position@{Set\+Position}}
+\index{Set\+Position@{Set\+Position}!Visible\+Game\+Object@{Visible\+Game\+Object}}
+\subsubsection[{Set\+Position(float x, float y)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Visible\+Game\+Object\+::\+Set\+Position (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classVisibleGameObject_a1a3c4566e9ee101b3d57bf64f6881211}
+
+
+Set\textquotesingle{}s this object\textquotesingle{}s position, relative to the origin. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X-\/\+Coodinate of the position. \\
+\hline
+{\em y} & Y-\/\+Coodinate of the position. \\
+\hline
+\end{DoxyParams}
+\index{Visible\+Game\+Object@{Visible\+Game\+Object}!Update@{Update}}
+\index{Update@{Update}!Visible\+Game\+Object@{Visible\+Game\+Object}}
+\subsubsection[{Update(float elapsed\+Time, sf\+::\+Event \&event, std\+::map$<$ std\+::string, Visible\+Game\+Object $\ast$ $>$ \&\+\_\+object)}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Visible\+Game\+Object\+::\+Update (
+\begin{DoxyParamCaption}
+\item[{float}]{elapsed\+Time, }
+\item[{sf\+::\+Event \&}]{event, }
+\item[{std\+::map$<$ std\+::string, {\bf Visible\+Game\+Object} $\ast$ $>$ \&}]{\+\_\+object}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classVisibleGameObject_a2760784b238d38161f5b0bbfa46ba427}
+
+
+Updates the objects position and texture of the object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em elapsed\+Time} & The time elapsed since last update (sort of simulates frame rate) \\
+\hline
+{\em event} & The event that occured. \\
+\hline
+{\em \+\_\+object} & A map of all other objects to be drawn.\\
+\hline
+\end{DoxyParams}
+Checks the \+\_\+object map to update this object according to the position of other objects in game. An example is checking for collisions. 
+
+Reimplemented in {\bf Platform} \doxyref{}{p.}{classPlatform_aaf13682e0f809e4e0faf4a545501a9b5}, and {\bf Player} \doxyref{}{p.}{classPlayer_a3e44a2494b4169bd0cc3d3f0f5a9dbd7}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Visible\+Game\+Object.\+h\end{DoxyCompactItemize}

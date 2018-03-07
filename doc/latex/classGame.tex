@@ -1,0 +1,23 @@
+\section{Game Class Reference}
+\label{classGame}\index{Game@{Game}}
+
+
+Saves the current state of the game.  
+
+
+
+
+\subsection{Detailed Description}
+Saves the current state of the game. 
+
+Saves the state similar to a finite state machine transitioning between various states which define the snapshot of game at any instant. Some of the states include game in Playing State , At Main Menu or the server waiting for its client.
+
+Takes the responsibility of setting up the server and keeping it\textquotesingle{}s state in sync with it\textquotesingle{}s client.
+
+All the members of the class are static as the class is not instantiated and require to set up with an intialiser list.
+
+Pushes the state to Waitfor\+Client if client calls for joining and to Waitfor\+Server if process wishes to create a server. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Game\+State.\+h\end{DoxyCompactItemize}

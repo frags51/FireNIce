@@ -1,0 +1,89 @@
+\section{Animation Class Reference}
+\label{classAnimation}\index{Animation@{Animation}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf update} (int row, float delta\+Time, bool face\+Right)
+\begin{DoxyCompactList}\small\item\em Takes the row from the compound texture. \end{DoxyCompactList}\item 
+void {\bf create} (sf\+::\+Texture $\ast$texture, sf\+::\+Vector2u {\bf image\+Count}, float switch\+Time)
+\begin{DoxyCompactList}\small\item\em Creates the animation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+sf\+::\+Int\+Rect {\bf uv\+Rect}\label{classAnimation_a82c41dd15d9a98ecc0699ecca09fd056}
+
+\begin{DoxyCompactList}\small\item\em Accounts for cropping 1 image out of the entire compound image. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+sf\+::\+Vector2u {\bf image\+Count}\label{classAnimation_ae4bc32c6c921bd2161350152ce12e09c}
+
+\begin{DoxyCompactList}\small\item\em Vector which gives a count of the total images in compund image file. \end{DoxyCompactList}\item 
+sf\+::\+Vector2u {\bf current\+Image}\label{classAnimation_aeb23dec031861eff3dda1b759f4472fc}
+
+\begin{DoxyCompactList}\small\item\em The image point at which the animation row is running at the moment. \end{DoxyCompactList}\item 
+float {\bfseries total\+Time}\label{classAnimation_a04f09b9faedd40c52a9b60b800e10ea8}
+
+\item 
+float {\bfseries switch\+Time}\label{classAnimation_a7b2fb4577ab94e863b88ec6cf96cc8b6}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 5 of file Animation.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Animation@{Animation}!create@{create}}
+\index{create@{create}!Animation@{Animation}}
+\subsubsection[{create(sf\+::\+Texture $\ast$texture, sf\+::\+Vector2u image\+Count, float switch\+Time)}]{\setlength{\rightskip}{0pt plus 5cm}void Animation\+::create (
+\begin{DoxyParamCaption}
+\item[{sf\+::\+Texture $\ast$}]{texture, }
+\item[{sf\+::\+Vector2u}]{image\+Count, }
+\item[{float}]{switch\+Time}
+\end{DoxyParamCaption}
+)}\label{classAnimation_a2597dbf92eb582f4610abee8a9e2aaeb}
+
+
+Creates the animation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em texture} & \\
+\hline
+{\em image\+Count} & \\
+\hline
+{\em switch\+Time} & Takes the imagecount , switchtime and texture as parameters and updates the correspponding private member variables. \\
+\hline
+\end{DoxyParams}
+\index{Animation@{Animation}!update@{update}}
+\index{update@{update}!Animation@{Animation}}
+\subsubsection[{update(int row, float delta\+Time, bool face\+Right)}]{\setlength{\rightskip}{0pt plus 5cm}void Animation\+::update (
+\begin{DoxyParamCaption}
+\item[{int}]{row, }
+\item[{float}]{delta\+Time, }
+\item[{bool}]{face\+Right}
+\end{DoxyParamCaption}
+)}\label{classAnimation_af09462caccc4d41ebfe288f703c4facd}
+
+
+Takes the row from the compound texture. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & \\
+\hline
+{\em delta\+Time} & \\
+\hline
+{\em face\+Right} & Row is taken as input from the source image and sets animation by running through the row. Delta\+Time counts for the animation switch time. Face\+Right is used for checking the direction of movement of player for loading texture. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Animation.\+h\end{DoxyCompactItemize}

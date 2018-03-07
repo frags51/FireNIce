@@ -1,0 +1,170 @@
+\section{Player Class Reference}
+\label{classPlayer}\index{Player@{Player}}
+
+
+Updates and checks Collision of Fire\+Boy/\+Water\+Girl with various objects.  
+
+
+Inheritance diagram for Player\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classPlayer}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Player} (const std\+::string \&f\+Name, sf\+::\+Keyboard\+::\+Key \+\_\+u, sf\+::\+Keyboard\+::\+Key \+\_\+l, sf\+::\+Keyboard\+::\+Key \+\_\+r)
+\begin{DoxyCompactList}\small\item\em Constructor for player. \end{DoxyCompactList}\item 
+void {\bf Update} (float elapsed\+Time, sf\+::\+Event \&\+\_\+event, std\+::map$<$ std\+::string, {\bf Visible\+Game\+Object} $\ast$ $>$ \&\+\_\+object)
+\begin{DoxyCompactList}\small\item\em Takes an event as input and updates the player according to it. \end{DoxyCompactList}\item 
+bool {\bf check\+Collision} ({\bf Visible\+Game\+Object} $\ast$other, float e)
+\begin{DoxyCompactList}\small\item\em Takes an object and checks for collision of player with it. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Animation} {\bf animation}\label{classPlayer_a9f7bf0ea89a4585b3247187409a83efa}
+
+\begin{DoxyCompactList}\small\item\em \doxyref{Animation}{p.}{classAnimation} object which takes care of animation of object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const float {\bf v\+Barrier\+Move\+Dist}\label{classPlayer_adf055a2b9e01a046d705730500bac25d}
+
+\begin{DoxyCompactList}\small\item\em Distance moved by barrier upon activation by a switch. \end{DoxyCompactList}\item 
+sf\+::\+Keyboard\+::\+Key {\bf u}\label{classPlayer_a37696731b6f5f0b03ba02a3e039f52bb}
+
+\begin{DoxyCompactList}\small\item\em Key for upward movement. \end{DoxyCompactList}\item 
+sf\+::\+Keyboard\+::\+Key {\bf l}\label{classPlayer_a8a66f34dab6d571b1062fe5745c2f524}
+
+\begin{DoxyCompactList}\small\item\em Key for left movement. \end{DoxyCompactList}\item 
+sf\+::\+Keyboard\+::\+Key {\bf r}\label{classPlayer_a67499db9ed2768ecdb3fbc7e5c7135fb}
+
+\begin{DoxyCompactList}\small\item\em Key for right movement. \end{DoxyCompactList}\item 
+bool {\bf is\+Up\+Pressed}\label{classPlayer_a80f447e22745905e58126c77fea06ee7}
+
+\begin{DoxyCompactList}\small\item\em Checks if up key is pressed. \end{DoxyCompactList}\item 
+bool {\bf is\+L\+Pressed}\label{classPlayer_acbdfbf6f7abe2a0725cdd1aceac5480a}
+
+\begin{DoxyCompactList}\small\item\em Checks if left key is pressed. \end{DoxyCompactList}\item 
+bool {\bf is\+R\+Pressed}\label{classPlayer_ab57005b45fdff6ff4e5d4a6fa081ffb1}
+
+\begin{DoxyCompactList}\small\item\em Checks if right key is pressed. \end{DoxyCompactList}\item 
+bool {\bf is\+Jumping}\label{classPlayer_aab294bec9f8fed91bb7d599e37bfd5f6}
+
+\begin{DoxyCompactList}\small\item\em is It falling down after ataining max distance it can jump? Not if it is actually jumping \end{DoxyCompactList}\item 
+float {\bf d\+Jump}\label{classPlayer_a0d51cb52a9554ea9828febc836c30f79}
+
+\begin{DoxyCompactList}\small\item\em The distance it jumped before falling down. \end{DoxyCompactList}\item 
+float {\bf \+\_\+up\+Vel}\label{classPlayer_aec33fb9bc8d9b1eb9f6c0eb71ef899dd}
+
+\begin{DoxyCompactList}\small\item\em Velocity for Jump. \end{DoxyCompactList}\item 
+float {\bf \+\_\+x\+Val}\label{classPlayer_a5b5ce3f912d9713076d07edbaa65c554}
+
+\begin{DoxyCompactList}\small\item\em Velocity to move left/right. \end{DoxyCompactList}\item 
+float {\bf \+\_\+velocity}\label{classPlayer_a6eead0ba8bf0a30264deeb066f30e9a9}
+
+\begin{DoxyCompactList}\small\item\em Downward Velocity. \end{DoxyCompactList}\item 
+float {\bf \+\_\+max\+Velocity}\label{classPlayer_a45568f07b5fe8d9e578e433d69e4b87e}
+
+\begin{DoxyCompactList}\small\item\em Max velocity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Updates and checks Collision of Fire\+Boy/\+Water\+Girl with various objects. 
+
+The player inherits from the \doxyref{Visible\+Game\+Object}{p.}{classVisibleGameObject} class and takes control of the Fireboy and Watergirl\textquotesingle{}s updates. 
+
+Definition at line 12 of file Player.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Player@{Player}!Player@{Player}}
+\index{Player@{Player}!Player@{Player}}
+\subsubsection[{Player(const std\+::string \&f\+Name, sf\+::\+Keyboard\+::\+Key \+\_\+u, sf\+::\+Keyboard\+::\+Key \+\_\+l, sf\+::\+Keyboard\+::\+Key \+\_\+r)}]{\setlength{\rightskip}{0pt plus 5cm}Player\+::\+Player (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{f\+Name, }
+\item[{sf\+::\+Keyboard\+::\+Key}]{\+\_\+u, }
+\item[{sf\+::\+Keyboard\+::\+Key}]{\+\_\+l, }
+\item[{sf\+::\+Keyboard\+::\+Key}]{\+\_\+r}
+\end{DoxyParamCaption}
+)}\label{classPlayer_a76ca9e2f31375ea484dc13604bfdd14e}
+
+
+Constructor for player. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f\+Name} & File name for loading the texture. \\
+\hline
+{\em \+\_\+u} & Key for jumping the player \\
+\hline
+{\em \+\_\+l} & Key for going left. \\
+\hline
+{\em \+\_\+r} & Key for going right \begin{DoxyVerb} The constructor initialises the members like maximum vecloity attainable by player, max
+ jump height and other parameters.
+
+ Sets the animation of the player as well.\end{DoxyVerb}
+ \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{Player@{Player}!check\+Collision@{check\+Collision}}
+\index{check\+Collision@{check\+Collision}!Player@{Player}}
+\subsubsection[{check\+Collision(\+Visible\+Game\+Object $\ast$other, float e)}]{\setlength{\rightskip}{0pt plus 5cm}bool Player\+::check\+Collision (
+\begin{DoxyParamCaption}
+\item[{{\bf Visible\+Game\+Object} $\ast$}]{other, }
+\item[{float}]{e}
+\end{DoxyParamCaption}
+)}\label{classPlayer_a480331d13e5c4661970aff8cdb70a38a}
+
+
+Takes an object and checks for collision of player with it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & \\
+\hline
+{\em e} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if collision occured false otherwise. e value checks the elasticity of collosion. If e = 0.\+0 then it pushes the player back and other object stays put. If e = 1 then object moves easily with a push. 
+\end{DoxyReturn}
+\index{Player@{Player}!Update@{Update}}
+\index{Update@{Update}!Player@{Player}}
+\subsubsection[{Update(float elapsed\+Time, sf\+::\+Event \&\+\_\+event, std\+::map$<$ std\+::string, Visible\+Game\+Object $\ast$ $>$ \&\+\_\+object)}]{\setlength{\rightskip}{0pt plus 5cm}void Player\+::\+Update (
+\begin{DoxyParamCaption}
+\item[{float}]{elapsed\+Time, }
+\item[{sf\+::\+Event \&}]{\+\_\+event, }
+\item[{std\+::map$<$ std\+::string, {\bf Visible\+Game\+Object} $\ast$ $>$ \&}]{\+\_\+object}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classPlayer_a3e44a2494b4169bd0cc3d3f0f5a9dbd7}
+
+
+Takes an event as input and updates the player according to it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em elapsed\+Time} & \\
+\hline
+{\em \+\_\+event} & \\
+\hline
+{\em \+\_\+object} & Checks for any events that are trigerred for the player , like going up or going left or right.\\
+\hline
+\end{DoxyParams}
+It checks for collisions also for every player with any object .
+
+Animates the object by giving a Texture to it by the corresponding state of game. 
+
+Reimplemented from {\bf Visible\+Game\+Object} \doxyref{}{p.}{classVisibleGameObject_a2760784b238d38161f5b0bbfa46ba427}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Player.\+h\end{DoxyCompactItemize}
