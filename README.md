@@ -1,6 +1,7 @@
 # FireNIce
 
 [![Build Status](https://travis-ci.org/frags51/FireNIce.svg?branch=master)](https://travis-ci.org/frags51/FireNIce)
+
 A game in C++ to learn about concurrency
 
 ## Contributing
